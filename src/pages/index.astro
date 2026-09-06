@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro'
+const schema = {
+  "@context":"https://schema.org",
+  "@type":"SoftwareApplication",
+  "name":"Oculivo",
+  "applicationCategory":"BusinessApplication",
+  "operatingSystem":"Web",
+  "url":"https://oculivo.com/",
+  "description":"Eye care practice management software for optometry and ophthalmology practices."
+}
+---
+<Base>
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  <main>
+    <section class="hero"><div class="wrap grid"><div><span class="eyebrow">Eye care practice management</span><h1>One connected workspace for the entire eye-care practice.</h1><p>Scheduling, patients, clinical records, optical inventory, insurance, billing, communications, documents, staff workflows, and reporting — built around how optometry and ophthalmology teams actually work.</p><div class="actions"><a class="btn primary" href="https://admin.romylabs.com/book?product=oculivo">Book a demo</a><a class="btn secondary" href="https://app.oculivo.com">Sign in</a></div></div><div class="panel"><b>Oculivo Core Connect</b><div class="metric"><span>Today</span><strong>Practice command center</strong></div><div class="rows"><span>Appointments & scheduling</span><span>Patient & clinical workflows</span><span>Optical inventory & orders</span><span>Insurance, billing & payments</span><span>Unified communications</span><span>Team Chat & staff operations</span></div></div></div></section>
+    <section class="section"><div class="wrap"><span class="eyebrow">Designed for eye care</span><h2>Stop forcing generic software into specialty workflows.</h2><div class="cards"><article><h3>Front desk</h3><p>Booking, intake, reminders, communications, documents, payments, and patient coordination stay in one place.</p></article><article><h3>Clinical team</h3><p>Patient context, encounters, records, care workflows, provider schedules, and secure documents stay connected.</p></article><article><h3>Optical & billing</h3><p>Inventory, optical orders, claims, invoices, payments, and office reporting connect to the same patient history.</p></article></div></div></section>
+  </main>
+</Base>
+<style>
+.hero{padding:86px 0;background:linear-gradient(135deg,#071827 0%,#0d3142 65%,#0a4e56 100%);color:white}.grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}.eyebrow{text-transform:uppercase;letter-spacing:.14em;font-size:12px;font-weight:850;color:#37c8c2}.hero h1{font-size:clamp(42px,6vw,72px);line-height:.98;letter-spacing:-.055em;margin:18px 0}.hero p{font-size:19px;line-height:1.7;color:#cce0e7;max-width:760px}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}.panel{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:22px;padding:28px;box-shadow:0 30px 80px rgba(0,0,0,.22)}.metric{padding:22px 0;border-bottom:1px solid rgba(255,255,255,.12);display:flex;flex-direction:column;gap:6px}.metric span,.rows span{color:#c7dce4}.rows{display:grid;gap:13px;padding-top:20px}.section{padding:88px 0}.section h2{font-size:clamp(32px,4vw,52px);letter-spacing:-.04em;max-width:800px}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:36px}.cards article{background:white;border:1px solid #d8e8ee;border-radius:18px;padding:26px;box-shadow:0 12px 36px rgba(17,50,66,.06)}.cards p{line-height:1.65;color:#526b78}@media(max-width:820px){.grid,.cards{grid-template-columns:1fr}.hero{padding:58px 0}}
+</style>
