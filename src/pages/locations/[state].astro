@@ -1,0 +1,68 @@
+---
+import Base from '../../layouts/Base.astro'
+import { states } from '../../data/states'
+
+export function getStaticPaths(){
+  return states.map(([slug,name]) => ({ params:{state:slug}, props:{name} }))
+}
+
+const { name } = Astro.props
+const slug = Astro.params.state
+const canonical = `https://oculivo.com/locations/${slug}/`
+const title = `Eye Care Practice Management Software in ${name} | Oculivo`
+const description = `Eye care practice management software for optometry, ophthalmology and optical teams in ${name}. Connect scheduling, patients, clinical workflows, optical, billing, communications, staff operations and reporting.`
+const schema = {
+  "@context":"https://schema.org",
+  "@type":"SoftwareApplication",
+  "name":"Oculivo",
+  "applicationCategory":"BusinessApplication",
+  "operatingSystem":"Web",
+  "url":canonical,
+  "areaServed":{"@type":"State","name":name},
+  "description":description,
+  "publisher":{"@type":"Organization","name":"RomyLabs","url":"https://romylabs.com/"}
+}
+---
+<Base title={title} description={description}>
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+<main>
+  <section class="hero-dark page-hero">
+    <div class="wrap">
+      <span class="eyebrow">Nationwide eye care software</span>
+      <h1>Eye care practice management software for {name} practices.</h1>
+      <p>Oculivo connects optometry, ophthalmology, optical, scheduling, patient communication, billing, staff operations, reporting, website and growth workflows in one secure operating system for modern eye-care teams.</p>
+      <div class="hero-actions">
+        <a class="btn-grad" href="https://taxrescrm.app/book?product=oculivo">Request a private demo&nbsp; →</a>
+        <a class="btn-outline" href="/features/">Explore Oculivo features</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-light depth-section">
+    <div class="wrap">
+      <div class="depth-top">
+        <span class="eyebrow">Built for eye care</span>
+        <div class="depth-title">
+          <h2>Clinical depth.<br/>Practice-wide clarity.</h2>
+          <p>Oculivo is designed for eye-care practices operating anywhere in {name}, from independent optometry offices to ophthalmology groups, optical retail operations and multi-location practices.</p>
+        </div>
+      </div>
+      <div class="depth-cards">
+        <article class="depth-card"><span class="num">01</span><h3>Optometry workflows</h3><p>Scheduling, intake, exams, prescriptions, recalls, optical, communication and billing stay connected to the same patient record.</p><a href="/optometry-software">Optometry software →</a></article>
+        <article class="depth-card"><span class="num">02</span><h3>Ophthalmology workflows</h3><p>Coordinate complex provider schedules, specialty records, claims, documents, patient communication and revenue operations across the practice.</p><a href="/ophthalmology-software">Ophthalmology software →</a></article>
+        <article class="depth-card"><span class="num">03</span><h3>Optical + operations</h3><p>Connect inventory, orders, staff, communications, reporting, website and local growth tools without splitting practice context across separate systems.</p><a href="/optical-management">Optical management →</a></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="founding-section">
+    <div class="wrap">
+      <div class="founding-card">
+        <div><span class="eyebrow">Nationwide coverage</span><h2>See Oculivo with your {name} workflow.</h2><p>Use your real provider, patient, optical and communication workflows in a private product walkthrough.</p></div>
+        <a class="btn-white" href="https://taxrescrm.app/book?product=oculivo">Request your private demo&nbsp; →</a>
+      </div>
+      <p style="margin-top:24px"><a href="/locations/">Browse all 50 states →</a></p>
+    </div>
+  </section>
+</main>
+</Base>

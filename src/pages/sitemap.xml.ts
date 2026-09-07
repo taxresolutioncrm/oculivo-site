@@ -1,3 +1,5 @@
+import { states } from '../data/states'
+
 const urls = [
   '',
   'features/',
@@ -6,10 +8,13 @@ const urls = [
   'terms/',
   'demo/',
   'communications/',
-  'optical/',
+  'optical-management/',
   'website-seo/',
-  'solutions/optometry/',
-  'solutions/ophthalmology/'
+  'security/',
+  'optometry-software/',
+  'ophthalmology-software/',
+  'locations/',
+  ...states.map(([slug]) => `locations/${slug}/`)
 ]
 
 export function GET() {
