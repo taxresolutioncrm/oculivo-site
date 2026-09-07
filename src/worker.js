@@ -53,6 +53,19 @@ export default {
       return Response.redirect('https://taxrescrm.app/book?product=oculivo', 302)
     }
 
+    const canonicalRedirects = new Map([
+      ['/solutions/optometry', '/optometry-software'],
+      ['/solutions/optometry/', '/optometry-software'],
+      ['/solutions/ophthalmology', '/ophthalmology-software'],
+      ['/solutions/ophthalmology/', '/ophthalmology-software'],
+      ['/optical', '/optical-management'],
+      ['/optical/', '/optical-management']
+    ])
+    const canonicalTarget = canonicalRedirects.get(incoming.pathname)
+    if (canonicalTarget) {
+      return Response.redirect(new URL(canonicalTarget, incoming.origin).toString(), 301)
+    }
+
     // SEO-controlled routes must come from the versioned Astro build rather than
     // the legacy design proxy so robots, sitemap, and nationwide pages stay
     // deterministic and deploy with this repository.
