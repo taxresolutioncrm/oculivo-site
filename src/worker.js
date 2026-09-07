@@ -53,6 +53,19 @@ export default {
       return Response.redirect('https://taxrescrm.app/book?product=oculivo', 302)
     }
 
+    // SEO-controlled routes must come from the versioned Astro build rather than
+    // the legacy design proxy so robots, sitemap, and nationwide pages stay
+    // deterministic and deploy with this repository.
+    if (
+      incoming.pathname === '/robots.txt' ||
+      incoming.pathname === '/sitemap.xml' ||
+      incoming.pathname === '/locations' ||
+      incoming.pathname === '/locations/' ||
+      incoming.pathname.startsWith('/locations/')
+    ) {
+      return env.ASSETS.fetch(request)
+    }
+
     try {
       const target = new URL(ORIGINAL_ORIGIN)
       target.pathname = incoming.pathname
