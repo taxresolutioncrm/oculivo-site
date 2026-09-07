@@ -1,4 +1,5 @@
 ---
+import '../styles/site.css'
 const {
   title = 'Oculivo | The operating system for modern eye care',
   description = 'Oculivo connects clinical, optical, communication, scheduling, billing, staff operations, website and SEO workflows for modern eye-care practices.'
@@ -18,46 +19,36 @@ const canonical = new URL(Astro.url.pathname, Astro.site)
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:url" content={canonical} />
-  <style>
-    :root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--ink:#08081d;--nav:#0a0a1f;--purple:#6041ff;--purple2:#854cff;--cyan:#2bd8d2;--text:#faf9ff;--muted:#c5c2dc;--light:#f7f7fb;--line:#292744}
-    *{box-sizing:border-box}html{background:#08081d}body{margin:0;background:#f7f7fb;color:#111128}a{color:inherit}.wrap{width:min(1240px,calc(100% - 48px));margin:auto}
-    header{background:#0a0a1f;color:white;border-bottom:1px solid #26243f}.topnav{height:72px;display:flex;align-items:center;justify-content:space-between;gap:28px}
-    .brand{display:flex;align-items:center;gap:8px;text-decoration:none;font-weight:900;letter-spacing:.04em;font-size:22px;color:#4b24ff}.brand svg{width:46px;height:34px;display:block}.brand em{font-style:normal;color:#4e28ff}.brand b{color:#1b7dff}
-    .links{display:flex;align-items:center;gap:28px;margin-left:auto}.links a{text-decoration:none;font-size:13px;color:#f0eefb}.links a:hover{color:#fff}
-    .demo-btn{border:1px solid #484662;border-radius:28px;padding:12px 20px;font-weight:800;background:transparent}.demo-btn:hover{border-color:#77728f}
-    footer{background:#070719;color:white;padding:54px 0}.footer-grid{display:grid;grid-template-columns:1.35fr .8fr .8fr;gap:60px}.footer-brand{font-size:22px;font-weight:900;color:#5d39ff;display:flex;align-items:center;gap:8px}.footer-brand svg{width:44px}.footer-copy{font-size:13px;line-height:1.7;color:#dedbee;margin-top:22px}.footer-col strong{display:block;font-size:13px;margin-bottom:18px}.footer-col a{display:block;text-decoration:none;color:#f1efff;font-size:13px;margin:12px 0}
-    @media(max-width:900px){.links{gap:15px}.links a:nth-child(-n+4){display:none}.wrap{width:min(100% - 28px,1240px)}.footer-grid{grid-template-columns:1fr}}
-  </style>
 </head>
 <body>
-<header>
-  <nav class="wrap topnav">
-    <a class="brand" href="/" aria-label="Oculivo home">
+<header class="site-header">
+  <nav class="wrap site-nav">
+    <a class="oculivo-logo" href="/" aria-label="Oculivo home">
       <svg viewBox="0 0 64 44" aria-hidden="true"><path d="M3 22C11 7 25 1 32 1c11 0 22 7 29 21-8 14-20 21-29 21C19 43 10 36 3 22Z" fill="#6b22ff"/><path d="M14 22C20 10 27 7 34 7c9 0 17 6 23 15-6 10-14 15-23 15-9 0-15-5-20-15Z" fill="#04b9ff"/><circle cx="33" cy="22" r="10" fill="#11113b"/><circle cx="33" cy="22" r="5.4" fill="#8a58ff"/><circle cx="36" cy="18" r="2.2" fill="#d7f6ff"/></svg>
-      <span><em>OCUL</em><b>IVO</b></span>
+      <span class="oculivo-word">OCUL<b>IVO</b></span>
     </a>
-    <div class="links">
+    <div class="main-links">
       <a href="/solutions/optometry/">Optometry</a>
       <a href="/solutions/ophthalmology/">Ophthalmology</a>
       <a href="/optical/">Optical</a>
       <a href="/communications/">Communications</a>
       <a href="/website-seo/">Website + SEO</a>
-      <a class="demo-btn" href="https://taxrescrm.app/book?product=oculivo">Book a demo&nbsp; →</a>
     </div>
+    <a class="nav-demo" href="https://taxrescrm.app/book?product=oculivo">Book a demo&nbsp; →</a>
   </nav>
 </header>
 <slot />
-<footer>
+<footer class="site-footer">
   <div class="wrap footer-grid">
     <div>
-      <div class="footer-brand">
+      <a class="oculivo-logo" href="/">
         <svg viewBox="0 0 64 44" aria-hidden="true"><path d="M3 22C11 7 25 1 32 1c11 0 22 7 29 21-8 14-20 21-29 21C19 43 10 36 3 22Z" fill="#6b22ff"/><path d="M14 22C20 10 27 7 34 7c9 0 17 6 23 15-6 10-14 15-23 15-9 0-15-5-20-15Z" fill="#04b9ff"/><circle cx="33" cy="22" r="10" fill="#11113b"/><circle cx="33" cy="22" r="5.4" fill="#8a58ff"/></svg>
-        OCULIVO
-      </div>
+        <span class="oculivo-word">OCUL<b>IVO</b></span>
+      </a>
       <div class="footer-copy">The operating system for modern eye care.<br/>Built by RomyLabs.</div>
     </div>
     <div class="footer-col"><strong>Platform</strong><a href="/solutions/optometry/">Optometry software</a><a href="/solutions/ophthalmology/">Ophthalmology software</a><a href="/optical/">Optical management</a><a href="/communications/">Communications</a></div>
-    <div class="footer-col"><strong>Growth & trust</strong><a href="/website-seo/">Website + SEO</a><a href="/privacy/">Security</a><a href="https://taxrescrm.app/book?product=oculivo">Founding practice demo</a><a href="mailto:info@romylabs.com">Contact RomyLabs</a></div>
+    <div class="footer-col"><strong>Growth & trust</strong><a href="/website-seo/">Website + SEO</a><a href="/privacy/">Security</a><a href="/demo/">Founding practice demo</a><a href="mailto:info@romylabs.com">Contact RomyLabs</a></div>
   </div>
 </footer>
 </body>
