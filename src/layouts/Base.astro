@@ -10,7 +10,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site)
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta name="theme-color" content="#071827" />
+    <meta name="theme-color" content="#0b0b22" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
@@ -19,19 +19,23 @@ const canonical = new URL(Astro.url.pathname, Astro.site)
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <style>
-      :root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#102331;background:#f7fbfd}
-      *{box-sizing:border-box}body{margin:0}a{color:inherit}.wrap{width:min(1160px,calc(100% - 32px));margin:auto}
-      header{background:#071827;color:white;border-bottom:1px solid rgba(255,255,255,.08)}nav{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:24px}
-      .brand{font-size:24px;font-weight:850;letter-spacing:-.04em;text-decoration:none}.brand span{color:#59d5cf}
-      .navlinks{display:flex;gap:20px;align-items:center;font-size:14px}.navlinks a{text-decoration:none;color:#d9e8ef}
-      .btn{display:inline-flex;align-items:center;justify-content:center;border-radius:10px;padding:12px 18px;text-decoration:none;font-weight:750}
-      .primary{background:#28b8b1;color:#042523}.secondary{border:1px solid #bfd6df;background:white}
-      footer{margin-top:80px;padding:36px 0;background:#071827;color:#a9c0cb;font-size:14px}
+      :root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#f7f5ff;background:#0b0b22;--bg:#0b0b22;--bg2:#11112c;--panel:#171438;--panel2:#211957;--purple:#7c5cff;--purple2:#9d8cff;--cyan:#61d7ff;--text:#f8f7ff;--muted:#aaa8c6;--line:#2b2850}
+      *{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--text)}a{color:inherit}.wrap{width:min(1160px,calc(100% - 32px));margin:auto}
+      header{position:sticky;top:0;z-index:20;background:rgba(11,11,34,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+      nav{min-height:68px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+      .brand{font-size:18px;font-weight:900;letter-spacing:.12em;text-decoration:none;color:white}.brand span{color:var(--cyan)}
+      .navlinks{display:flex;gap:22px;align-items:center;font-size:13px}.navlinks a{text-decoration:none;color:#d7d5e8;font-weight:650}.navlinks a:hover{color:white}
+      .btn{display:inline-flex;align-items:center;justify-content:center;border-radius:14px;padding:12px 18px;text-decoration:none;font-weight:800;border:1px solid transparent;transition:.18s ease}
+      .primary{background:linear-gradient(90deg,#7358ff,#9a86ff);color:white;box-shadow:0 12px 30px rgba(91,65,214,.28)}
+      .secondary{border-color:#4a456d;background:transparent;color:white}
+      .btn:hover{transform:translateY(-1px)}
+      footer{margin-top:0;padding:40px 0;background:#09091c;color:#85839f;font-size:13px;border-top:1px solid #22203e}
+      footer a{color:#b9b6d1}
       @media(max-width:760px){.navlinks a:not(.btn){display:none}.wrap{width:min(100% - 24px,1160px)}}
     </style>
   </head>
   <body>
-    <header><nav class="wrap"><a class="brand" href="/">Ocul<span>ivo</span></a><div class="navlinks"><a href="/features/">Features</a><a href="/solutions/optometry/">Optometry</a><a href="/solutions/ophthalmology/">Ophthalmology</a><a href="/pricing/">Pricing</a><a class="btn primary" href="https://taxrescrm.app/book?product=oculivo">Book a demo</a></div></nav></header>
+    <header><nav class="wrap"><a class="brand" href="/">OCUL<span>IVO</span></a><div class="navlinks"><a href="/features/">Features</a><a href="/solutions/optometry/">Optometry</a><a href="/solutions/ophthalmology/">Ophthalmology</a><a href="/pricing/">Pricing</a><a class="btn secondary" href="https://taxrescrm.app/book?product=oculivo">Book a demo →</a></div></nav></header>
     <slot />
     <footer><div class="wrap">© 2026 Oculivo · A RomyLabs product · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a></div></footer>
   </body>
