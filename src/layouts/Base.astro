@@ -14,6 +14,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site)
   <meta name="theme-color" content="#0b0b22" />\n  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <title>{title}</title>
   <meta name="description" content={description} />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <link rel="canonical" href={canonical} />
   <meta property="og:type" content="website" />
   <meta property="og:title" content={title} />
@@ -33,6 +34,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site)
       <a href="/optical/">Optical</a>
       <a href="/communications/">Communications</a>
       <a href="/website-seo/">Website + SEO</a>
+      <a href="/locations/">Nationwide</a>
     </div>
     <a class="nav-demo" href="https://taxrescrm.app/book?product=oculivo">Book a demo&nbsp; →</a>
   </nav>
@@ -48,7 +50,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site)
       <div class="footer-copy">The operating system for modern eye care.<br/>Built by RomyLabs.</div>
     </div>
     <div class="footer-col"><strong>Platform</strong><a href="/solutions/optometry/">Optometry software</a><a href="/solutions/ophthalmology/">Ophthalmology software</a><a href="/optical/">Optical management</a><a href="/communications/">Communications</a></div>
-    <div class="footer-col"><strong>Growth & trust</strong><a href="/website-seo/">Website + SEO</a><a href="/privacy/">Security</a><a href="/demo/">Founding practice demo</a><a href="mailto:info@romylabs.com">Contact RomyLabs</a></div>
+    <div class="footer-col"><strong>Growth & trust</strong><a href="/website-seo/">Website + SEO</a><a href="/locations/">Nationwide coverage</a><a href="/privacy/">Privacy</a><a href="/demo/">Founding practice demo</a><a href="mailto:info@romylabs.com">Contact RomyLabs</a></div>
   </div>
 </footer>
 </body>
