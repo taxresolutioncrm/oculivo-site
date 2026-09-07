@@ -2,8 +2,11 @@ const ORIGINAL_ORIGIN = 'https://oculivo.rcruz187.chatgpt.site'
 
 export default {
   async fetch(request, env) {
+    const incoming = new URL(request.url)
+    if (incoming.pathname === '/demo' || incoming.pathname === '/demo/') {
+      return Response.redirect('https://taxrescrm.app/book?product=oculivo', 302)
+    }
     try {
-      const incoming = new URL(request.url)
       const target = new URL(ORIGINAL_ORIGIN)
       target.pathname = incoming.pathname
       target.search = incoming.search
