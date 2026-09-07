@@ -34,6 +34,7 @@ export default {
   async fetch(request, env) {
     const candidates = [
       ['https://custom-domains.chatgpt.site', {
+        'host': ORIGINAL_HOST,
         'x-forwarded-host': ORIGINAL_HOST,
         'x-original-host': ORIGINAL_HOST,
         'forwarded': 'host=' + ORIGINAL_HOST
