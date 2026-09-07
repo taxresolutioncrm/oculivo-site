@@ -1,0 +1,15 @@
+---
+import Base from '../../layouts/Base.astro'
+import { states } from '../../data/states'
+const schema={"@context":"https://schema.org","@type":"CollectionPage","name":"Oculivo Eye Care Practice Management Software Across All 50 States","url":"https://oculivo.com/locations/"}
+---
+<Base title="Eye Care Practice Management Software Across All 50 States | Oculivo" description="Oculivo serves optometry, ophthalmology, optical and multi-location eye-care practices nationwide. Browse eye care practice management software pages for all 50 states.">
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+<main>
+  <section class="hero-dark page-hero"><div class="wrap"><span class="eyebrow">Nationwide coverage</span><h1>Eye care practice management software across all 50 states.</h1><p>Oculivo is built for optometry, ophthalmology, optical retail and multi-location eye-care groups nationwide.</p><div class="hero-actions"><a class="btn-grad" href="https://taxrescrm.app/book?product=oculivo">Request a private demo&nbsp; →</a></div></div></section>
+  <section class="section-light depth-section"><div class="wrap"><div class="depth-top"><span class="eyebrow">Browse by state</span><div class="depth-title"><h2>Find Oculivo in your market.</h2><p>Each state page connects the same national Oculivo platform to the eye-care buyer intent practitioners use when researching practice software.</p></div></div><div class="state-grid">{states.map(([slug,name]) => <a class="state-link" href={`/locations/${slug}/`}>{name}</a>)}</div></div></section>
+</main>
+</Base>
+<style>
+.state-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}.state-link{display:block;padding:14px 16px;border:1px solid rgba(17,17,59,.12);border-radius:12px;background:#fff;color:#11113b;text-decoration:none;font-weight:700}.state-link:hover{border-color:#6b22ff;color:#6b22ff}@media(max-width:900px){.state-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:560px){.state-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
