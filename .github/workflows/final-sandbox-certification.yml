@@ -1,0 +1,36 @@
+name: Final Sandbox Certification
+on:
+  push:
+    branches: [crm-demo-gallery-sandbox]
+    paths: ['.github/workflows/final-sandbox-certification.yml']
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: npm install --no-audit --no-fund
+      - run: npm run build
+      - name: Tour asset and route smoke
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f dist/tour/overview.jpg
+          test -f dist/tour/patients.jpg
+          test -f dist/tour/clinical.jpg
+          grep -q '/tour/overview.jpg' dist/tour/index.html
+          grep -q '/tour/patients.jpg' dist/tour/index.html
+          grep -q '/tour/clinical.jpg' dist/tour/index.html
+          grep -q 'Watch the 90-sec tour' dist/index.html
+          if grep -q 'taxrescrm.app/book' dist/tour/index.html; then echo "booking link leaked into tour"; exit 1; fi
+          python3 -m http.server 4174 --directory dist >/tmp/site.log 2>&1 &
+          pid=$!
+          trap 'kill $pid || true' EXIT
+          for i in $(seq 1 30); do curl -fsS http://127.0.0.1:4174/ >/dev/null && break || sleep 1; done
+          for route in / /tour/ /demo/ /features/ /pricing/ /communications/ /website-seo/ /locations/ /sitemap.xml /robots.txt; do
+            code=$(curl -sS -o /tmp/r -w "%{http_code}" "http://127.0.0.1:4174$route")
+            echo "$route => $code"
+            test "$code" = "200"
+          done
