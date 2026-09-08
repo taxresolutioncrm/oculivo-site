@@ -1,6 +1,6 @@
 const ORIGINAL_ORIGIN = 'https://oculivo.rcruz187.chatgpt.site'
 
-function cleanHeaders(headers, cacheControl = 'public, max-age=300, s-maxage=900') {
+function cleanHeaders(headers, cacheControl = 'public, max-age=300, s-maxage=900, stale-while-revalidate=86400') {
   const out = new Headers(headers)
   for (const h of [
     'content-security-policy',
@@ -39,14 +39,19 @@ function rewriteCss(css, cssUrl) {
   return css
 }
 
-async function fetchOriginal(url, request) {
+async function fetchOriginal(url, request, ttl = 900) {
   const headers = new Headers(request.headers)
   for (const h of ['host','cf-connecting-ip','cf-ipcountry','cf-ray','cf-visitor']) headers.delete(h)
-  return fetch(url, { method: request.method, headers, redirect: 'follow', cf: { cacheTtl: 600, cacheEverything: true } })
+  return fetch(url, {
+    method: request.method,
+    headers,
+    redirect: 'follow',
+    cf: request.method === 'GET' ? { cacheEverything: true, cacheTtl: ttl } : undefined
+  })
 }
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const incoming = new URL(request.url)
 
     if (incoming.pathname === '/demo' || incoming.pathname === '/demo/') {
@@ -62,61 +67,85 @@ export default {
       return Response.redirect(target.toString(), 302)
     }
 
-    // Prefer the versioned Astro build for every route. This removes the
-    // cross-origin round trip that previously made the Oculivo site feel slow.
-    // Only fall back to the legacy origin when the local build truly has no page.
-    const local = await env.ASSETS.fetch(request)
-    if (local.status !== 404) return local
+    const canonicalRedirects = new Map([
+      ['/solutions/optometry', '/optometry-software'],
+      ['/solutions/optometry/', '/optometry-software'],
+      ['/solutions/ophthalmology', '/ophthalmology-software'],
+      ['/solutions/ophthalmology/', '/ophthalmology-software'],
+      ['/optical', '/optical-management'],
+      ['/optical/', '/optical-management']
+    ])
+    const canonicalTarget = canonicalRedirects.get(incoming.pathname)
+    if (canonicalTarget) {
+      return Response.redirect(new URL(canonicalTarget, incoming.origin).toString(), 301)
+    }
+
+    // SEO-controlled routes remain versioned in this repository.
+    if (
+      incoming.pathname === '/robots.txt' ||
+      incoming.pathname === '/sitemap.xml' ||
+      incoming.pathname === '/locations' ||
+      incoming.pathname === '/locations/' ||
+      incoming.pathname.startsWith('/locations/')
+    ) {
+      return env.ASSETS.fetch(request)
+    }
+
+    // Preserve the approved Oculivo design served by the existing origin, but
+    // cache the transformed response at Cloudflare so repeat traffic does not
+    // pay for an origin round trip on every request.
+    if (request.method === 'GET') {
+      const cache = caches.default
+      const cached = await cache.match(request)
+      if (cached) return cached
+    }
 
     try {
       const target = new URL(ORIGINAL_ORIGIN)
       target.pathname = incoming.pathname
       target.search = incoming.search
-      const upstream = await fetchOriginal(target.toString(), request)
+      const upstream = await fetchOriginal(target.toString(), request, 900)
 
       if (upstream.ok) {
         const type = upstream.headers.get('content-type') || ''
+        let response
 
         if (type.includes('text/html')) {
           let html = await upstream.text()
-
-          const links = [...html.matchAll(/<link\b[^>]*rel=(['"])stylesheet\1[^>]*href=(['"])([^'"]+)\2[^>]*>/gi)]
-          for (const match of links) {
-            try {
-              const cssUrl = new URL(match[3], upstream.url)
-              const cssRes = await fetch(cssUrl.toString(), { redirect: 'follow', cf: { cacheTtl: 3600, cacheEverything: true } })
-              if (cssRes.ok) {
-                const css = rewriteCss(await cssRes.text(), cssRes.url)
-                html = html.replace(match[0], '<style data-oculivo-original="' + cssUrl.pathname + '">' + css + '</style>')
-              }
-            } catch {}
-          }
-
           const original = new URL(ORIGINAL_ORIGIN)
-          html = html.replaceAll(original.origin, '').replace(/<base\b[^>]*>/gi, '')
 
-          return new Response(html, {
+          // Keep stylesheet links instead of downloading + inlining every CSS
+          // file on every HTML request. Origin URLs become same-host paths and
+          // are served through this worker with independent long-lived caching.
+          html = html
+            .replaceAll(original.origin, '')
+            .replace(/<base\b[^>]*>/gi, '')
+
+          response = new Response(html, {
             status: upstream.status,
             statusText: upstream.statusText,
             headers: cleanHeaders(upstream.headers)
           })
-        }
-
-        if (type.includes('text/css')) {
+        } else if (type.includes('text/css')) {
           const css = rewriteCss(await upstream.text(), upstream.url)
-          const headers = cleanHeaders(upstream.headers, 'public, max-age=3600, s-maxage=86400')
+          const headers = cleanHeaders(upstream.headers, 'public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800')
           headers.set('content-type', 'text/css; charset=utf-8')
-          return new Response(css, { status: upstream.status, headers })
+          response = new Response(css, { status: upstream.status, headers })
+        } else {
+          response = new Response(upstream.body, {
+            status: upstream.status,
+            statusText: upstream.statusText,
+            headers: cleanHeaders(upstream.headers, 'public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800')
+          })
         }
 
-        return new Response(upstream.body, {
-          status: upstream.status,
-          statusText: upstream.statusText,
-          headers: cleanHeaders(upstream.headers, 'public, max-age=3600, s-maxage=86400')
-        })
+        if (request.method === 'GET') {
+          ctx.waitUntil(caches.default.put(request, response.clone()))
+        }
+        return response
       }
     } catch {}
 
-    return local
+    return env.ASSETS.fetch(request)
   }
 }
