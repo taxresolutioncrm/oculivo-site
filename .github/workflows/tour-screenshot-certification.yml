@@ -1,0 +1,41 @@
+name: Tour Screenshot Certification
+on:
+  push:
+    branches: [crm-demo-gallery-sandbox]
+    paths: ['.github/workflows/tour-screenshot-certification.yml']
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: npm ci --no-audit --no-fund
+      - run: npm run build
+      - name: Validate JPEGs and tour routes
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          for name in ['overview','patients','clinical']:
+              p=Path('dist/tour')/f'{name}.jpg'
+              assert p.exists() and p.stat().st_size > 5000, p
+              with Image.open(p) as im:
+                  im.verify()
+              print(name, p.stat().st_size, 'valid')
+          PY
+          python3 -m http.server 4174 --directory dist >/tmp/site.log 2>&1 &
+          pid=$!
+          trap 'kill $pid || true' EXIT
+          for i in $(seq 1 30); do curl -fsS http://127.0.0.1:4174/tour/ >/dev/null && break || sleep 1; done
+          test "$(curl -sS -o /tmp/tour -w "%{http_code}" http://127.0.0.1:4174/tour/)" = "200"
+          for asset in overview patients clinical; do
+            test "$(curl -sS -o /tmp/a -w "%{http_code}" "http://127.0.0.1:4174/tour/$asset.jpg")" = "200"
+          done
+          grep -q '/tour/overview.jpg' /tmp/tour
+          grep -q '/tour/patients.jpg' /tmp/tour
+          grep -q '/tour/clinical.jpg' /tmp/tour
+          ! grep -q 'taxrescrm.app/book' /tmp/tour
