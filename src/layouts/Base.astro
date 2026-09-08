@@ -2,7 +2,8 @@
 import '../styles/site.css'
 const {
   title = 'Oculivo | The operating system for modern eye care',
-  description = 'Oculivo connects clinical, optical, communication, scheduling, billing, staff operations, website and SEO workflows for modern eye-care practices.'
+  description = 'Oculivo connects clinical, optical, communication, scheduling, billing, staff operations, website and SEO workflows for modern eye-care practices.',
+  hideDemoCta = false
 } = Astro.props
 const canonical = new URL(Astro.url.pathname, Astro.site)
 ---
@@ -36,7 +37,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site)
       <a href="/website-seo/">Website + SEO</a>
       <a href="/locations/">Nationwide</a>
     </div>
-    <a class="nav-demo" href="https://taxrescrm.app/book?product=oculivo">Book a demo&nbsp; →</a>
+    {hideDemoCta ? <span></span> : <a class="nav-demo" href="https://taxrescrm.app/book?product=oculivo">Book a demo&nbsp; →</a>}
   </nav>
 </header>
 <slot />
