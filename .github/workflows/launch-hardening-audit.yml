@@ -1,0 +1,48 @@
+name: Launch Hardening Audit
+on:
+  push:
+    branches: [crm-demo-gallery-sandbox]
+    paths: ['.github/workflows/launch-hardening-audit.yml']
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: npm install --no-audit --no-fund
+      - name: Runtime dependency audit
+        run: npm audit --omit=dev --audit-level=high
+      - name: Full dependency audit
+        run: npm audit --audit-level=high
+      - name: Build
+        run: npm run build
+      - name: Internal link/file audit
+        shell: python
+        run: |
+          from pathlib import Path
+          import re, sys
+          root=Path('dist')
+          missing=[]
+          for html in root.rglob('*.html'):
+              txt=html.read_text(errors='ignore')
+              for href in re.findall(r'(?:href|src)="([^"]+)"',txt):
+                  if href.startswith(('http://','https://','mailto:','tel:','#','data:','javascript:')):
+                      continue
+                  clean=href.split('#',1)[0].split('?',1)[0]
+                  if not clean:
+                      continue
+                  if clean.startswith('/'):
+                      p=root/clean.lstrip('/')
+                  else:
+                      p=html.parent/clean
+                  candidates=[p,p/'index.html',Path(str(p)+'.html')]
+                  if not any(x.exists() for x in candidates):
+                      missing.append((str(html),href))
+          for item in missing[:100]:
+              print('MISSING',*item)
+          if missing:
+              print(f'{len(missing)} missing internal assets/links')
+              sys.exit(1)
+          print('All internal links/assets resolved')
