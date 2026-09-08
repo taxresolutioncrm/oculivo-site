@@ -1,0 +1,33 @@
+name: Post-Upgrade Route Smoke
+on:
+  push:
+    branches: [crm-demo-gallery-sandbox]
+    paths: ['.github/workflows/post-upgrade-route-smoke.yml']
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: npm ci --no-audit --no-fund
+      - run: npm run build
+      - name: Smoke website routes and tour assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m http.server 4174 --directory dist >/tmp/site.log 2>&1 &
+          pid=$!
+          trap 'kill $pid || true' EXIT
+          for i in $(seq 1 30); do curl -fsS http://127.0.0.1:4174/ >/dev/null && break || sleep 1; done
+          routes=(/ /tour/ /demo/ /features/ /pricing/ /communications/ /website-seo/ /locations/ /solutions/optometry/ /solutions/ophthalmology/ /optical/ /sitemap.xml /robots.txt)
+          for route in "${routes[@]}"; do
+            code=$(curl -sS -o /tmp/r -w "%{http_code}" "http://127.0.0.1:4174$route")
+            echo "$route => $code"
+            test "$code" = "200"
+          done
+          for asset in /tour/overview.jpg /tour/patients.jpg /tour/clinical.jpg; do
+            test "$(curl -sS -o /tmp/a -w "%{http_code}" "http://127.0.0.1:4174$asset")" = "200"
+          done
+          ! grep -q 'taxrescrm.app/book' dist/tour/index.html
