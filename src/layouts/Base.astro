@@ -12,7 +12,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site)
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width" />
-  <meta name="theme-color" content="#0b0b22" />\n  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="theme-color" content="#0b0b22" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <title>{title}</title>
   <meta name="description" content={description} />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
@@ -20,7 +21,11 @@ const canonical = new URL(Astro.url.pathname, Astro.site)
   <meta property="og:type" content="website" />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
-  <meta property="og:url" content={canonical} />\n  <meta property="og:site_name" content="Oculivo" />\n  <meta name="twitter:card" content="summary" />\n  <meta name="twitter:title" content={title} />\n  <meta name="twitter:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:site_name" content="Oculivo" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
 </head>
 <body>
 <header class="site-header">
@@ -30,9 +35,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site)
       <span class="oculivo-word">OCUL<b>IVO</b></span>
     </a>
     <div class="main-links">
-      <a href="/optometry-software">Optometry</a>
-      <a href="/ophthalmology-software">Ophthalmology</a>
-      <a href="/optical-management">Optical</a>
+      <a href="/solutions/optometry/">Optometry</a>
+      <a href="/solutions/ophthalmology/">Ophthalmology</a>
+      <a href="/optical/">Optical</a>
       <a href="/communications/">Communications</a>
       <a href="/website-seo/">Website + SEO</a>
       <a href="/locations/">Nationwide</a>
@@ -45,12 +50,12 @@ const canonical = new URL(Astro.url.pathname, Astro.site)
   <div class="wrap footer-grid">
     <div>
       <a class="oculivo-logo" href="/">
-        <svg viewBox="0 0 64 44" aria-hidden="true"><path d="M3 22C11 7 25 1 32 1c11 0 22 7 29 21-8 14-20 21-29 21C19 43 10 36 3 22Z" fill="#6b22ff"/><path d="M14 22C20 10 27 7 34 7c9 0 17 6 23 15-6 10-14 15-23 15-9 0-15-5-20-15Z" fill="#04b9ff"/><circle cx="33" cy="22" r="10" fill="#11113b"/><circle cx="33" cy="22" r="5.4" fill="#8a58ff"/></svg>
+        <svg viewBox="0 0 64 44" aria-hidden="true"><path d="M3 22C11 7 25 1 32 1c11 0 22 7 29 21-8 14-20 21-29 21C19 43 10 36 3 22Z" fill="#6b22ff"/><path d="M14 22C20 10 27 7 34 7c9 0 17 6 23 15-6 10-14 15-23 15-9 0-15-5-20-15Z" fill="#04b9ff"/><circle cx="33" cy="22" r="10" fill="#11113b"/><circle cx="33" cy="22" r="5.4" fill="#8a58ff"/><circle cx="36" cy="18" r="2.2" fill="#d7f6ff"/></svg>
         <span class="oculivo-word">OCUL<b>IVO</b></span>
       </a>
       <div class="footer-copy">The operating system for modern eye care.<br/>Built by RomyLabs.</div>
     </div>
-    <div class="footer-col"><strong>Platform</strong><a href="/optometry-software">Optometry software</a><a href="/ophthalmology-software">Ophthalmology software</a><a href="/optical-management">Optical management</a><a href="/communications/">Communications</a></div>
+    <div class="footer-col"><strong>Platform</strong><a href="/solutions/optometry/">Optometry software</a><a href="/solutions/ophthalmology/">Ophthalmology software</a><a href="/optical/">Optical management</a><a href="/communications/">Communications</a></div>
     <div class="footer-col"><strong>Growth & trust</strong><a href="/website-seo/">Website + SEO</a><a href="/locations/">Nationwide coverage</a><a href="/privacy/">Privacy</a><a href="/demo/">Founding practice demo</a><a href="mailto:info@romylabs.com">Contact RomyLabs</a></div>
   </div>
 </footer>
