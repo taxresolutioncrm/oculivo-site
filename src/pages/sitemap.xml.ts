@@ -7,6 +7,7 @@ const urls = [
   'privacy/',
   'terms/',
   'demo/',
+  'tour/',
   'communications/',
   'optical-management/',
   'website-seo/',
