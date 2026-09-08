@@ -53,6 +53,15 @@ export default {
       return Response.redirect('https://taxrescrm.app/book?product=oculivo', 302)
     }
 
+    if (incoming.pathname === '/app' || incoming.pathname === '/app/' || incoming.pathname.startsWith('/app/')) {
+      const target = new URL('https://app.oculivo.com')
+      const suffix = incoming.pathname.replace(/^\/app\/?/, '/')
+      target.pathname = suffix || '/'
+      target.search = incoming.search
+      target.hash = incoming.hash
+      return Response.redirect(target.toString(), 302)
+    }
+
     const canonicalRedirects = new Map([
       ['/solutions/optometry', '/optometry-software'],
       ['/solutions/optometry/', '/optometry-software'],
