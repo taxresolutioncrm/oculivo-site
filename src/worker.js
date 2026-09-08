@@ -1,6 +1,6 @@
 const ORIGINAL_ORIGIN = 'https://oculivo.rcruz187.chatgpt.site'
 
-function cleanHeaders(headers) {
+function cleanHeaders(headers, cacheControl = 'public, max-age=300, s-maxage=900') {
   const out = new Headers(headers)
   for (const h of [
     'content-security-policy',
@@ -9,7 +9,7 @@ function cleanHeaders(headers) {
     'cross-origin-opener-policy',
     'cross-origin-resource-policy'
   ]) out.delete(h)
-  out.set('cache-control', 'no-store')
+  out.set('cache-control', cacheControl)
   return out
 }
 
@@ -42,7 +42,7 @@ function rewriteCss(css, cssUrl) {
 async function fetchOriginal(url, request) {
   const headers = new Headers(request.headers)
   for (const h of ['host','cf-connecting-ip','cf-ipcountry','cf-ray','cf-visitor']) headers.delete(h)
-  return fetch(url, { method: request.method, headers, redirect: 'follow' })
+  return fetch(url, { method: request.method, headers, redirect: 'follow', cf: { cacheTtl: 600, cacheEverything: true } })
 }
 
 export default {
@@ -62,31 +62,11 @@ export default {
       return Response.redirect(target.toString(), 302)
     }
 
-    const canonicalRedirects = new Map([
-      ['/solutions/optometry', '/optometry-software'],
-      ['/solutions/optometry/', '/optometry-software'],
-      ['/solutions/ophthalmology', '/ophthalmology-software'],
-      ['/solutions/ophthalmology/', '/ophthalmology-software'],
-      ['/optical', '/optical-management'],
-      ['/optical/', '/optical-management']
-    ])
-    const canonicalTarget = canonicalRedirects.get(incoming.pathname)
-    if (canonicalTarget) {
-      return Response.redirect(new URL(canonicalTarget, incoming.origin).toString(), 301)
-    }
-
-    // SEO-controlled routes must come from the versioned Astro build rather than
-    // the legacy design proxy so robots, sitemap, and nationwide pages stay
-    // deterministic and deploy with this repository.
-    if (
-      incoming.pathname === '/robots.txt' ||
-      incoming.pathname === '/sitemap.xml' ||
-      incoming.pathname === '/locations' ||
-      incoming.pathname === '/locations/' ||
-      incoming.pathname.startsWith('/locations/')
-    ) {
-      return env.ASSETS.fetch(request)
-    }
+    // Prefer the versioned Astro build for every route. This removes the
+    // cross-origin round trip that previously made the Oculivo site feel slow.
+    // Only fall back to the legacy origin when the local build truly has no page.
+    const local = await env.ASSETS.fetch(request)
+    if (local.status !== 404) return local
 
     try {
       const target = new URL(ORIGINAL_ORIGIN)
@@ -104,7 +84,7 @@ export default {
           for (const match of links) {
             try {
               const cssUrl = new URL(match[3], upstream.url)
-              const cssRes = await fetch(cssUrl.toString(), { redirect: 'follow' })
+              const cssRes = await fetch(cssUrl.toString(), { redirect: 'follow', cf: { cacheTtl: 3600, cacheEverything: true } })
               if (cssRes.ok) {
                 const css = rewriteCss(await cssRes.text(), cssRes.url)
                 html = html.replace(match[0], '<style data-oculivo-original="' + cssUrl.pathname + '">' + css + '</style>')
@@ -113,9 +93,7 @@ export default {
           }
 
           const original = new URL(ORIGINAL_ORIGIN)
-          html = html
-            .replaceAll(original.origin, '')
-            .replace(/<base\b[^>]*>/gi, '')
+          html = html.replaceAll(original.origin, '').replace(/<base\b[^>]*>/gi, '')
 
           return new Response(html, {
             status: upstream.status,
@@ -126,7 +104,7 @@ export default {
 
         if (type.includes('text/css')) {
           const css = rewriteCss(await upstream.text(), upstream.url)
-          const headers = cleanHeaders(upstream.headers)
+          const headers = cleanHeaders(upstream.headers, 'public, max-age=3600, s-maxage=86400')
           headers.set('content-type', 'text/css; charset=utf-8')
           return new Response(css, { status: upstream.status, headers })
         }
@@ -134,11 +112,11 @@ export default {
         return new Response(upstream.body, {
           status: upstream.status,
           statusText: upstream.statusText,
-          headers: cleanHeaders(upstream.headers)
+          headers: cleanHeaders(upstream.headers, 'public, max-age=3600, s-maxage=86400')
         })
       }
     } catch {}
 
-    return env.ASSETS.fetch(request)
+    return local
   }
 }
