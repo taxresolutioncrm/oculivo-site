@@ -1,5 +1,5 @@
 name: Launch Hardening Audit
-# rerun-astro7-demo-fix
+# rerun-shared-layout-fixes
 on:
   push:
     branches: [crm-demo-gallery-sandbox]
