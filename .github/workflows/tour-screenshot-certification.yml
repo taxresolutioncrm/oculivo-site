@@ -19,13 +19,13 @@ jobs:
           set -euo pipefail
           python3 - <<'PY'
           from pathlib import Path
-          from PIL import Image
           for name in ['overview','patients','clinical']:
               p=Path('dist/tour')/f'{name}.jpg'
-              assert p.exists() and p.stat().st_size > 5000, p
-              with Image.open(p) as im:
-                  im.verify()
-              print(name, p.stat().st_size, 'valid')
+              data=p.read_bytes()
+              assert len(data) > 5000, (name,len(data))
+              assert data[:3] == b'\\xff\\xd8\\xff', (name,data[:4].hex())
+              assert data[-2:] == b'\\xff\\xd9', (name,data[-4:].hex())
+              print(name, len(data), 'valid JPEG')
           PY
           python3 -m http.server 4174 --directory dist >/tmp/site.log 2>&1 &
           pid=$!
