@@ -1,5 +1,5 @@
 name: Launch Hardening Audit
-# rerun-after-security-upgrades
+# rerun-astro7-demo-fix
 on:
   push:
     branches: [crm-demo-gallery-sandbox]
