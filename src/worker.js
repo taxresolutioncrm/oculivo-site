@@ -121,6 +121,15 @@ export default {
             .replaceAll(original.origin, '')
             .replace(/<base\b[^>]*>/gi, '')
 
+          const tracking = `
+<link rel="manifest" href="/site.webmanifest">
+<link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg">
+<link rel="shortcut icon" href="/favicon.svg">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WR6GGVYLXX"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-WR6GGVYLXX');</script>
+<script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src='https://www.clarity.ms/tag/'+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,'clarity','script','yguz2tkhnt');</script>`
+          if (/<\/head>/i.test(html)) html = html.replace(/<\/head>/i, tracking + '\n</head>')
+
           response = new Response(html, {
             status: upstream.status,
             statusText: upstream.statusText,
