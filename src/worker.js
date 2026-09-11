@@ -86,7 +86,15 @@ export default {
       incoming.pathname === '/sitemap.xml' ||
       incoming.pathname === '/locations' ||
       incoming.pathname === '/locations/' ||
-      incoming.pathname.startsWith('/locations/')
+      incoming.pathname.startsWith('/locations/') ||
+      incoming.pathname === '/pricing' ||
+      incoming.pathname === '/pricing/' ||
+      incoming.pathname === '/optometry-software' ||
+      incoming.pathname === '/optometry-software/' ||
+      incoming.pathname === '/ophthalmology-software' ||
+      incoming.pathname === '/ophthalmology-software/' ||
+      incoming.pathname === '/optical-management' ||
+      incoming.pathname === '/optical-management/'
     ) {
       return env.ASSETS.fetch(request)
     }
