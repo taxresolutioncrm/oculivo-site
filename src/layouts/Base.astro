@@ -11,7 +11,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site)
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width" />
-  <meta name="theme-color" content="#0b0b22" />\n  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="theme-color" content="#0b0b22" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <title>{title}</title>
   <meta name="description" content={description} />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
@@ -19,7 +20,11 @@ const canonical = new URL(Astro.url.pathname, Astro.site)
   <meta property="og:type" content="website" />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
-  <meta property="og:url" content={canonical} />\n  <meta property="og:site_name" content="Oculivo" />\n  <meta name="twitter:card" content="summary" />\n  <meta name="twitter:title" content={title} />\n  <meta name="twitter:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:site_name" content="Oculivo" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
 </head>
 <body>
 <header class="site-header">
