@@ -10,7 +10,6 @@ const urls = [
   'communications/',
   'optical-management/',
   'website-seo/',
-  'security/',
   'optometry-software/',
   'ophthalmology-software/',
   'locations/',
