@@ -11,7 +11,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site)
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width" />
-  <meta name="theme-color" content="#0b0b22" />\n  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="theme-color" content="#0b0b22" />\n  <link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg" />\n  <link rel="shortcut icon" href="/favicon.svg" />\n  <link rel="manifest" href="/site.webmanifest" />
   <title>{title}</title>
   <meta name="description" content={description} />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
@@ -20,6 +20,20 @@ const canonical = new URL(Astro.url.pathname, Astro.site)
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:url" content={canonical} />\n  <meta property="og:site_name" content="Oculivo" />\n  <meta name="twitter:card" content="summary" />\n  <meta name="twitter:title" content={title} />\n  <meta name="twitter:description" content={description} />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-WR6GGVYLXX"></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-WR6GGVYLXX');
+  </script>
+  <script is:inline>
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src='https://www.clarity.ms/tag/'+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window,document,'clarity','script','yguz2tkhnt');
+  </script>
 </head>
 <body>
 <header class="site-header">
