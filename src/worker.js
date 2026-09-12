@@ -84,6 +84,7 @@ export default {
     if (
       incoming.pathname === '/robots.txt' ||
       incoming.pathname === '/sitemap.xml' ||
+      incoming.pathname === '/BingSiteAuth.xml' ||
       incoming.pathname === '/locations' ||
       incoming.pathname === '/locations/' ||
       incoming.pathname.startsWith('/locations/')
