@@ -123,7 +123,7 @@ export default {
             .replace(/<base\b[^>]*>/gi, '')
 
           const tracking = `
-<link rel="manifest" href="/site.webmanifest">
+<meta name="msvalidate.01" content="BC8190C5D48F98C3E4C4A6EC29AA5CB3">\n<link rel="manifest" href="/site.webmanifest">
 <link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg">
 <link rel="shortcut icon" href="/favicon.svg">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-WR6GGVYLXX"></script>
