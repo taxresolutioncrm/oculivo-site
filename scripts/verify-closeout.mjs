@@ -1,0 +1,26 @@
+import fs from 'node:fs'
+const read=(p)=>fs.readFileSync(new URL('../'+p,import.meta.url),'utf8')
+const fail=(m)=>{console.error('FAIL:',m);process.exitCode=1}
+const pass=(m)=>console.log('PASS:',m)
+const check=(ok,m)=>ok?pass(m):fail(m)
+
+const base=read('src/layouts/Base.astro')
+const worker=read('src/worker.js')
+const pricing=read('src/pages/pricing/index.astro')
+const sitemap=read('src/pages/sitemap.xml.ts')
+const pkg=JSON.parse(read('package.json'))
+
+check(base.includes('href="/pricing/">Pricing</a>'),'Pricing is linked in repository navigation')
+check(base.includes('href="/security/">Security</a>'),'Security is linked from the public site')
+check(!base.includes('\\n'),'Base metadata has no literal newline escapes')
+check(worker.includes("'/pricing'")&&worker.includes("'/pricing/'"),'Worker serves pricing from repository assets')
+check(worker.includes("'/security'")&&worker.includes("'/security/'"),'Worker serves security from repository assets')
+check(worker.includes("'/favicon.svg'")&&worker.includes("'/site.webmanifest'"),'Worker serves current brand assets')
+check(worker.includes('G-WR6GGVYLXX')&&worker.includes('yguz2tkhnt'),'GA4 and Clarity injection guards are present')
+check(worker.includes('BC8190C5D48F98C3E4C4A6EC29AA5CB3'),'Bing verification is preserved')
+check(['$399/mo','$599/mo','$799/mo'].every(x=>pricing.includes(x)),'All three approved pricing tiers are present')
+check(pricing.includes('AggregateOffer'),'Pricing structured data is present')
+check(sitemap.includes("'pricing/'")&&sitemap.includes("'security/'"),'Pricing and security are in the sitemap')
+check(!sitemap.includes("'demo/'"),'Redirect-only demo route is excluded from sitemap')
+check(pkg.devDependencies?.astro==='4.16.18'&&pkg.devDependencies?.typescript==='5.6.3'&&pkg.devDependencies?.wrangler==='4.20.0','Website toolchain versions are pinned')
+if(process.exitCode)process.exit(process.exitCode)
