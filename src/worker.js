@@ -93,6 +93,8 @@ export default {
       '/features/',
       '/pricing',
       '/pricing/',
+      '/security',
+      '/security/',
       '/privacy',
       '/privacy/',
       '/terms',
