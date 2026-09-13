@@ -80,11 +80,37 @@ export default {
       return Response.redirect(new URL(canonicalTarget, incoming.origin).toString(), 301)
     }
 
-    // SEO-controlled routes remain versioned in this repository.
+    // Repository-owned routes and public assets must be served from this build.
+    // This prevents the legacy origin from shadowing current pricing, SEO pages,
+    // favicon/manifest files, and canonical product routes.
+    const assetPaths = new Set([
+      '/robots.txt',
+      '/sitemap.xml',
+      '/BingSiteAuth.xml',
+      '/favicon.svg',
+      '/site.webmanifest',
+      '/features',
+      '/features/',
+      '/pricing',
+      '/pricing/',
+      '/privacy',
+      '/privacy/',
+      '/terms',
+      '/terms/',
+      '/communications',
+      '/communications/',
+      '/website-seo',
+      '/website-seo/',
+      '/optometry-software',
+      '/optometry-software/',
+      '/ophthalmology-software',
+      '/ophthalmology-software/',
+      '/optical-management',
+      '/optical-management/'
+    ])
+
     if (
-      incoming.pathname === '/robots.txt' ||
-      incoming.pathname === '/sitemap.xml' ||
-      incoming.pathname === '/BingSiteAuth.xml' ||
+      assetPaths.has(incoming.pathname) ||
       incoming.pathname === '/locations' ||
       incoming.pathname === '/locations/' ||
       incoming.pathname.startsWith('/locations/')
