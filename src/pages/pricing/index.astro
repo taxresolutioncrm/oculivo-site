@@ -1,7 +1,24 @@
 ---
 import Base from '../../layouts/Base.astro'
+const pricingSchema = {
+  "@context":"https://schema.org",
+  "@type":"SoftwareApplication",
+  "name":"Oculivo",
+  "applicationCategory":"BusinessApplication",
+  "operatingSystem":"Web",
+  "url":"https://oculivo.com/pricing/",
+  "description":"Connected eye-care practice software for optometry, ophthalmology and optical operations.",
+  "offers":{
+    "@type":"AggregateOffer",
+    "priceCurrency":"USD",
+    "lowPrice":"399",
+    "highPrice":"799",
+    "offerCount":"3"
+  }
+}
 ---
 <Base title="Oculivo Pricing | Eye Care Practice Software" description="Oculivo eye care practice software pricing starts at $399 per month per location, with plans for growing practices and advanced operations.">
+<script type="application/ld+json" set:html={JSON.stringify(pricingSchema)} />
 <main>
 <section class="hero-dark page-hero"><div class="wrap"><span class="eyebrow">Transparent founding-practice pricing</span><h1>Eye-care software priced<br/>for the practice.</h1><p>Choose the Oculivo level that fits your practice today. Founding practices lock their launch-plan price for 24 months. Annual billing saves 15%.</p><div class="hero-actions"><a class="btn-grad" href="https://taxrescrm.app/book?product=oculivo">Request a private demo&nbsp; →</a></div></div></section>
 <section class="section-light"><div class="wrap">
