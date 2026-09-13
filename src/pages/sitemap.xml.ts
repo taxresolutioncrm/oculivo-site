@@ -4,6 +4,7 @@ const urls = [
   '',
   'features/',
   'pricing/',
+  'security/',
   'privacy/',
   'terms/',
   'demo/',
