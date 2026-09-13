@@ -5,6 +5,25 @@ const {
   description = 'Oculivo connects clinical, optical, communication, scheduling, billing, staff operations, website and SEO workflows for modern eye-care practices.'
 } = Astro.props
 const canonical = new URL(Astro.url.pathname, Astro.site)
+const siteSchema = {
+  "@context":"https://schema.org",
+  "@graph":[
+    {
+      "@type":"Organization",
+      "@id":"https://oculivo.com/#organization",
+      "name":"Oculivo",
+      "url":"https://oculivo.com/",
+      "parentOrganization":{"@type":"Organization","name":"RomyLabs","url":"https://romylabs.com/"}
+    },
+    {
+      "@type":"WebSite",
+      "@id":"https://oculivo.com/#website",
+      "url":"https://oculivo.com/",
+      "name":"Oculivo",
+      "publisher":{"@id":"https://oculivo.com/#organization"}
+    }
+  ]
+}
 ---
 <!doctype html>
 <html lang="en">
@@ -27,6 +46,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site)
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
+  <script type="application/ld+json" set:html={JSON.stringify(siteSchema)} />
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-WR6GGVYLXX"></script>
   <script is:inline>
     window.dataLayer = window.dataLayer || [];
