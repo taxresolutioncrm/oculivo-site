@@ -147,6 +147,13 @@ export default {
           html = html
             .replaceAll(original.origin, '')
             .replace(/<base\b[^>]*>/gi, '')
+            // Keep the approved proxied homepage design, but expose the current
+            // repository pricing route in the primary navigation when the
+            // legacy origin has not yet added it.
+            .replace(
+              /(<a\b[^>]*href=["']\/locations\/?["'][^>]*>\s*Nationwide\s*<\/a>)/i,
+              (match) => /href=["']\/pricing\/?["']/i.test(html) ? match : '<a href="/pricing/">Pricing</a>' + match
+            )
 
           const tracking = `
 <meta name="msvalidate.01" content="BC8190C5D48F98C3E4C4A6EC29AA5CB3">\n<link rel="manifest" href="/site.webmanifest">
