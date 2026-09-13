@@ -153,7 +153,7 @@ export default {
             // repository pricing route in the primary navigation when the
             // legacy origin has not yet added it.
             .replace(
-              /(<a\b[^>]*href=["']\/locations\/?["'][^>]*>\s*Nationwide\s*<\/a>)/i,
+              /(<a\b[^>]*href=["']\/locations\/?["'][^>]*>\s*Nationwide\s*<\/a>)/ig,
               (match) => /href=["']\/pricing\/?["']/i.test(html) ? match : '<a href="/pricing/">Pricing</a>' + match
             )
 
