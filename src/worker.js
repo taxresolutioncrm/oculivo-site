@@ -157,13 +157,21 @@ export default {
               (match) => /href=["']\/pricing\/?["']/i.test(html) ? match : '<a href="/pricing/">Pricing</a>' + match
             )
 
-          const tracking = `
-<meta name="msvalidate.01" content="BC8190C5D48F98C3E4C4A6EC29AA5CB3">\n<link rel="manifest" href="/site.webmanifest">
-<link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg">
-<link rel="shortcut icon" href="/favicon.svg">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-WR6GGVYLXX"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-WR6GGVYLXX');</script>
-<script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src='https://www.clarity.ms/tag/'+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,'clarity','script','yguz2tkhnt');</script>`
+          const trackingParts = []
+          if (!/msvalidate\.01/i.test(html)) trackingParts.push('<meta name="msvalidate.01" content="BC8190C5D48F98C3E4C4A6EC29AA5CB3">')
+          if (!/site\.webmanifest/i.test(html)) trackingParts.push('<link rel="manifest" href="/site.webmanifest">')
+          if (!/href=["']\/favicon\.svg["']/i.test(html)) {
+            trackingParts.push('<link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg">')
+            trackingParts.push('<link rel="shortcut icon" href="/favicon.svg">')
+          }
+          if (!html.includes('G-WR6GGVYLXX')) {
+            trackingParts.push('<script async src="https://www.googletagmanager.com/gtag/js?id=G-WR6GGVYLXX"><\/script>')
+            trackingParts.push('<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-WR6GGVYLXX");<\/script>')
+          }
+          if (!html.includes('yguz2tkhnt')) {
+            trackingParts.push('<script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","yguz2tkhnt");<\/script>')
+          }
+          const tracking = trackingParts.join('\n')
           if (/<\/head>/i.test(html)) html = html.replace(/<\/head>/i, tracking + '\n</head>')
 
           response = new Response(html, {
