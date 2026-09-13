@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "verify:closeout": "node scripts/verify-closeout.mjs"
   },
   "dependencies": {
     "astro": "4.16.18"
