@@ -22,5 +22,7 @@ check(['$399/mo','$599/mo','$799/mo'].every(x=>pricing.includes(x)),'All three a
 check(pricing.includes('AggregateOffer'),'Pricing structured data is present')
 check(sitemap.includes("'pricing/'")&&sitemap.includes("'security/'"),'Pricing and security are in the sitemap')
 check(!sitemap.includes("'demo/'"),'Redirect-only demo route is excluded from sitemap')
+const seo=read('src/pages/website-seo/index.astro')
+check(!/reputation management|call tracking|appointment attribution|portal messages|portal conversations|automation/i.test(pricing+'\n'+seo),'Pricing and SEO pages contain no unsupported marketing claims')
 check(pkg.devDependencies?.astro==='4.16.18'&&pkg.devDependencies?.typescript==='5.6.3'&&pkg.devDependencies?.wrangler==='4.20.0','Website toolchain versions are pinned')
 if(process.exitCode)process.exit(process.exitCode)
