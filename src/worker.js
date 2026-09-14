@@ -154,7 +154,10 @@ export default {
             // legacy origin has not yet added it.
             .replace(
               /(<a\b[^>]*href=["']\/locations\/?["'][^>]*>\s*Nationwide\s*<\/a>)/ig,
-              (match) => /href=["']\/pricing\/?["']/i.test(html) ? match : '<a href="/pricing/">Pricing</a>' + match
+              (match, _anchor, offset, whole) => {
+                const before = whole.slice(Math.max(0, offset - 500), offset)
+                return /href=["']\/pricing\/?["']/i.test(before) ? match : '<a href="/pricing/">Pricing</a>' + match
+              }
             )
 
           const trackingParts = []
