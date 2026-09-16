@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro'
+import { seoResources } from '../../data/seoResources'
 ---
 <Base title="Eye Care Practice Resources | Oculivo" description="Operational guides for optometry and ophthalmology practices covering patient recall, optical inventory, communications, insurance, scheduling and connected practice workflows.">
 <main><section class="hero-dark page-hero"><div class="wrap"><span class="eyebrow">Oculivo resources</span><h1>Practical guides for connected eye-care operations.</h1><p>Deep-dive practice guides for the workflows that connect the front desk, clinical team, optical, billing and patient communication.</p></div></section>
@@ -7,4 +8,5 @@ import Base from '../../layouts/Base.astro'
 <article class="depth-card"><span class="num">01</span><h3><a href="/resources/optometry-patient-recall-workflow/">Optometry Patient Recall Workflow</a></h3><p>Build a repeatable process for due patients, outreach, booking and reactivation reporting.</p></article>
 <article class="depth-card"><span class="num">02</span><h3><a href="/resources/optical-inventory-management-guide/">Optical Inventory Management Guide</a></h3><p>Connect frames, vendors, stock movement, patient orders and profitability.</p></article>
 <article class="depth-card"><span class="num">03</span><h3><a href="/communications/">Patient Communications</a></h3><p>Keep calls, messages and reminders attached to the patient workflow.</p></article>
+{seoResources.map((resource,index) => <article class="depth-card"><span class="num">{String(index+4).padStart(2,'0')}</span><h3><a href={`/resources/${resource.slug}/`}>{resource.title}</a></h3><p>{resource.description}</p></article>)}
 </div></div></section></main></Base>
