@@ -1,4 +1,5 @@
 import { states } from '../data/states'
+import { seoResources } from '../data/seoResources'
 
 const urls = [
   '',
@@ -17,6 +18,7 @@ const urls = [
   'resources/',
   'resources/optometry-patient-recall-workflow/',
   'resources/optical-inventory-management-guide/',
+  ...seoResources.map((resource) => `resources/${resource.slug}/`),
   ...states.map(([slug]) => `locations/${slug}/`)
 ]
 
