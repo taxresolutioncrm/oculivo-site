@@ -14,6 +14,9 @@ const urls = [
   'optometry-software/',
   'ophthalmology-software/',
   'locations/',
+  'resources/',
+  'resources/optometry-patient-recall-workflow/',
+  'resources/optical-inventory-management-guide/',
   ...states.map(([slug]) => `locations/${slug}/`)
 ]
 
