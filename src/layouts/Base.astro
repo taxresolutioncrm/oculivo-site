@@ -2,7 +2,8 @@
 import '../styles/site.css'
 const {
   title = 'Oculivo | The operating system for modern eye care',
-  description = 'Oculivo connects clinical, optical, communication, scheduling, billing, staff operations, website and SEO workflows for modern eye-care practices.'
+  description = 'Oculivo connects clinical, optical, communication, scheduling, billing, staff operations, website and SEO workflows for modern eye-care practices.',
+  schema
 } = Astro.props
 const canonical = new URL(Astro.url.pathname, Astro.site)
 ---
@@ -20,6 +21,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site)
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:url" content={canonical} />\n  <meta property="og:site_name" content="Oculivo" />\n  <meta name="twitter:card" content="summary" />\n  <meta name="twitter:title" content={title} />\n  <meta name="twitter:description" content={description} />
+  {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-WR6GGVYLXX"></script>
   <script is:inline>
     window.dataLayer = window.dataLayer || [];
