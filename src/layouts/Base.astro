@@ -2,7 +2,8 @@
 import '../styles/site.css'
 const {
   title = 'Oculivo | The operating system for modern eye care',
-  description = 'Oculivo connects clinical, optical, communication, scheduling, billing, staff operations, website and SEO workflows for modern eye-care practices.'
+  description = 'Oculivo connects clinical, optical, communication, scheduling, billing, staff operations, website and SEO workflows for modern eye-care practices.',
+  schema
 } = Astro.props
 const canonical = new URL(Astro.url.pathname, Astro.site)
 const siteSchema = {
@@ -48,6 +49,7 @@ const siteSchema = {
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
   <script type="application/ld+json" set:html={JSON.stringify(siteSchema)} />
+  {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-WR6GGVYLXX"></script>
   <script is:inline>
     window.dataLayer = window.dataLayer || [];
@@ -105,7 +107,7 @@ const siteSchema = {
       <div class="footer-copy">The operating system for modern eye care.<br/>Built by RomyLabs.</div>
     </div>
     <div class="footer-col"><strong>Platform</strong><a href="/optometry-software">Optometry software</a><a href="/ophthalmology-software">Ophthalmology software</a><a href="/optical-management">Optical management</a><a href="/communications/">Communications</a></div>
-    <div class="footer-col"><strong>Growth & trust</strong><a href="/website-seo/">Website + SEO</a><a href="/pricing/">Pricing</a><a href="/security/">Security</a><a href="/locations/">Nationwide coverage</a><a href="/privacy/">Privacy</a><a href="/demo/">Founding practice demo</a><a href="mailto:info@romylabs.com">Contact RomyLabs</a></div>
+    <div class="footer-col"><strong>Growth & trust</strong><a href="/resources/">Practice resources</a><a href="/website-seo/">Website + SEO</a><a href="/pricing/">Pricing</a><a href="/security/">Security</a><a href="/locations/">Nationwide coverage</a><a href="/privacy/">Privacy</a><a href="/demo/">Founding practice demo</a><a href="mailto:info@romylabs.com">Contact RomyLabs</a></div>
   </div>
 </footer>
 </body>
