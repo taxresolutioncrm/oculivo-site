@@ -22,6 +22,12 @@ for(const file of files){
   const route='/'+rel
   routes.add(route.endsWith('/')?route:route+'/')
 }
+
+const states=fs.readFileSync(path.join(root,'src','data','states.ts'),'utf8')
+for(const m of states.matchAll(/\['([^']+)'\s*,/g))routes.add(`/locations/${m[1]}/`)
+const resources=fs.readFileSync(path.join(root,'src','data','seoResources.ts'),'utf8')
+for(const m of resources.matchAll(/\bslug\s*:\s*'([^']+)'/g))routes.add(`/resources/${m[1]}/`)
+
 const normalize=(href)=>{
   const clean=href.split('#')[0].split('?')[0]
   if(!clean)return '/'
@@ -33,7 +39,6 @@ for(const file of files){
   for(const match of src.matchAll(/href=["'](\/[^"']*)["']/g)){
     const href=match[1]
     const route=normalize(href)
-    if(route.startsWith('/locations/')||route.startsWith('/resources/'))continue
     if(!routes.has(route))missing.push(`${path.relative(root,file)} -> ${href}`)
   }
 }
@@ -41,4 +46,4 @@ if(missing.length){
   console.error('FAIL: unresolved internal links:',[...new Set(missing)].join(', '))
   process.exit(1)
 }
-console.log('PASS: repository-owned Astro pages contain no unresolved static internal links')
+console.log(`PASS: ${files.length} Astro pages contain no unresolved internal links`)
