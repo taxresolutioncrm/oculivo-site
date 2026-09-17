@@ -82,7 +82,7 @@ export default {
 
     // Repository-owned routes and public assets must be served from this build.
     // This prevents the legacy origin from shadowing current pricing, SEO pages,
-    // favicon/manifest files, and canonical product routes.
+    // favicon/manifest files, canonical product routes, and the resource library.
     const assetPaths = new Set([
       '/robots.txt',
       '/sitemap.xml',
@@ -115,7 +115,10 @@ export default {
       assetPaths.has(incoming.pathname) ||
       incoming.pathname === '/locations' ||
       incoming.pathname === '/locations/' ||
-      incoming.pathname.startsWith('/locations/')
+      incoming.pathname.startsWith('/locations/') ||
+      incoming.pathname === '/resources' ||
+      incoming.pathname === '/resources/' ||
+      incoming.pathname.startsWith('/resources/')
     ) {
       return env.ASSETS.fetch(request)
     }
@@ -149,6 +152,9 @@ export default {
           html = html
             .replaceAll(original.origin, '')
             .replace(/<base\b[^>]*>/gi, '')
+            // Remove the Website + SEO tab from the legacy primary navigation.
+            // The page remains indexable and is still linked from repository-owned footer content.
+            .replace(/<a\b[^>]*href=["']\/website-seo\/?["'][^>]*>\s*Website\s*\+\s*SEO\s*<\/a>/i, '')
             // Keep the approved proxied homepage design, but expose the current
             // repository pricing route in the primary navigation when the
             // legacy origin has not yet added it.
