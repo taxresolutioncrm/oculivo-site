@@ -1,4 +1,11 @@
 const ORIGINAL_ORIGIN = 'https://oculivo.rcruz187.chatgpt.site'
+const HOME_SCHEMA = JSON.stringify({
+  '@context':'https://schema.org',
+  '@graph':[
+    {'@type':'Organization','@id':'https://oculivo.com/#organization','name':'Oculivo','url':'https://oculivo.com/','parentOrganization':{'@type':'Organization','name':'RomyLabs','url':'https://romylabs.com/'}},
+    {'@type':'WebSite','@id':'https://oculivo.com/#website','url':'https://oculivo.com/','name':'Oculivo','publisher':{'@id':'https://oculivo.com/#organization'}}
+  ]
+})
 
 function cleanHeaders(headers, cacheControl = 'public, max-age=300, s-maxage=900, stale-while-revalidate=86400') {
   const out = new Headers(headers)
@@ -80,21 +87,46 @@ export default {
       return Response.redirect(new URL(canonicalTarget, incoming.origin).toString(), 301)
     }
 
-    // SEO-controlled routes remain versioned in this repository.
+    const assetPaths = new Set([
+      '/robots.txt',
+      '/sitemap.xml',
+      '/BingSiteAuth.xml',
+      '/favicon.svg',
+      '/site.webmanifest',
+      '/features',
+      '/features/',
+      '/pricing',
+      '/pricing/',
+      '/security',
+      '/security/',
+      '/privacy',
+      '/privacy/',
+      '/terms',
+      '/terms/',
+      '/communications',
+      '/communications/',
+      '/website-seo',
+      '/website-seo/',
+      '/optometry-software',
+      '/optometry-software/',
+      '/ophthalmology-software',
+      '/ophthalmology-software/',
+      '/optical-management',
+      '/optical-management/'
+    ])
+
     if (
-      incoming.pathname === '/robots.txt' ||
-      incoming.pathname === '/sitemap.xml' ||
-      incoming.pathname === '/BingSiteAuth.xml' ||
+      assetPaths.has(incoming.pathname) ||
       incoming.pathname === '/locations' ||
       incoming.pathname === '/locations/' ||
-      incoming.pathname.startsWith('/locations/')
+      incoming.pathname.startsWith('/locations/') ||
+      incoming.pathname === '/resources' ||
+      incoming.pathname === '/resources/' ||
+      incoming.pathname.startsWith('/resources/')
     ) {
       return env.ASSETS.fetch(request)
     }
 
-    // Preserve the approved Oculivo design served by the existing origin, but
-    // cache the transformed response at Cloudflare so repeat traffic does not
-    // pay for an origin round trip on every request.
     if (request.method === 'GET') {
       const cache = caches.default
       const cached = await cache.match(request)
@@ -115,20 +147,41 @@ export default {
           let html = await upstream.text()
           const original = new URL(ORIGINAL_ORIGIN)
 
-          // Keep stylesheet links instead of downloading + inlining every CSS
-          // file on every HTML request. Origin URLs become same-host paths and
-          // are served through this worker with independent long-lived caching.
           html = html
             .replaceAll(original.origin, '')
             .replace(/<base\b[^>]*>/gi, '')
+            .replace(/<a\b[^>]*href=["']\/website-seo\/?["'][^>]*>\s*Website\s*\+\s*SEO\s*<\/a>/gi, '')
+            .replace(
+              /(<a\b[^>]*href=["']\/locations\/?["'][^>]*>\s*Nationwide\s*<\/a>)/ig,
+              (match, _anchor, offset, whole) => {
+                const before = whole.slice(Math.max(0, offset - 500), offset)
+                return /href=["']\/pricing\/?["']/i.test(before) ? match : '<a href="/pricing/">Pricing</a>' + match
+              }
+            )
 
-          const tracking = `
-<meta name="msvalidate.01" content="BC8190C5D48F98C3E4C4A6EC29AA5CB3">\n<link rel="manifest" href="/site.webmanifest">
-<link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg">
-<link rel="shortcut icon" href="/favicon.svg">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-WR6GGVYLXX"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-WR6GGVYLXX');</script>
-<script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src='https://www.clarity.ms/tag/'+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,'clarity','script','yguz2tkhnt');</script>`
+          const trackingParts = []
+          if (!/msvalidate\.01/i.test(html)) trackingParts.push('<meta name="msvalidate.01" content="BC8190C5D48F98C3E4C4A6EC29AA5CB3">')
+          if (!/site\.webmanifest/i.test(html)) trackingParts.push('<link rel="manifest" href="/site.webmanifest">')
+          if (!/href=["']\/favicon\.svg["']/i.test(html)) {
+            trackingParts.push('<link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg">')
+            trackingParts.push('<link rel="shortcut icon" href="/favicon.svg">')
+          }
+          if (incoming.pathname === '/' || incoming.pathname === '') {
+            if (!/<link\s+[^>]*rel=["']canonical["']/i.test(html)) trackingParts.push('<link rel="canonical" href="https://oculivo.com/">')
+            if (!/<meta\s+[^>]*name=["']description["']/i.test(html)) trackingParts.push('<meta name="description" content="Cloud-based eye care practice management software for optometry, ophthalmology and optical operations, connecting scheduling, patients, billing, communications and reporting.">')
+            if (!/oculivo\.com\/#organization/i.test(html)) trackingParts.push('<script type="application/ld+json">'+HOME_SCHEMA.replace(/<\/script/gi,'<\\/script')+'<\/script>')
+          }
+          if (!html.includes('G-WR6GGVYLXX')) {
+            trackingParts.push('<script async src="https://www.googletagmanager.com/gtag/js?id=G-WR6GGVYLXX"><\/script>')
+            trackingParts.push('<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-WR6GGVYLXX");<\/script>')
+          }
+          if (!html.includes('yguz2tkhnt')) {
+            trackingParts.push('<script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","yguz2tkhnt");<\/script>')
+          }
+          if (!html.includes('oculivo_cta_click')) {
+            trackingParts.push('<script>document.addEventListener("click",function(e){var a=e.target&&e.target.closest?e.target.closest("a"):null;if(!a)return;var h=a.getAttribute("href")||"",t=(a.textContent||"").trim().replace(/\\s+/g," ").slice(0,120),c="";if(h.indexOf("taxrescrm.app/book?product=oculivo")>-1||h==="/demo/"||h==="/demo")c="demo";else if(h==="/pricing/"||h==="/pricing")c="pricing";else if(h==="/app/"||h==="/app")c="app";if(!c)return;if(typeof window.gtag==="function")window.gtag("event","oculivo_cta_click",{cta_type:c,link_url:h,link_text:t,page_path:location.pathname});else{window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:"oculivo_cta_click",cta_type:c,link_url:h,link_text:t,page_path:location.pathname})}},true);<\/script>')
+          }
+          const tracking = trackingParts.join('\n')
           if (/<\/head>/i.test(html)) html = html.replace(/<\/head>/i, tracking + '\n</head>')
 
           response = new Response(html, {

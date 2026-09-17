@@ -5,13 +5,14 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "verify:closeout": "node scripts/verify-closeout.mjs && node scripts/verify-links.mjs && node scripts/verify-deploy-config.mjs"
   },
   "dependencies": {
-    "astro": "^4.16.18"
+    "astro": "4.16.18"
   },
   "devDependencies": {
-    "typescript": "^5.6.3",
-    "wrangler": "^4.20.0"
+    "typescript": "5.6.3",
+    "wrangler": "4.20.0"
   }
 }
