@@ -32,6 +32,8 @@ check(worker.includes("'/pricing'")&&worker.includes("'/pricing/'"),'Worker serv
 check(worker.includes("'/security'")&&worker.includes("'/security/'"),'Worker serves security from repository assets')
 check(worker.includes("incoming.pathname === '/resources'")&&worker.includes("incoming.pathname.startsWith('/resources/')"),'Worker serves the SEO resource library from repository assets')
 check(worker.includes('Website\\s*\\+\\s*SEO')&&worker.includes("'/website-seo"),'Proxied legacy navigation strips the Website + SEO tab')
+check(worker.includes('HOME_SCHEMA')&&worker.includes('oculivo.com/#organization'),'Proxied homepage receives Organization/WebSite structured data when missing')
+check(worker.includes('rel=\"canonical\" href=\"https://oculivo.com/\"')&&worker.includes('Cloud-based eye care practice management software'),'Proxied homepage receives canonical and fallback SEO description when missing')
 check(worker.includes("'/favicon.svg'")&&worker.includes("'/site.webmanifest'"),'Worker serves current brand assets')
 check(worker.includes('G-WR6GGVYLXX')&&worker.includes('yguz2tkhnt'),'GA4 and Clarity injection guards are present')
 check(worker.includes('BC8190C5D48F98C3E4C4A6EC29AA5CB3'),'Bing verification is preserved')
