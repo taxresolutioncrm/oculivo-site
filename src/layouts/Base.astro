@@ -64,6 +64,24 @@ const siteSchema = {
       y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window,document,'clarity','script','yguz2tkhnt');
   </script>
+  <script is:inline>
+    document.addEventListener('click', function(event){
+      const target = event.target instanceof Element ? event.target.closest('a') : null;
+      if(!target) return;
+      const href = target.getAttribute('href') || '';
+      const text = (target.textContent || '').trim().replace(/\s+/g,' ').slice(0,120);
+      let ctaType = '';
+      if(href.includes('taxrescrm.app/book?product=oculivo') || href === '/demo/' || href === '/demo') ctaType = 'demo';
+      else if(href === '/pricing/' || href === '/pricing') ctaType = 'pricing';
+      else if(href === '/app/' || href === '/app') ctaType = 'app';
+      if(!ctaType) return;
+      if(typeof window.gtag === 'function') window.gtag('event','oculivo_cta_click',{cta_type:ctaType,link_url:href,link_text:text,page_path:location.pathname});
+      else {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({event:'oculivo_cta_click',cta_type:ctaType,link_url:href,link_text:text,page_path:location.pathname});
+      }
+    }, {capture:true});
+  </script>
 </head>
 <body>
 <header class="site-header">
