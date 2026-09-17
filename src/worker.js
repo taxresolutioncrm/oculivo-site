@@ -150,7 +150,7 @@ export default {
           html = html
             .replaceAll(original.origin, '')
             .replace(/<base\b[^>]*>/gi, '')
-            .replace(/<a\b[^>]*href=["']\/website-seo\/?["'][^>]*>\s*Website\s*\+\s*SEO\s*<\/a>/i, '')
+            .replace(/<a\b[^>]*href=["']\/website-seo\/?["'][^>]*>\s*Website\s*\+\s*SEO\s*<\/a>/gi, '')
             .replace(
               /(<a\b[^>]*href=["']\/locations\/?["'][^>]*>\s*Nationwide\s*<\/a>)/ig,
               (match, _anchor, offset, whole) => {
