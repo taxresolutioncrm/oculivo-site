@@ -32,7 +32,7 @@ check(base.includes('oculivo_cta_click')&&base.includes("ctaType = 'demo'")&&bas
 check(worker.includes("'/pricing'")&&worker.includes("'/pricing/'"),'Worker serves pricing from repository assets')
 check(worker.includes("'/security'")&&worker.includes("'/security/'"),'Worker serves security from repository assets')
 check(worker.includes("incoming.pathname === '/resources'")&&worker.includes("incoming.pathname.startsWith('/resources/')"),'Worker serves the SEO resource library from repository assets')
-check(worker.includes('Website\\s*\\+\\s*SEO')&&worker.includes("'/website-seo"),'Proxied legacy navigation strips the Website + SEO tab')
+check(worker.includes('Website\\s*\\+\\s*SEO')&&worker.includes('/gi, \'\')'),'Proxied legacy navigation strips every Website + SEO nav occurrence')
 check(worker.includes('HOME_SCHEMA')&&worker.includes('oculivo.com/#organization'),'Proxied homepage receives Organization/WebSite structured data when missing')
 check(worker.includes('rel=\"canonical\" href=\"https://oculivo.com/\"')&&worker.includes('Cloud-based eye care practice management software'),'Proxied homepage receives canonical and fallback SEO description when missing')
 check(worker.includes('oculivo_cta_click')&&worker.includes('taxrescrm.app/book?product=oculivo'),'Proxied legacy pages track demo/pricing/app CTA clicks in GA4')
