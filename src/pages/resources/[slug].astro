@@ -5,7 +5,7 @@ export function getStaticPaths(){ return seoResources.map((resource)=>({params:{
 const { resource } = Astro.props
 const canonical=`https://oculivo.com/resources/${resource.slug}/`
 const schema=[
- {'@context':'https://schema.org','@type':'Article','headline':resource.title,'description':resource.description,'datePublished':'2026-09-16','dateModified':'2026-09-16','author':{'@type':'Organization','name':'Oculivo'},'publisher':{'@type':'Organization','name':'Oculivo','url':'https://oculivo.com'},'mainEntityOfPage':canonical},
+ {'@context':'https://schema.org','@type':'Article','headline':resource.title,'description':resource.description,'datePublished':'2026-09-16','dateModified':'2026-09-17','author':{'@type':'Organization','name':'Oculivo'},'publisher':{'@type':'Organization','name':'Oculivo','url':'https://oculivo.com'},'mainEntityOfPage':canonical},
  {'@context':'https://schema.org','@type':'FAQPage','mainEntity':resource.faq.map(([q,a])=>({'@type':'Question','name':q,'acceptedAnswer':{'@type':'Answer','text':a}}))}
 ]
 ---
