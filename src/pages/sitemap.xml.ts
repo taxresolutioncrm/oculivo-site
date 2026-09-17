@@ -19,6 +19,8 @@ const urls = [
   'resources/optical-inventory-management-guide/',
   'resources/best-optometry-software-guide/',
   'resources/best-ophthalmology-software-guide/',
+  'resources/cloud-based-optometry-software-guide/',
+  'resources/ophthalmology-software-buyers-guide/',
   ...seoResources.map((resource) => `resources/${resource.slug}/`),
   ...states.map(([slug]) => `locations/${slug}/`)
 ]
