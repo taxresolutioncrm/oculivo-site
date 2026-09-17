@@ -55,5 +55,5 @@ check(ophthalmology.includes('Cloud-Based Ophthalmology Practice Management Soft
 check(optical.includes('Optical Inventory & Order Management Software')&&optical.includes("'@type':'FAQPage'")&&optical.includes('/resources/optical-inventory-management-guide/'),'Optical pillar targets inventory/order intent with FAQ and internal links')
 const seo=read('src/pages/website-seo/index.astro')
 check(!/reputation management|call tracking|appointment attribution|portal messages|portal conversations|automation/i.test(pricing+'\n'+seo),'Pricing and SEO pages contain no unsupported marketing claims')
-check(pkg.devDependencies?.astro==='4.16.18'&&pkg.devDependencies?.typescript==='5.6.3'&&pkg.devDependencies?.wrangler==='4.20.0','Website toolchain versions are pinned')
+check(pkg.dependencies?.astro==='4.16.18'&&pkg.devDependencies?.typescript==='5.6.3'&&pkg.devDependencies?.wrangler==='4.20.0','Website toolchain versions are pinned')
 if(process.exitCode)process.exit(process.exitCode)
