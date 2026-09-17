@@ -17,6 +17,8 @@ const urls = [
   'resources/',
   'resources/optometry-patient-recall-workflow/',
   'resources/optical-inventory-management-guide/',
+  'resources/best-optometry-software-guide/',
+  'resources/best-ophthalmology-software-guide/',
   ...seoResources.map((resource) => `resources/${resource.slug}/`),
   ...states.map(([slug]) => `locations/${slug}/`)
 ]
