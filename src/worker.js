@@ -1,4 +1,11 @@
 const ORIGINAL_ORIGIN = 'https://oculivo.rcruz187.chatgpt.site'
+const HOME_SCHEMA = JSON.stringify({
+  '@context':'https://schema.org',
+  '@graph':[
+    {'@type':'Organization','@id':'https://oculivo.com/#organization','name':'Oculivo','url':'https://oculivo.com/','parentOrganization':{'@type':'Organization','name':'RomyLabs','url':'https://romylabs.com/'}},
+    {'@type':'WebSite','@id':'https://oculivo.com/#website','url':'https://oculivo.com/','name':'Oculivo','publisher':{'@id':'https://oculivo.com/#organization'}}
+  ]
+})
 
 function cleanHeaders(headers, cacheControl = 'public, max-age=300, s-maxage=900, stale-while-revalidate=86400') {
   const out = new Headers(headers)
@@ -172,6 +179,11 @@ export default {
           if (!/href=["']\/favicon\.svg["']/i.test(html)) {
             trackingParts.push('<link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg">')
             trackingParts.push('<link rel="shortcut icon" href="/favicon.svg">')
+          }
+          if (incoming.pathname === '/' || incoming.pathname === '') {
+            if (!/<link\s+[^>]*rel=["']canonical["']/i.test(html)) trackingParts.push('<link rel="canonical" href="https://oculivo.com/">')
+            if (!/<meta\s+[^>]*name=["']description["']/i.test(html)) trackingParts.push('<meta name="description" content="Cloud-based eye care practice management software for optometry, ophthalmology and optical operations, connecting scheduling, patients, billing, communications and reporting.">')
+            if (!/oculivo\.com\/#organization/i.test(html)) trackingParts.push('<script type="application/ld+json">'+HOME_SCHEMA.replace(/<\/script/gi,'<\\/script')+'<\/script>')
           }
           if (!html.includes('G-WR6GGVYLXX')) {
             trackingParts.push('<script async src="https://www.googletagmanager.com/gtag/js?id=G-WR6GGVYLXX"><\/script>')
