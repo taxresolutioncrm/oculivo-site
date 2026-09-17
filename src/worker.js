@@ -87,9 +87,6 @@ export default {
       return Response.redirect(new URL(canonicalTarget, incoming.origin).toString(), 301)
     }
 
-    // Repository-owned routes and public assets must be served from this build.
-    // This prevents the legacy origin from shadowing current pricing, SEO pages,
-    // favicon/manifest files, canonical product routes, and the resource library.
     const assetPaths = new Set([
       '/robots.txt',
       '/sitemap.xml',
@@ -130,9 +127,6 @@ export default {
       return env.ASSETS.fetch(request)
     }
 
-    // Preserve the approved Oculivo design served by the existing origin, but
-    // cache the transformed response at Cloudflare so repeat traffic does not
-    // pay for an origin round trip on every request.
     if (request.method === 'GET') {
       const cache = caches.default
       const cached = await cache.match(request)
@@ -153,18 +147,10 @@ export default {
           let html = await upstream.text()
           const original = new URL(ORIGINAL_ORIGIN)
 
-          // Keep stylesheet links instead of downloading + inlining every CSS
-          // file on every HTML request. Origin URLs become same-host paths and
-          // are served through this worker with independent long-lived caching.
           html = html
             .replaceAll(original.origin, '')
             .replace(/<base\b[^>]*>/gi, '')
-            // Remove the Website + SEO tab from the legacy primary navigation.
-            // The page remains indexable and is still linked from repository-owned footer content.
             .replace(/<a\b[^>]*href=["']\/website-seo\/?["'][^>]*>\s*Website\s*\+\s*SEO\s*<\/a>/i, '')
-            // Keep the approved proxied homepage design, but expose the current
-            // repository pricing route in the primary navigation when the
-            // legacy origin has not yet added it.
             .replace(
               /(<a\b[^>]*href=["']\/locations\/?["'][^>]*>\s*Nationwide\s*<\/a>)/ig,
               (match, _anchor, offset, whole) => {
@@ -191,6 +177,9 @@ export default {
           }
           if (!html.includes('yguz2tkhnt')) {
             trackingParts.push('<script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","yguz2tkhnt");<\/script>')
+          }
+          if (!html.includes('oculivo_cta_click')) {
+            trackingParts.push('<script>document.addEventListener("click",function(e){var a=e.target&&e.target.closest?e.target.closest("a"):null;if(!a)return;var h=a.getAttribute("href")||"",t=(a.textContent||"").trim().replace(/\\s+/g," ").slice(0,120),c="";if(h.indexOf("taxrescrm.app/book?product=oculivo")>-1||h==="/demo/"||h==="/demo")c="demo";else if(h==="/pricing/"||h==="/pricing")c="pricing";else if(h==="/app/"||h==="/app")c="app";if(!c)return;if(typeof window.gtag==="function")window.gtag("event","oculivo_cta_click",{cta_type:c,link_url:h,link_text:t,page_path:location.pathname});else{window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:"oculivo_cta_click",cta_type:c,link_url:h,link_text:t,page_path:location.pathname})}},true);<\/script>')
           }
           const tracking = trackingParts.join('\n')
           if (/<\/head>/i.test(html)) html = html.replace(/<\/head>/i, tracking + '\n</head>')
