@@ -58,6 +58,8 @@ check(optometry.includes('Cloud-Based Optometry Practice Management Software')&&
 check(ophthalmology.includes('Cloud-Based Ophthalmology Practice Management Software')&&ophthalmology.includes('FAQPage')&&ophthalmology.includes('/resources/ophthalmology-referral-workflow/')&&ophthalmology.includes('/resources/ophthalmology-software-buyers-guide/'),'Ophthalmology pillar targets commercial cloud/practice-management intent with FAQ and buyer-guide links')
 check(optical.includes('Optical Inventory & Order Management Software')&&optical.includes('FAQPage')&&optical.includes('/resources/optical-inventory-management-guide/'),'Optical pillar targets inventory/order intent with FAQ and internal links')
 const seo=read('src/pages/website-seo/index.astro')
+const locationsState=read('src/pages/locations/[state].astro')
 check(!/reputation management|call tracking|appointment attribution|portal messages|portal conversations|automation/i.test(pricing+'\n'+seo),'Pricing and SEO pages contain no unsupported marketing claims')
+check(!/prescriptions, recalls|intake, exams/i.test(locationsState),'Location pages do not claim unverified prescription, recall, or intake workflows')
 check(pkg.dependencies?.astro==='7.3.3'&&pkg.devDependencies?.typescript==='5.6.3'&&pkg.devDependencies?.wrangler==='4.20.0','Website toolchain versions are pinned')
 if(process.exitCode)process.exit(process.exitCode)
