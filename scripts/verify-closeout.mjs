@@ -34,6 +34,8 @@ check(worker.includes("'/security'")&&worker.includes("'/security/'"),'Worker se
 check(worker.includes("incoming.pathname === '/resources'")&&worker.includes("incoming.pathname.startsWith('/resources/')"),'Worker serves the SEO resource library from repository assets')
 check(worker.includes('Website\\s*\\+\\s*SEO')&&worker.includes('/gi, \'\')'),'Proxied legacy navigation strips every Website + SEO nav occurrence')
 check(worker.includes('HOME_SCHEMA')&&worker.includes('oculivo.com/#organization'),'Proxied homepage receives Organization/WebSite structured data when missing')
+check(worker.includes('canonicalPublicUrl')&&worker.includes("canonical.hostname = 'oculivo.com'"),'Worker enforces the canonical Oculivo host and public canonical URLs')
+check(worker.includes('noindex')&&worker.includes('index,follow,max-image-preview:large'),'Worker strips inherited legacy noindex and replaces it with indexable public robots metadata')
 check(worker.includes('rel=\"canonical\" href=\"https://oculivo.com/\"')&&worker.includes('Cloud-based eye care practice management software'),'Proxied homepage receives canonical and fallback SEO description when missing')
 check(worker.includes('oculivo_cta_click')&&worker.includes('taxrescrm.app/book?product=oculivo'),'Proxied legacy pages track demo/pricing/app CTA clicks in GA4')
 check(worker.includes("'/favicon.svg'")&&worker.includes("'/site.webmanifest'"),'Worker serves current brand assets')
