@@ -36,7 +36,7 @@ check(worker.includes('Website\\s*\\+\\s*SEO')&&worker.includes('/gi, \'\')'),'P
 check(worker.includes('HOME_SCHEMA')&&worker.includes('oculivo.com/#organization'),'Proxied homepage receives Organization/WebSite structured data when missing')
 check(worker.includes('canonicalPublicUrl')&&worker.includes("canonical.hostname = 'oculivo.com'"),'Proxied public pages normalize canonical and robots signals')
 check(worker.includes('index,follow,max-image-preview:large')&&worker.includes('(?:robots|googlebot|bingbot)'),'Legacy proxy robots metadata cannot reintroduce noindex')
-check(worker.includes('rel=\"canonical\" href=\"https://oculivo.com/\"')&&worker.includes('Cloud-based eye care practice management software'),'Proxied homepage receives canonical and fallback SEO description when missing')
+check(worker.includes('canonicalPublicUrl(incoming)')&&worker.includes('Cloud-based eye care practice management software'),'Proxied homepage receives canonical and fallback SEO description when missing')
 check(worker.includes('oculivo_cta_click')&&worker.includes('taxrescrm.app/book?product=oculivo'),'Proxied legacy pages track demo/pricing/app CTA clicks in GA4')
 check(worker.includes("'/favicon.svg'")&&worker.includes("'/site.webmanifest'"),'Worker serves current brand assets')
 check(worker.includes('G-WR6GGVYLXX')&&worker.includes('yguz2tkhnt'),'GA4 and Clarity injection guards are present')
