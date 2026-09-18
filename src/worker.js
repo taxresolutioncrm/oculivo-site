@@ -174,7 +174,7 @@ export default {
 
           // Normalize public SEO signals inherited from the legacy origin.
           html = html
-            .replace(/<meta\s+[^>]*name=["']robots["'][^>]*>/gi, '')
+            .replace(/<meta\s+[^>]*name=["'](?:robots|googlebot|bingbot)["'][^>]*>/gi, '')
             .replace(/<link\s+[^>]*rel=["']canonical["'][^>]*>/gi, '')
 
           const trackingParts = []
