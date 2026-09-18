@@ -67,6 +67,13 @@ export default {
   async fetch(request, env, ctx) {
     const incoming = new URL(request.url)
 
+    if (incoming.hostname.toLowerCase() === 'www.oculivo.com') {
+      const canonical = new URL(request.url)
+      canonical.protocol = 'https:'
+      canonical.hostname = 'oculivo.com'
+      return Response.redirect(canonical.toString(), 301)
+    }
+
     if (incoming.pathname === '/demo' || incoming.pathname === '/demo/') {
       return Response.redirect('https://taxrescrm.app/book?product=oculivo', 302)
     }
