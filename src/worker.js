@@ -101,6 +101,7 @@ export default {
     }
 
     const assetPaths = new Set([
+      '/',
       '/robots.txt',
       '/sitemap.xml',
       '/BingSiteAuth.xml',

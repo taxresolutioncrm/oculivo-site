@@ -1,0 +1,16 @@
+name: Oculivo Website Sandbox Gate
+on:
+  push:
+    branches:
+      - sandbox/oculivo-pricing-visibility
+jobs:
+  sandbox-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+      - run: npm install
+      - run: npm audit --omit=dev --audit-level=high
+      - run: npm run build
