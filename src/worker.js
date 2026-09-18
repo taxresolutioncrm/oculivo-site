@@ -20,12 +20,6 @@ function cleanHeaders(headers, cacheControl = 'public, max-age=300, s-maxage=900
   return out
 }
 
-function canonicalPublicUrl(incoming) {
-  let pathname = incoming.pathname || '/'
-  if (pathname !== '/' && !pathname.endsWith('/') && !/\.[a-z0-9]+$/i.test(pathname)) pathname += '/'
-  return 'https://oculivo.com' + pathname
-}
-
 function currentPathFor(resolvedUrl) {
   const u = new URL(resolvedUrl)
   return u.pathname + u.search + u.hash
@@ -66,13 +60,6 @@ async function fetchOriginal(url, request, ttl = 900) {
 export default {
   async fetch(request, env, ctx) {
     const incoming = new URL(request.url)
-
-    if (incoming.hostname.toLowerCase() === 'www.oculivo.com') {
-      const canonical = new URL(request.url)
-      canonical.protocol = 'https:'
-      canonical.hostname = 'oculivo.com'
-      return Response.redirect(canonical.toString(), 301)
-    }
 
     if (incoming.pathname === '/demo' || incoming.pathname === '/demo/') {
       return Response.redirect('https://taxrescrm.app/book?product=oculivo', 302)
@@ -172,14 +159,7 @@ export default {
               }
             )
 
-          // Normalize public SEO signals from the legacy origin before serving on oculivo.com.
-          html = html
-            .replace(/<meta\s+[^>]*name=["']robots["'][^>]*content=["'][^"']*noindex[^"']*["'][^>]*>/gi, '')
-            .replace(/<link\s+[^>]*rel=["']canonical["'][^>]*>/gi, '')
-
           const trackingParts = []
-          trackingParts.push('<link rel="canonical" href="' + canonicalPublicUrl(incoming) + '">')
-          trackingParts.push('<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">')
           if (!/msvalidate\.01/i.test(html)) trackingParts.push('<meta name="msvalidate.01" content="BC8190C5D48F98C3E4C4A6EC29AA5CB3">')
           if (!/site\.webmanifest/i.test(html)) trackingParts.push('<link rel="manifest" href="/site.webmanifest">')
           if (!/href=["']\/favicon\.svg["']/i.test(html)) {
@@ -187,6 +167,7 @@ export default {
             trackingParts.push('<link rel="shortcut icon" href="/favicon.svg">')
           }
           if (incoming.pathname === '/' || incoming.pathname === '') {
+            if (!/<link\s+[^>]*rel=["']canonical["']/i.test(html)) trackingParts.push('<link rel="canonical" href="https://oculivo.com/">')
             if (!/<meta\s+[^>]*name=["']description["']/i.test(html)) trackingParts.push('<meta name="description" content="Cloud-based eye care practice management software for optometry, ophthalmology and optical operations, connecting scheduling, patients, billing, communications and reporting.">')
             if (!/oculivo\.com\/#organization/i.test(html)) trackingParts.push('<script type="application/ld+json">'+HOME_SCHEMA.replace(/<\/script/gi,'<\\/script')+'<\/script>')
           }
