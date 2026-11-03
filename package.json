@@ -6,7 +6,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "verify:closeout": "node scripts/verify-closeout.mjs && node scripts/verify-links.mjs && node scripts/verify-deploy-config.mjs && node scripts/verify-lead-funnel.mjs"
+    "verify:closeout": "node scripts/verify-closeout.mjs && node scripts/verify-links.mjs && node scripts/verify-deploy-config.mjs && node scripts/verify-lead-funnel.mjs",
+    "prebuild": "npm run verify:closeout"
   },
   "dependencies": {
     "astro": "4.16.18"
