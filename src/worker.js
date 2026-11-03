@@ -17,6 +17,8 @@ async function handleOculivoDemoRequest(request, env) {
   if(!data || typeof data!=='object' || Array.isArray(data))return json({ok:false,error:'Invalid form data'},400)
   if(String(data.website||'').trim())return json({ok:true}) // honeypot, never forward spam
   const value=(key,max)=>String(data[key]||'').trim().slice(0,max)
+  const requestId=value('request_id',36)
+  if(!/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(requestId))return json({ok:false,error:'Invalid request ID'},400)
   const name=value('name',120),email=value('email',254),practice=value('practice',160)
   const specialty=value('specialty',40),locations=value('locations',12),message=value('message',900)
   const validSpecialties=['optometry','ophthalmology','optical','multi-specialty','other']
@@ -31,7 +33,7 @@ async function handleOculivoDemoRequest(request, env) {
   try{target=new URL(endpoint)}catch{return json({ok:false,error:'Online requests are temporarily unavailable.'},503)}
   if(target.protocol!=='https:'||target.username||target.password||target.hash)return json({ok:false,error:'Online requests are temporarily unavailable.'},503)
   const submission={
-    product:'oculivo',source:'oculivo.com',event:'demo_request',
+    product:'oculivo',source:'oculivo.com',event:'demo_request',request_id:requestId,
     contact:{name,email:email.toLowerCase(),practice,specialty,locations,message},
     attribution:{utm_source:value('utm_source',120),utm_medium:value('utm_medium',120),utm_campaign:value('utm_campaign',120),landing_path:value('landing_path',120)},
     consent:true,submitted_at:new Date().toISOString()
