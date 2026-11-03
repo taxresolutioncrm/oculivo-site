@@ -44,7 +44,7 @@ check(worker.includes('BC8190C5D48F98C3E4C4A6EC29AA5CB3'),'Bing verification is 
 check(['$399/mo','$599/mo','$799/mo'].every(x=>pricing.includes(x)),'All three approved pricing tiers are present')
 check(pricing.includes('AggregateOffer'),'Pricing structured data is present')
 check(sitemap.includes("'pricing/'")&&sitemap.includes("'security/'"),'Pricing and security are in the sitemap')
-check(!sitemap.includes("'demo/'"),'Redirect-only demo route is excluded from sitemap')
+check(sitemap.includes("'demo/'"),'First-party demo lead capture route is included in sitemap')
 check(sitemap.includes("'resources/'")&&sitemap.includes('seoResources.map'),'SEO resource library and generated guides are in the sitemap')
 check(['best-optometry-software-guide','best-ophthalmology-software-guide','cloud-based-optometry-software-guide','ophthalmology-software-buyers-guide'].every(x=>sitemap.includes(x)),'High-intent commercial SEO guides are explicitly included in sitemap')
 check((resources.match(/slug:/g)||[]).length>=10,'At least ten query-focused SEO resource guides are defined')
