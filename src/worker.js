@@ -1,3 +1,53 @@
+
+// Same-origin lead intake. The delivery target must be configured and verified
+// before release; never report success without a 2xx response from that target.
+async function handleOculivoDemoRequest(request, env) {
+  const json=(data,status=200)=>new Response(JSON.stringify(data),{status,headers:{'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff'}})
+  if(request.method!=='POST')return json({ok:false,error:'Method not allowed'},405)
+  if(new URL(request.url).origin!==request.headers.get('origin'))return json({ok:false,error:'Invalid request origin'},403)
+  if(!String(request.headers.get('content-type')||'').toLowerCase().startsWith('application/json'))return json({ok:false,error:'JSON required'},415)
+  const length=Number(request.headers.get('content-length')||0)
+  if(length>8192)return json({ok:false,error:'Request too large'},413)
+  let data
+  try {
+    const raw=await request.text()
+    if(raw.length>8192)return json({ok:false,error:'Request too large'},413)
+    data=JSON.parse(raw)
+  }catch{return json({ok:false,error:'Invalid form data'},400)}
+  if(!data || typeof data!=='object' || Array.isArray(data))return json({ok:false,error:'Invalid form data'},400)
+  if(String(data.website||'').trim())return json({ok:true}) // honeypot, never forward spam
+  const value=(key,max)=>String(data[key]||'').trim().slice(0,max)
+  const name=value('name',120),email=value('email',254),practice=value('practice',160)
+  const specialty=value('specialty',40),locations=value('locations',12),message=value('message',900)
+  const validSpecialties=['optometry','ophthalmology','optical','multi-specialty','other']
+  if(!name||!practice||!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)||!validSpecialties.includes(specialty)||data.consent!=='yes'){
+    return json({ok:false,error:'Please complete the required fields using a valid email address.'},400)
+  }
+  if(!['1','2-5','6+'].includes(locations))return json({ok:false,error:'Invalid number of locations'},400)
+  const endpoint=String(env.OCULIVO_LEAD_WEBHOOK_URL||'').trim()
+  const secret=String(env.OCULIVO_LEAD_WEBHOOK_SECRET||'')
+  if(!endpoint||!secret)return json({ok:false,error:'Online requests are temporarily unavailable.'},503)
+  let target
+  try{target=new URL(endpoint)}catch{return json({ok:false,error:'Online requests are temporarily unavailable.'},503)}
+  if(target.protocol!=='https:'||target.username||target.password||target.hash)return json({ok:false,error:'Online requests are temporarily unavailable.'},503)
+  const submission={
+    product:'oculivo',source:'oculivo.com',event:'demo_request',
+    contact:{name,email:email.toLowerCase(),practice,specialty,locations,message},
+    attribution:{utm_source:value('utm_source',120),utm_medium:value('utm_medium',120),utm_campaign:value('utm_campaign',120),landing_path:value('landing_path',120)},
+    consent:true,submitted_at:new Date().toISOString()
+  }
+  try{
+    const response=await fetch(target.toString(),{
+      method:'POST',headers:{'content-type':'application/json','authorization':'Bearer '+secret,'x-oculivo-event':'demo_request'},
+      body:JSON.stringify(submission),redirect:'manual',signal:AbortSignal.timeout(12000)
+    })
+    if(!response.ok)return json({ok:false,error:'Unable to deliver the request. Please use the booking calendar instead.'},502)
+    return json({ok:true})
+  }catch{
+    return json({ok:false,error:'Unable to deliver the request. Please use the booking calendar instead.'},502)
+  }
+}
+
 const ORIGINAL_ORIGIN = 'https://oculivo.rcruz187.chatgpt.site'
 const HOME_SCHEMA = JSON.stringify({
   '@context':'https://schema.org',
@@ -74,8 +124,8 @@ export default {
       return Response.redirect(canonical.toString(), 301)
     }
 
-    if (incoming.pathname === '/demo' || incoming.pathname === '/demo/') {
-      return Response.redirect('https://taxrescrm.app/book?product=oculivo', 302)
+    if (incoming.pathname === '/api/demo-request') {
+      return handleOculivoDemoRequest(request, env)
     }
 
     if (incoming.pathname === '/app' || incoming.pathname === '/app/' || incoming.pathname.startsWith('/app/')) {
@@ -106,6 +156,8 @@ export default {
       '/BingSiteAuth.xml',
       '/favicon.svg',
       '/site.webmanifest',
+      '/demo',
+      '/demo/',
       '/features',
       '/features/',
       '/pricing',
@@ -162,6 +214,7 @@ export default {
 
           html = html
             .replaceAll(original.origin, '')
+            .replace(/href=(["'])https:\/\/taxrescrm\.app\/book\?product=oculivo\1/gi,'href="/demo/"')
             .replace(/<base\b[^>]*>/gi, '')
             .replace(/<a\b[^>]*href=["']\/website-seo\/?["'][^>]*>\s*Website\s*\+\s*SEO\s*<\/a>/gi, '')
             .replace(
