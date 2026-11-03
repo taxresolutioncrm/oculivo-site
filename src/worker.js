@@ -225,6 +225,13 @@ export default {
               }
             )
 
+          // Preserve the approved design while aligning search snippets with the
+          // actual high-intent optometry and ophthalmology software queries.
+          if (incoming.pathname === '/' || incoming.pathname === '') {
+            html=html.replace(/<title>[\\s\\S]*?<\\/title>/i,
+              '<title>Optometry &amp; Ophthalmology Practice Management Software | Oculivo</title>')
+            html=html.replace(/<meta\\s+[^>]*name=["']description["'][^>]*>/gi,'')
+          }
           // Normalize public SEO signals inherited from the legacy origin.
           html = html
             .replace(/<meta\s+[^>]*name=["'](?:robots|googlebot|bingbot)["'][^>]*>/gi, '')
@@ -240,7 +247,7 @@ export default {
             trackingParts.push('<link rel="shortcut icon" href="/favicon.svg">')
           }
           if (incoming.pathname === '/' || incoming.pathname === '') {
-            if (!/<meta\s+[^>]*name=["']description["']/i.test(html)) trackingParts.push('<meta name="description" content="Cloud-based eye care practice management software for optometry, ophthalmology and optical operations, connecting scheduling, patients, billing, communications and reporting.">')
+            trackingParts.push('<meta name="description" content="Oculivo connects optometry and ophthalmology scheduling, patient workflows, optical operations, billing and communications. Request a private software demo.">')
             if (!/oculivo\.com\/#organization/i.test(html)) trackingParts.push('<script type="application/ld+json">'+HOME_SCHEMA.replace(/<\/script/gi,'<\\/script')+'<\/script>')
           }
           if (!html.includes('G-WR6GGVYLXX')) {
