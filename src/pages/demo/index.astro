@@ -53,6 +53,7 @@ import Base from '../../layouts/Base.astro'
     const form=document.getElementById('oculivo-demo-form');
     const feedback=document.getElementById('oculivo-demo-feedback');
     const button=document.getElementById('oculivo-demo-submit');
+    let requestId=crypto.randomUUID();
     const track=(event,params={})=>{if(typeof window.gtag==='function')window.gtag('event',event,{product:'oculivo',...params});};
     document.querySelectorAll('[data-demo-booking]').forEach(a=>a.addEventListener('click',()=>track('oculivo_booking_start',{source:'demo_page'})));
     if(!form||!feedback||!button)return;
@@ -61,6 +62,7 @@ import Base from '../../layouts/Base.astro'
       if(!form.reportValidity())return;
       button.disabled=true;feedback.textContent='Sending your request…';
       const fields=Object.fromEntries(new FormData(form).entries());
+      fields.request_id=requestId;
       const params=new URLSearchParams(location.search);
       fields.utm_source=(params.get('utm_source')||'').slice(0,120);
       fields.utm_medium=(params.get('utm_medium')||'').slice(0,120);
@@ -71,7 +73,7 @@ import Base from '../../layouts/Base.astro'
         const data=await resp.json().catch(()=>({}));
         if(!resp.ok||!data.ok)throw new Error(data.error||'Request could not be delivered.');
         feedback.textContent='Thank you. Your demo request was received.';
-        form.reset();track('oculivo_demo_submit_success',{source:'native_form'});
+        form.reset();requestId=crypto.randomUUID();track('oculivo_demo_submit_success',{source:'native_form'});
       }catch(err){
         feedback.textContent=(err instanceof Error?err.message:'Request could not be delivered.')+' You can also book directly using the link above.';
         track('oculivo_demo_submit_failure',{source:'native_form'});
