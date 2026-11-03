@@ -1,25 +1,99 @@
 ---
 import Base from '../../layouts/Base.astro'
 ---
-<Base title="Private Oculivo Demo | Founding Practice Program" description="Request a private Oculivo walkthrough tailored to your eye-care practice.">
+<Base title="Request an Oculivo Demo | Optometry & Ophthalmology Software" description="Book a personalized Oculivo demo for your optometry, ophthalmology, or optical practice. Explore scheduling, patient workflows, communications, billing, and optical operations.">
 <main class="hero-dark demo-page">
   <div class="wrap demo-grid">
     <section>
       <span class="eyebrow demo-purple">Private founding-practice demo</span>
-      <h1>See what your<br/>practice looks like<br/>when everything<br/>connects.</h1>
-      <p>We’ll tailor the walkthrough to your specialty, locations, team, communication stack, optical operations, and growth goals.</p>
-      <ul><li>✓&nbsp;&nbsp;A realistic, eye-care-specific product walkthrough</li><li>✓&nbsp;&nbsp;Workflow and integration discovery</li><li>✓&nbsp;&nbsp;Founding-practice onboarding discussion</li><li>✓&nbsp;&nbsp;English and Spanish workflow planning</li></ul>
+      <h1>See what your practice looks like when everything connects.</h1>
+      <p>Talk with the Oculivo team about optometry, ophthalmology, optical inventory, scheduling, billing, and the workflows your practice needs.</p>
+      <ul>
+        <li>✓ An eye-care-specific product walkthrough</li>
+        <li>✓ Workflow, integration, and migration discussion</li>
+        <li>✓ Multi-location and English/Spanish planning</li>
+        <li>✓ No obligation to purchase</li>
+      </ul>
+      <p class="demo-alt">Prefer to choose a time directly? <a href="https://taxrescrm.app/book?product=oculivo" data-demo-booking>Open the booking calendar</a>.</p>
     </section>
     <aside class="demo-card">
-      <div class="demo-icon">✣</div>
+      <div class="demo-icon" aria-hidden="true">✣</div>
       <span class="eyebrow">Your private walkthrough</span>
-      <h2>Start the conversation.</h2>
-      <p>Tell us which type of eye-care practice you operate and what you want Oculivo to replace or improve.</p>
-      <a class="btn-grad demo-email" href="https://taxrescrm.app/book?product=oculivo">▣&nbsp;&nbsp;Book your Oculivo demo&nbsp;&nbsp; →</a>
-      <small>Direct founding-practice access. No generic sales queue.</small>
+      <h2>Request a demo</h2>
+      <p>Tell us a little about your practice. We'll use this information only to follow up about Oculivo.</p>
+      <form id="oculivo-demo-form" class="demo-form" method="post" action="/api/demo-request">
+        <label>Full name <input name="name" autocomplete="name" maxlength="120" required /></label>
+        <label>Work email <input name="email" type="email" autocomplete="email" maxlength="254" required /></label>
+        <label>Practice name <input name="practice" autocomplete="organization" maxlength="160" required /></label>
+        <div class="demo-form-pair">
+          <label>Specialty
+            <select name="specialty" required>
+              <option value="">Choose one</option>
+              <option value="optometry">Optometry</option>
+              <option value="ophthalmology">Ophthalmology</option>
+              <option value="optical">Optical retail</option>
+              <option value="multi-specialty">Multi-specialty / group</option>
+              <option value="other">Other</option>
+            </select>
+          </label>
+          <label>Locations <select name="locations"><option value="1">1</option><option value="2-5">2–5</option><option value="6+">6+</option></select></label>
+        </div>
+        <label>What would you like to improve? <textarea name="message" rows="3" maxlength="900" placeholder="Scheduling, optical, communications, billing… (no patient information)"></textarea></label>
+        <div class="demo-honeypot" aria-hidden="true"><label>Website <input name="website" tabindex="-1" autocomplete="off" /></label></div>
+        <label class="demo-consent"><input type="checkbox" name="consent" value="yes" required /><span>I agree to be contacted about my Oculivo demo request. Please do not submit patient or medical information.</span></label>
+        <button id="oculivo-demo-submit" class="btn-grad" type="submit">Request my demo</button>
+        <p id="oculivo-demo-feedback" class="demo-feedback" role="status" aria-live="polite"></p>
+      </form>
+      <small>Or <a href="https://taxrescrm.app/book?product=oculivo" data-demo-booking>book a time directly</a>. We do not need patient information.</small>
     </aside>
   </div>
 </main>
+<script is:inline>
+  (function(){
+    const form=document.getElementById('oculivo-demo-form');
+    const feedback=document.getElementById('oculivo-demo-feedback');
+    const button=document.getElementById('oculivo-demo-submit');
+    const track=(event,params={})=>{if(typeof window.gtag==='function')window.gtag('event',event,{product:'oculivo',...params});};
+    document.querySelectorAll('[data-demo-booking]').forEach(a=>a.addEventListener('click',()=>track('oculivo_booking_start',{source:'demo_page'})));
+    if(!form||!feedback||!button)return;
+    form.addEventListener('submit',async function(e){
+      e.preventDefault();
+      if(!form.reportValidity())return;
+      button.disabled=true;feedback.textContent='Sending your request…';
+      const fields=Object.fromEntries(new FormData(form).entries());
+      const params=new URLSearchParams(location.search);
+      fields.utm_source=(params.get('utm_source')||'').slice(0,120);
+      fields.utm_medium=(params.get('utm_medium')||'').slice(0,120);
+      fields.utm_campaign=(params.get('utm_campaign')||'').slice(0,120);
+      fields.landing_path=location.pathname;
+      try{
+        const resp=await fetch('/api/demo-request',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(fields)});
+        const data=await resp.json().catch(()=>({}));
+        if(!resp.ok||!data.ok)throw new Error(data.error||'Request could not be delivered.');
+        feedback.textContent='Thank you. Your demo request was received.';
+        form.reset();track('oculivo_demo_submit_success',{source:'native_form'});
+      }catch(err){
+        feedback.textContent=(err instanceof Error?err.message:'Request could not be delivered.')+' You can also book directly using the link above.';
+        track('oculivo_demo_submit_failure',{source:'native_form'});
+      }finally{button.disabled=false}
+    });
+  })();
+</script>
 <style>
-.demo-page{padding:110px 0 120px;min-height:760px}.demo-grid{display:grid;grid-template-columns:1.2fr .85fr;gap:92px;align-items:center}.demo-purple{color:#825cff}.demo-page h1{font-size:clamp(58px,6vw,82px);line-height:.91;letter-spacing:-.055em;font-weight:500;margin:28px 0 24px}.demo-page section>p{font-size:17px;line-height:1.7;color:#c7c3dc;max-width:680px}.demo-page ul{list-style:none;padding:0;margin:34px 0 0;display:grid;gap:20px;color:#fff;font-size:14px}.demo-page li{color:#f4f2ff}.demo-page li::first-letter{color:#25d8d3}.demo-card{background:#261c64;border:1px solid #5849a0;border-radius:26px;padding:38px;min-height:465px}.demo-icon{width:56px;height:56px;border-radius:17px;background:linear-gradient(135deg,#2fd7d4,#8e8af4,#d64ccb);display:grid;place-items:center;color:#11122d;font-size:30px;margin-bottom:42px}.demo-card h2{font-size:30px;font-weight:500;margin:28px 0 18px}.demo-card p{font-size:17px;line-height:1.75;color:#c6c0df}.demo-email{margin-top:20px;width:100%;justify-content:space-between}.demo-card small{display:block;margin-top:18px;color:#aaa3c9;font-size:13px}@media(max-width:900px){.demo-grid{grid-template-columns:1fr}.demo-page h1 br{display:none}}
+.demo-page{padding:85px 0 100px;min-height:720px}.demo-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:start}.demo-purple{color:#9b83ff}
+.demo-page h1{font-size:clamp(43px,5vw,75px);line-height:1.04;letter-spacing:-.045em;font-weight:600;margin:25px 0}.demo-page section>p{font-size:17px;line-height:1.65;color:#d1cde4;max-width:650px}
+.demo-page ul{list-style:none;padding:0;margin:30px 0;display:grid;gap:17px;color:#fff;font-size:15px}
+.demo-page li{line-height:1.5}.demo-alt a,.demo-card small a{color:#c4b4ff;text-decoration:underline}
+.demo-card{background:#261c64;border:1px solid #5849a0;border-radius:22px;padding:30px}.demo-icon{width:48px;height:48px;border-radius:13px;background:linear-gradient(135deg,#2fd7d4,#8e8af4,#d64ccb);display:grid;place-items:center;color:#11122d;font-size:25px}
+.demo-card h2{font-size:28px;margin:18px 0 8px}.demo-card>p{font-size:14px;line-height:1.65;color:#dfdbf6}
+.demo-form{display:grid;gap:14px;margin-top:20px}.demo-form label{display:grid;gap:7px;font-size:13px;font-weight:600;color:#f5f2ff}
+.demo-form input:not([type="checkbox"]),.demo-form select,.demo-form textarea{width:100%;min-width:0;border:1px solid #7467bd;background:#171237;color:#fff;padding:12px 13px;border-radius:9px;font:inherit;font-size:14px}
+.demo-form input:focus-visible,.demo-form select:focus-visible,.demo-form textarea:focus-visible{outline:2px solid #5dd5dd;outline-offset:2px}
+.demo-form-pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}.demo-form select option{color:#111}
+.demo-form .demo-consent{display:flex;align-items:start;gap:10px;font-size:12px;font-weight:400;line-height:1.5;color:#ddd7f7}
+.demo-consent input{margin-top:3px;flex:0 0 auto}.demo-form .btn-grad{width:100%;justify-content:center;cursor:pointer;border:0;padding:14px 16px;font-weight:700;font-size:15px}
+.demo-form button:disabled{opacity:.6;cursor:wait}.demo-feedback{min-height:20px;font-size:13px;line-height:1.5;color:#d8fff8;margin:0}.demo-card small{display:block;margin-top:16px;color:#c9c2ec;font-size:12px}
+.demo-honeypot{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;overflow:hidden!important}
+@media(max-width:900px){.demo-grid{grid-template-columns:1fr;gap:28px}.demo-page h1{max-width:700px}}@media(max-width:520px){.demo-page{padding:50px 0}.demo-card{padding:22px}.demo-form-pair{grid-template-columns:1fr}}
 </style>
+</Base>
