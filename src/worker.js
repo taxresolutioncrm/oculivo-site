@@ -230,9 +230,9 @@ export default {
           // Preserve the approved design while aligning search snippets with the
           // actual high-intent optometry and ophthalmology software queries.
           if (incoming.pathname === '/' || incoming.pathname === '') {
-            html=html.replace(/<title>[\\s\\S]*?<\\/title>/i,
+            html=html.replace(/<title>[\s\S]*?<\/title>/i,
               '<title>Optometry &amp; Ophthalmology Practice Management Software | Oculivo</title>')
-            html=html.replace(/<meta\\s+[^>]*name=["']description["'][^>]*>/gi,'')
+            html=html.replace(/<meta\s+[^>]*name=["']description["'][^>]*>/gi,'')
           }
           // Normalize public SEO signals inherited from the legacy origin.
           html = html
