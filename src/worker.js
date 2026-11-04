@@ -44,7 +44,12 @@ async function handleOculivoDemoRequest(request, env) {
       body:JSON.stringify(submission),redirect:'manual',signal:AbortSignal.timeout(12000)
     })
     if(!response.ok)return json({ok:false,error:'Unable to deliver the request. Please use the booking calendar instead.'},502)
-    return json({ok:true})
+    // A gateway may return HTTP 200 with an application-level failure.
+    // Only confirm a lead after the Admin intake explicitly acknowledges it.
+    let receipt
+    try{receipt=await response.json()}catch{return json({ok:false,error:'The lead intake returned an invalid receipt. Please use the booking calendar instead.'},502)}
+    if(receipt?.ok!==true)return json({ok:false,error:'Unable to confirm receipt. Please use the booking calendar instead.'},502)
+    return json({ok:true,already_received:receipt.already_received===true})
   }catch{
     return json({ok:false,error:'Unable to deliver the request. Please use the booking calendar instead.'},502)
   }
