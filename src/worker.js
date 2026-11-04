@@ -165,7 +165,8 @@ export default {
       '/robots.txt',
       '/sitemap.xml',
       '/BingSiteAuth.xml',
-      '/favicon.svg',
+      '/oculivo-brand-logo.png',
+      '/oculivo-favicon.png',
       '/site.webmanifest',
       '/demo',
       '/demo/',
@@ -253,9 +254,9 @@ export default {
           trackingParts.push('<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">')
           if (!/msvalidate\.01/i.test(html)) trackingParts.push('<meta name="msvalidate.01" content="BC8190C5D48F98C3E4C4A6EC29AA5CB3">')
           if (!/site\.webmanifest/i.test(html)) trackingParts.push('<link rel="manifest" href="/site.webmanifest">')
-          if (!/href=["']\/favicon\.svg["']/i.test(html)) {
-            trackingParts.push('<link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg">')
-            trackingParts.push('<link rel="shortcut icon" href="/favicon.svg">')
+          if (!/href=["']\/oculivo-favicon\.png["']/i.test(html)) {
+            trackingParts.push('<link rel="icon" type="image/png" sizes="64x64" href="/oculivo-favicon.png">')
+            trackingParts.push('<link rel="shortcut icon" href="/oculivo-favicon.png">')
           }
           if (incoming.pathname === '/' || incoming.pathname === '') {
             trackingParts.push('<meta name="description" content="Oculivo connects optometry and ophthalmology scheduling, patient workflows, optical operations, billing and communications. Request a private software demo.">')
