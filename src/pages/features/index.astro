@@ -1,7 +1,51 @@
 ---
 import Base from '../../layouts/Base.astro'
+const pillars=[
+  {number:'01',name:'Front desk',title:'Scheduling that stays connected',body:'Keep appointment planning, providers, patient profiles and records within the same practice workspace.',items:['Appointments and provider scheduling','Patient intake and profiles','Practice documents'],link:'/optometry-software/',action:'Explore optometry workflows'},
+  {number:'02',name:'Clinical + optical',title:'From care to optical fulfillment',body:'Organize clinical documentation and optical orders beside the patients and appointments they serve.',items:['Clinical documentation','Frames, inventory and orders','Order and dispensing workflows'],link:'/optical-management/',action:'Explore optical operations'},
+  {number:'03',name:'Financial operations',title:'See work and payments together',body:'Review invoices, claims and payment information in one operational view instead of constantly switching systems.',items:['Invoices and balances','Insurance claim workflows','Practice reporting'],link:'/pricing/',action:'Compare plans'},
+  {number:'04',name:'Communications',title:'Keep conversations with your team',body:'Use a shared inbox and team workflows to coordinate follow-up across staff. Provider-backed features depend on onboarding configuration.',items:['Email and SMS conversations','Browser calling and fax workflows','Internal team chat'],link:'/communications/',action:'Explore communications'}
+]
+const faq=[
+  {q:'Is Oculivo designed specifically for eye-care practices?',a:'Oculivo is built around optometry, ophthalmology and optical operations. Availability of individual integrations and provider services is confirmed during onboarding.'},
+  {q:'Can I use Oculivo for more than one location?',a:'Multi-location practice structure can be discussed in a demo. Each practice is separated using account membership and organization-level access controls.'},
+  {q:'Does the demo require patient information?',a:'No. Our demo request asks for practice contact and operational needs only. Do not send patient or medical information.'}
+]
+const schema={'@context':'https://schema.org','@type':'FAQPage',mainEntity:faq.map(x=>({'@type':'Question',name:x.q,acceptedAnswer:{'@type':'Answer',text:x.a}}))}
 ---
-<Base title="Oculivo Features | Eye Care Practice Management" description="Explore Oculivo scheduling, patient, clinical, optical, billing, communications, document, staff, reporting, website and SEO workflows.">
-<main><section class="hero-dark page-hero"><div class="wrap"><span class="eyebrow">One connected platform</span><h1>Everything the practice needs,<br/>connected.</h1><p>Oculivo combines specialty depth with one shared patient and practice context.</p></div></section><section class="section-light depth-section"><div class="wrap"><div class="depth-cards">{['Scheduling & appointments','Patients & intake','Clinical records','Optical inventory & orders','Insurance claims','Invoices & payments','Email, SMS, phone & fax','Documents & e-signatures','Team Chat','Time clock & staff','Reporting & AI assistant','Website + local SEO'].map((x,i)=><article class="depth-card"><span class="num">{String(i+1).padStart(2,'0')}</span><h3>{x}</h3><p>Built into the same secure Oculivo workspace so staff can move between workflows without losing patient or office context.</p><small>◉&nbsp;&nbsp;Connected to the complete patient record</small></article>)}</div></div></section></main>
+<Base title="Eye Care Practice Management Software Features | Oculivo" description="Explore Oculivo eye-care software workflows for scheduling, patients, clinical records, optical inventory, billing, communications, and reporting.">
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+<main>
+  <section class="hero-dark page-hero feature-hero"><div class="wrap">
+    <span class="eyebrow">Designed around the practice</span>
+    <h1>One workflow shouldn't need five systems.</h1>
+    <p>Oculivo brings the everyday parts of eye-care operations into a connected workspace—so staff can spend less time finding information and more time moving work forward.</p>
+    <div class="hero-actions"><a class="btn-grad" href="/demo/">Request a private demo</a><a class="btn-outline" href="/pricing/">View plans and pricing</a></div>
+  </div></section>
+  <section class="section-light feature-workflows"><div class="wrap">
+    <div class="feature-intro"><span class="eyebrow">Explore the platform</span><h2>What connects inside Oculivo</h2><p>Four operational areas. One practice context. Walk through the workflows most important to your team.</p></div>
+    <div class="feature-pillar-grid">{pillars.map(p=><article class="feature-pillar">
+      <div class="feature-pill-label"><span>{p.number}</span><strong>{p.name}</strong></div>
+      <h3>{p.title}</h3><p>{p.body}</p>
+      <ul>{p.items.map(item=><li>{item}</li>)}</ul>
+      <a href={p.link}>{p.action} <span aria-hidden="true">→</span></a>
+    </article>)}</div>
+  </div></section>
+  <section class="feature-specialty"><div class="wrap feature-specialty-grid">
+    <div><span class="eyebrow">Built for eye care</span><h2>Different specialties. Connected operations.</h2><p>Review how Oculivo supports the workflow priorities of independent optometry offices, ophthalmology practices, and optical businesses.</p></div>
+    <div class="feature-specialty-links"><a href="/optometry-software/">Optometry software <span>→</span></a><a href="/ophthalmology-software/">Ophthalmology software <span>→</span></a><a href="/optical-management/">Optical management <span>→</span></a></div>
+  </div></section>
+  <section class="section-light feature-faq"><div class="wrap"><span class="eyebrow">Frequently asked questions</span><h2>Before your walkthrough</h2><div class="feature-faq-grid">{faq.map(item=><details><summary>{item.q}</summary><p>{item.a}</p></details>)}</div></div></section>
+  <section class="founding-section"><div class="wrap"><div class="founding-card"><div><span class="eyebrow">See Oculivo in context</span><h2>Show us how your practice works.</h2><p>Tell us what is slowing your team down. We'll tailor a walkthrough around your priorities, without asking for patient information.</p></div><a class="btn-white" href="/demo/">Request your private demo →</a></div></div></section>
+</main>
 </Base>
-<style>.depth-cards{grid-template-columns:repeat(3,1fr)}@media(max-width:900px){.depth-cards{grid-template-columns:1fr}}</style>
+<style>
+.feature-hero{min-height:auto;padding:94px 0 106px}.feature-hero h1{max-width:1050px;margin-left:auto;margin-right:auto}
+.feature-workflows{padding:90px 0 100px}.feature-intro{max-width:780px;margin-bottom:35px}.feature-intro h2,.feature-specialty h2,.feature-faq h2{font-size:clamp(36px,5vw,62px);letter-spacing:-.045em;line-height:1.04;font-weight:600;margin:17px 0}.feature-intro p,.feature-specialty p{line-height:1.7;color:#68667a;font-size:17px}
+.feature-pillar-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.feature-pillar{background:white;border:1px solid #dedee8;border-radius:24px;padding:35px;display:flex;flex-direction:column;min-height:390px}
+.feature-pill-label{display:flex;align-items:center;gap:15px;text-transform:uppercase;font-size:11px;letter-spacing:.12em;color:#6642c9}.feature-pill-label span{display:grid;place-items:center;background:#f1edff;border-radius:12px;width:43px;height:43px;font-weight:800}
+.feature-pillar h3{font-size:clamp(23px,3vw,32px);line-height:1.12;letter-spacing:-.025em;margin:22px 0 10px}.feature-pillar p{font-size:15px;color:#66647b;line-height:1.7;margin:0}.feature-pillar ul{list-style:none;padding:0;margin:23px 0 28px;display:grid;gap:10px}.feature-pillar li{font-size:14px;color:#24243a}.feature-pillar li::before{content:'✓';color:#6947d4;margin-right:10px;font-weight:800}.feature-pillar>a{margin-top:auto;color:#5233a3;font-size:14px;font-weight:800;text-decoration:none}.feature-pillar>a:hover{text-decoration:underline}
+.feature-specialty{background:#10102a;color:white;padding:82px 0}.feature-specialty-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:65px;align-items:center}.feature-specialty p{color:#c8c5e2}.feature-specialty-links{display:grid;gap:12px}.feature-specialty-links a{display:flex;justify-content:space-between;align-items:center;padding:20px 22px;border:1px solid #4d4978;border-radius:14px;color:white;text-decoration:none;background:#211b4b;font-weight:700}.feature-specialty-links a:hover{border-color:#a18aff;background:#29205d}
+.feature-faq{padding:84px 0 100px}.feature-faq-grid{display:grid;gap:12px;max-width:920px;margin-top:30px}.feature-faq details{background:white;border:1px solid #dedee8;border-radius:14px;padding:20px 24px}.feature-faq summary{font-size:17px;font-weight:700;cursor:pointer}.feature-faq p{color:#69677d;line-height:1.7;margin-bottom:0}
+@media(max-width:800px){.feature-pillar-grid,.feature-specialty-grid{grid-template-columns:1fr}.feature-specialty-grid{gap:25px}.feature-workflows{padding:60px 0}.feature-hero{padding:65px 0 75px}}@media(max-width:500px){.feature-pillar{padding:24px;min-height:auto}.feature-hero h1{font-size:clamp(39px,11vw,54px)}}
+</style>
