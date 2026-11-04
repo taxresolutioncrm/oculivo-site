@@ -3,6 +3,7 @@ import { seoResources } from '../data/seoResources'
 
 const urls = [
   '',
+  'demo/',
   'features/',
   'pricing/',
   'security/',

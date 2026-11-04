@@ -6,9 +6,10 @@ const checks=[
   [wrangler.includes('"main": "./src/worker.js"'),'Cloudflare worker entry points at src/worker.js'],
   [wrangler.includes('"directory": "./dist"')&&wrangler.includes('"binding": "ASSETS"'),'Cloudflare static assets bind the Astro dist directory'],
   [wrangler.includes('"run_worker_first": true'),'Cloudflare runs the Oculivo routing worker before static assets'],
+  [wrangler.includes('"secrets"')&&wrangler.includes('"OCULIVO_LEAD_WEBHOOK_SECRET"')&&worker.includes('https://mpxgxfqdbquzkrvvejkh.supabase.co/functions/v1/oculivo-demo-intake'),'Cloudflare release requires private bearer secret and uses approved Admin intake endpoint'],
   [wrangler.includes('"html_handling": "auto-trailing-slash"'),'Cloudflare HTML handling matches canonical trailing-slash routes'],
   [astro.includes("site: 'https://oculivo.com'")&&astro.includes('compressHTML: true'),'Astro canonical site and HTML compression remain configured'],
-  [worker.includes('env.ASSETS.fetch(request)')&&worker.includes('https://oculivo.rcruz187.chatgpt.site'),'Worker preserves repository assets plus the approved legacy homepage origin']
+  [worker.includes('env.ASSETS.fetch(request)')&&worker.includes("'/'")&&worker.includes("'/index.html'"),'Worker serves the approved first-party homepage from repo assets']
 ]
 let failed=false
 for(const [ok,label] of checks){

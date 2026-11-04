@@ -1,0 +1,25 @@
+name: Oculivo Website Sandbox Release Gate
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  website-build:
+    name: Website lint, lead gate and Astro build
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout exact candidate
+        uses: actions/checkout@v4
+      - name: Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install pinned project dependencies
+        run: npm install --no-audit --no-fund
+      - name: Verify funnel, links, SEO and Worker configuration
+        run: npm run verify:closeout
+      - name: Build Astro assets without Cloudflare deployment
+        run: npm run build

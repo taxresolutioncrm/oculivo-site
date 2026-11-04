@@ -1,76 +1,74 @@
 ---
 import Base from '../layouts/Base.astro'
-const schema={"@context":"https://schema.org","@type":"SoftwareApplication","name":"Oculivo","applicationCategory":"BusinessApplication","operatingSystem":"Web","url":"https://oculivo.com/","description":"The operating system for modern eye care."}
+const schema={
+  '@context':'https://schema.org','@type':'SoftwareApplication',
+  'name':'Oculivo','applicationCategory':'BusinessApplication','operatingSystem':'Web',
+  'url':'https://oculivo.com/',
+  'description':'Eye-care practice management software for optometry, ophthalmology and optical operations.',
+  'publisher':{'@type':'Organization','name':'RomyLabs','url':'https://romylabs.com/'}
+}
+const pathways=[
+  {number:'01',title:'Optometry',copy:'Coordinate appointments, patients, clinical context, optical work and billing in one practice.',link:'/optometry-software/',label:'Explore optometry'},
+  {number:'02',title:'Ophthalmology',copy:'Keep provider scheduling, patient records, documents, claims and staff coordination connected.',link:'/ophthalmology-software/',label:'Explore ophthalmology'},
+  {number:'03',title:'Optical operations',copy:'Organize frames, inventory and patient orders beside the rest of the eye-care workflow.',link:'/optical-management/',label:'Explore optical'}
+]
 ---
-<Base title="Optometry & Ophthalmology Practice Management Software | Oculivo" description="Oculivo is cloud-based practice management software for optometry and ophthalmology teams, connecting scheduling, patients, communications, billing, optical operations and reporting.">
+<Base title="Optometry & Ophthalmology Practice Management Software | Oculivo" description="Explore Oculivo eye-care practice management software for scheduling, patients, optical inventory, billing and communications. Request a private demo.">
 <script type="application/ld+json" set:html={JSON.stringify(schema)} />
 <main>
-<section class="hero-dark home-hero">
-  <div class="wrap home-grid">
-    <div class="home-copy">
-      <span class="eyebrow home-purple">One connected eye-care platform</span>
-      <h1>Practice management<br/>software for<br/>modern eye<br/>care.</h1>
-      <p>Oculivo connects scheduling, patients, clinical workflows, optical, communications, billing, staff operations, website, SEO, and reporting in one practice-wide system.</p>
-      <div class="hero-actions left">
-        <a class="btn-grad" href="https://taxrescrm.app/book?product=oculivo">Request a private demo&nbsp; →</a>
-        <a class="btn-outline" href="/optometry-software/">Explore practice management</a>
+  <section class="hero-dark home-hero">
+    <div class="wrap home-grid">
+      <div class="home-copy">
+        <span class="eyebrow home-purple">Eye-care practice management, connected</span>
+        <h1>Your practice.<br/><em>One clearer view.</em></h1>
+        <p class="home-lead">From the first appointment to the final optical order, Oculivo brings the people, workflows, and daily operations of eye care into one connected workspace.</p>
+        <div class="hero-actions left"><a class="btn-grad" href="/demo/">Request a private demo <span aria-hidden="true">→</span></a><a class="btn-outline" href="/features/">Explore the platform</a></div>
+        <p class="home-footnote">Built for optometry, ophthalmology and optical teams. No patient information needed to request a demo.</p>
       </div>
+      <aside class="home-workflow" aria-label="Illustration of connected eye-care workflows">
+        <div class="workflow-top"><span class="workflow-dot"></span> OCULIVO WORKSPACE <span class="workflow-tag">CONNECTED</span></div>
+        <div class="workflow-main"><span class="workflow-label">One practice view</span><strong>Front desk to follow-up</strong><p>Patient and office operations in context</p></div>
+        <div class="workflow-lines">
+          <div><span class="workflow-icon">01</span><span><b>Schedule + patients</b><small>Appointments and records</small></span><span aria-hidden="true">↗</span></div>
+          <div><span class="workflow-icon">02</span><span><b>Clinical + optical</b><small>Care and orders</small></span><span aria-hidden="true">↗</span></div>
+          <div><span class="workflow-icon">03</span><span><b>Billing + communications</b><small>Office coordination</small></span><span aria-hidden="true">↗</span></div>
+        </div>
+        <div class="workflow-bottom"><span>Built around eye care</span><span class="workflow-pulse"></span></div>
+      </aside>
     </div>
-    <aside class="home-panel">
-      <span class="eyebrow">Oculivo Core Connect</span>
-      <h2>One patient record.<br/>One connected practice.</h2>
-      <div class="panel-list">
-        <b>Schedule + intake</b>
-        <b>Clinical + optical</b>
-        <b>Communications + billing</b>
-        <b>Team + growth</b>
-      </div>
-    </aside>
-  </div>
-</section>
-
-<section class="section-light depth-section">
-  <div class="wrap">
-    <div class="depth-top">
-      <span class="eyebrow">One connected platform</span>
-      <div class="depth-title">
-        <h2>Purpose-built depth.<br/>Practice-wide clarity.</h2>
-        <p>Oculivo connects every workflow to the same patient and practice context so your team can move from front desk to clinical, optical, communications, billing, and growth without rebuilding the story in disconnected systems.</p>
-      </div>
-    </div>
-    <div class="depth-cards">
-      <article class="depth-card"><span class="num">01</span><h3>Front desk + patient flow</h3><p>Scheduling, intake, communication, reminders, documents, and patient coordination stay connected.</p><small>◉&nbsp;&nbsp;Connected to the complete patient record</small></article>
-      <article class="depth-card"><span class="num">02</span><h3>Clinical + optical</h3><p>Clinical records, provider workflows, optical inventory, orders, and fulfillment share the same patient context.</p><small>◉&nbsp;&nbsp;Connected to the complete patient record</small></article>
-      <article class="depth-card"><span class="num">03</span><h3>Growth + operations</h3><p>Billing, reporting, communications, website, SEO, and staff operations connect to the work happening in the practice.</p><small>◉&nbsp;&nbsp;Connected to the complete patient record</small></article>
-    </div>
-  </div>
-</section>
-
-<section class="founding-section">
-  <div class="wrap">
-    <div class="founding-card">
-      <div>
-        <span class="eyebrow">Founding practice program</span>
-        <h2>Build the clearer future of eye care<br/>with us.</h2>
-        <p>Get a private walkthrough and help shape Oculivo around the workflows your practice actually uses.</p>
-      </div>
-      <a class="btn-white" href="https://taxrescrm.app/book?product=oculivo">Request your private demo&nbsp; →</a>
-    </div>
-  </div>
-</section>
+  </section>
+  <section class="home-proof"><div class="wrap home-proof-grid">
+    <div><strong>Eye-care focused</strong><span>Workflows designed around practice operations</span></div>
+    <div><strong>Practice scoped</strong><span>Team roles and office-specific access</span></div>
+    <div><strong>Connected operations</strong><span>Scheduling, clinical, optical and billing</span></div>
+  </div></section>
+  <section class="section-light home-specialties"><div class="wrap">
+    <div class="home-section-intro"><span class="eyebrow">Your specialty matters</span><div><h2>Not just another general-purpose CRM.</h2><p>Eye care is different. Explore the operational workflows most relevant to your practice, rather than comparing an endless generic feature list.</p></div></div>
+    <div class="home-specialty-grid">{pathways.map(item=><article class="home-specialty-card"><span class="home-card-number">{item.number}</span><h3>{item.title}</h3><p>{item.copy}</p><a href={item.link}>{item.label} <span aria-hidden="true">→</span></a></article>)}</div>
+  </div></section>
+  <section class="home-journey"><div class="wrap home-journey-grid">
+    <div><span class="eyebrow">A connected patient journey</span><h2>Fewer handoffs.<br/>More context.</h2><p>Appointments, patient records, clinical workflows, optical orders and office operations can share one working context. See how that connection fits your actual team.</p><a href="/features/" class="home-text-link">See how Oculivo works →</a></div>
+    <ol class="journey-list"><li><span>01</span><div><strong>Schedule and prepare</strong><small>Appointments, providers and patient information</small></div></li><li><span>02</span><div><strong>Document and coordinate</strong><small>Clinical records, documents and staff workflows</small></div></li><li><span>03</span><div><strong>Order and fulfill</strong><small>Optical inventory and patient orders</small></div></li><li><span>04</span><div><strong>Bill and follow up</strong><small>Invoices, communications and reports</small></div></li></ol>
+  </div></section>
+  <section class="section-light home-resources"><div class="wrap">
+    <div class="home-resources-head"><div><span class="eyebrow">Practical buyer guidance</span><h2>See what to evaluate before you choose.</h2></div><a href="/resources/">Browse all resources →</a></div>
+    <div class="home-resources-grid"><a href="/resources/optometry-software-buyers-guide/"><small>OPTOMETRY</small><strong>Practice management buyer's guide</strong><span>Evaluate software with a real patient journey →</span></a><a href="/resources/ophthalmology-software-buyers-guide/"><small>OPHTHALMOLOGY</small><strong>Specialty software buyer's guide</strong><span>Compare scheduling, referrals, billing and records →</span></a><a href="/resources/optical-inventory-management-guide/"><small>OPTICAL</small><strong>Inventory and order management guide</strong><span>Connect products, orders and dispensing →</span></a></div>
+  </div></section>
+  <section class="founding-section"><div class="wrap"><div class="founding-card">
+    <div><span class="eyebrow">Founding practice program</span><h2>Show us how your practice works.</h2><p>Get a personalized walkthrough of Oculivo, discuss your priorities and see which workflows are ready for your practice.</p></div>
+    <a class="btn-white" href="/demo/">Request your private demo →</a>
+  </div></div></section>
 </main>
 </Base>
 <style>
-.home-hero{padding:94px 0 96px;min-height:706px}
-.home-grid{display:grid;grid-template-columns:1.03fr .97fr;gap:78px;align-items:center}
-.home-copy{padding-top:4px}
-.home-purple{color:#825cff}
-.home-hero h1{font-size:clamp(64px,6.4vw,92px);line-height:.92;letter-spacing:-.06em;font-weight:650;margin:24px 0 24px}
-.home-hero p{font-size:17px;line-height:1.75;color:#d1cde4;max-width:700px;margin:0}
-.hero-actions.left{justify-content:flex-start}
-.home-panel{background:#2a1f6b;border:1px solid #634ec0;border-radius:26px;padding:40px 36px;min-height:420px;box-shadow:0 28px 70px rgba(3,3,19,.28)}
-.home-panel h2{font-size:36px;line-height:1.06;letter-spacing:-.035em;font-weight:650;margin:36px 0 30px}
-.panel-list{border-top:1px solid rgba(255,255,255,.15);padding-top:25px;display:grid;gap:17px}
-.panel-list b{font-size:15px;color:#fff}
-@media(max-width:900px){.home-grid{grid-template-columns:1fr}.home-hero h1 br{display:none}}
+.home-hero{padding:88px 0 96px;overflow:hidden}.home-grid{display:grid;grid-template-columns:1fr .92fr;gap:64px;align-items:center}.home-copy h1{font-size:clamp(55px,6.5vw,90px);line-height:.99;letter-spacing:-.063em;margin:24px 0 24px;font-weight:650}.home-copy h1 em{font-style:normal;color:#9ee4f6}.home-lead{font-size:18px;line-height:1.75;color:#d4d1e7;max-width:580px}.hero-actions.left{justify-content:flex-start;flex-wrap:wrap}.home-footnote{font-size:12px;color:#aca8cf;margin-top:22px;line-height:1.65}.home-purple{color:#a88cff}
+.home-workflow{border:1px solid #5a538c;background:linear-gradient(155deg,#2e225f,#191738 74%);border-radius:24px;overflow:hidden;box-shadow:0 28px 70px rgba(0,0,0,.25);transform:rotate(1deg)}
+.workflow-top{display:flex;align-items:center;gap:9px;border-bottom:1px solid #50487c;padding:19px 25px;font-size:10px;letter-spacing:.16em;font-weight:800;color:#d3d0e6}.workflow-dot,.workflow-pulse{display:inline-block;border-radius:50%;width:8px;height:8px;background:#59e0cf}.workflow-tag{margin-left:auto;border:1px solid #645998;border-radius:30px;padding:6px 9px;font-size:9px;color:#92ebd8}
+.workflow-main{padding:34px 28px 22px}.workflow-label{display:block;color:#7fe2df;font-size:11px;text-transform:uppercase;letter-spacing:.13em;font-weight:800}.workflow-main strong{display:block;font-size:33px;letter-spacing:-.035em;margin:12px 0 6px}.workflow-main p{color:#c2bee0;font-size:13px}.workflow-lines{display:grid;gap:11px;padding:0 24px 28px}.workflow-lines>div{display:flex;gap:14px;align-items:center;background:#322b63;border:1px solid #514982;border-radius:12px;padding:17px}.workflow-lines>div>span:nth-child(2){flex:1;display:grid;gap:5px}.workflow-lines b{font-size:14px}.workflow-lines small{font-size:11px;color:#bbb8d7}.workflow-icon{background:#473e82;padding:10px;border-radius:9px;color:#aeecf7;font-weight:800;font-size:11px}.workflow-bottom{display:flex;justify-content:space-between;background:#14152f;padding:17px 25px;font-size:11px;color:#c4c1df}
+.home-proof{background:#171632;color:white;border-top:1px solid #39345c}.home-proof-grid{display:grid;grid-template-columns:repeat(3,1fr)}.home-proof-grid>div{display:grid;gap:8px;padding:27px;border-right:1px solid #373355}.home-proof strong{font-size:14px}.home-proof span{font-size:12px;color:#c5bfdb}
+.home-specialties{padding:95px 0}.home-section-intro{display:grid;grid-template-columns:.65fr 1.35fr;gap:48px;align-items:start;margin-bottom:36px}.home-section-intro h2,.home-journey h2,.home-resources h2{font-size:clamp(39px,5vw,64px);letter-spacing:-.055em;line-height:1.05;margin:0 0 21px}.home-section-intro p,.home-journey p{color:#6b687e;line-height:1.7;font-size:16px;max-width:740px}.home-specialty-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.home-specialty-card{border:1px solid #dfdfeb;background:white;border-radius:21px;padding:31px;min-height:310px;display:flex;flex-direction:column}.home-card-number{font-size:12px;color:#7243e1;font-weight:850}.home-specialty-card h3{font-size:29px;margin:40px 0 12px;letter-spacing:-.025em}.home-specialty-card p{font-size:14px;line-height:1.7;color:#6d6b7d;margin:0}.home-specialty-card a{margin-top:auto;padding-top:20px;color:#5131aa;text-decoration:none;font-size:13px;font-weight:800}.home-specialty-card a:hover{text-decoration:underline}
+.home-journey{background:#12132e;color:#fff;padding:98px 0}.home-journey-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:110px}.home-journey h2{margin-top:23px}.home-journey p{color:#c6c3dc}.home-text-link{display:inline-block;color:#89e7e7;margin-top:20px;text-decoration:none;font-weight:800}.journey-list{list-style:none;padding:0;margin:0;display:grid;gap:12px}.journey-list li{display:flex;gap:25px;padding:22px 23px;background:#242044;border:1px solid #474061;border-radius:15px}.journey-list li>span{color:#8de8e7;font-weight:850;font-size:12px}.journey-list strong{display:block;font-size:17px}.journey-list small{display:block;color:#bcb8d6;font-size:12px;margin-top:7px}
+.home-resources{padding:90px 0}.home-resources-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:26px}.home-resources-head h2{max-width:780px;margin-top:15px}.home-resources-head>a{white-space:nowrap;color:#5131aa;font-weight:800;text-decoration:none}.home-resources-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.home-resources-grid a{background:white;border:1px solid #dfdfeb;border-radius:19px;padding:27px;display:grid;gap:16px;text-decoration:none}.home-resources-grid small{font-size:10px;color:#7756d4;font-weight:850;letter-spacing:.15em}.home-resources-grid strong{font-size:19px;line-height:1.3}.home-resources-grid span{font-size:12px;color:#5233a3;font-weight:700}
+@media(max-width:960px){.home-grid,.home-section-intro,.home-journey-grid{grid-template-columns:1fr;gap:34px}.home-specialty-grid,.home-resources-grid{grid-template-columns:1fr 1fr}.home-workflow{transform:none}.home-hero{padding:68px 0}.home-proof-grid{grid-template-columns:1fr}.home-proof-grid>div{border-right:0;border-bottom:1px solid #373355}}
+@media(max-width:600px){.home-copy h1{font-size:clamp(45px,11vw,64px)}.home-lead{font-size:16px}.home-workflow .workflow-main strong{font-size:26px}.home-specialty-grid,.home-resources-grid{grid-template-columns:1fr}.home-specialties,.home-journey,.home-resources{padding:64px 0}.home-resources-head{align-items:start;flex-direction:column}.home-specialty-card{min-height:240px}.hero-actions.left>a{width:100%}}
 </style>
