@@ -64,10 +64,13 @@ import Base from '../../layouts/Base.astro'
       const fields=Object.fromEntries(new FormData(form).entries());
       fields.request_id=requestId;
       const params=new URLSearchParams(location.search);
-      fields.utm_source=(params.get('utm_source')||'').slice(0,120);
-      fields.utm_medium=(params.get('utm_medium')||'').slice(0,120);
-      fields.utm_campaign=(params.get('utm_campaign')||'').slice(0,120);
-      fields.landing_path=location.pathname;
+      let attribution={};
+      try{attribution=JSON.parse(sessionStorage.getItem('oculivo-attribution')||'{}')||{}}catch{}
+      const attr=(key)=>String(params.get(key)||attribution[key]||'').slice(0,120);
+      fields.utm_source=attr('utm_source');
+      fields.utm_medium=attr('utm_medium');
+      fields.utm_campaign=attr('utm_campaign');
+      fields.landing_path=String(attribution.landing_path||location.pathname).slice(0,120);
       try{
         const resp=await fetch('/api/demo-request',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(fields)});
         const data=await resp.json().catch(()=>({}));
