@@ -153,6 +153,8 @@ export default {
     }
 
     const assetPaths = new Set([
+      '/',
+      '/index.html',
       '/robots.txt',
       '/sitemap.xml',
       '/BingSiteAuth.xml',
