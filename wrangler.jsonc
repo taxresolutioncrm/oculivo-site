@@ -3,6 +3,9 @@
   "name": "oculivo-site",
   "compatibility_date": "2026-09-06",
   "main": "./src/worker.js",
+  "secrets": {
+    "required": ["OCULIVO_LEAD_WEBHOOK_URL", "OCULIVO_LEAD_WEBHOOK_SECRET"]
+  },
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
