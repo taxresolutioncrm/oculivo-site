@@ -47,4 +47,8 @@ try{
  assert.equal(r.status,200)
  assert.equal(await r.text(),'native demo page')
  console.log('PASS: /demo/ serves first-party assets rather than redirecting visitors')
+ r=await worker.fetch(new Request('https://oculivo.com/'),env,{waitUntil:()=>{}})
+ assert.equal(r.status,200)
+ assert.equal(await r.text(),'native demo page')
+ console.log('PASS: homepage now uses first-party assets, not a legacy upstream proxy')
 }finally{globalThis.fetch=originalFetch}
