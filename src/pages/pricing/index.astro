@@ -23,12 +23,40 @@ const pricingSchema = {
 <section class="hero-dark page-hero"><div class="wrap"><span class="eyebrow">Transparent founding-practice pricing</span><h1>Eye-care software priced<br/>for the practice.</h1><p>Choose the Oculivo level that fits your practice today. Founding practices lock their launch-plan price for 24 months. Annual billing saves 15%.</p><div class="hero-actions"><a class="btn-grad" href="/demo/">Request a private demo&nbsp; →</a></div></div></section>
 <section class="section-light depth-section"><div class="wrap">
   <div class="depth-top"><span class="eyebrow">Plans</span><div class="depth-title"><h2>Start with the workflow you need.<br/>Expand when the practice grows.</h2><p>Pricing is per practice location. Implementation, migration and usage-based communication or payment services are scoped during onboarding.</p></div></div>
-  <div class="depth-cards">
-    <article class="depth-card"><span class="num">01</span><h3>Core — $399/mo</h3><p>Scheduling, patients, clinical workflows, billing, reporting and core practice operations for a single eye-care location.</p><small>Founding price locked for 24 months</small></article>
-    <article class="depth-card"><span class="num">02</span><h3>Professional — $599/mo</h3><p>Everything in Core plus communications, optical operations, workforce tools, AI assistance and expanded reporting.</p><small>Best fit for most full-service practices</small></article>
-    <article class="depth-card"><span class="num">03</span><h3>Complete — $799/mo</h3><p>The broadest Oculivo operating package for practices that want the full connected workflow, growth tools and higher-touch rollout support.</p><small>Multi-location groups receive custom rollout terms</small></article>
+  <div class="pricing-grid">
+    <article class="pricing-card">
+      <span class="pricing-tier">CORE</span><h3>Core</h3><p class="pricing-audience">An eye-care practice establishing its connected foundation.</p>
+      <div class="pricing-price"><strong>$399</strong><span>/ month<br/>per location</span></div>
+      <ul><li>Scheduling and appointments</li><li>Patient profiles and clinical workflows</li><li>Invoices and billing visibility</li><li>Core practice reporting</li></ul>
+      <a href="/demo/" class="pricing-link">Talk through Core →</a><small>Founding price locked for 24 months</small>
+    </article>
+    <article class="pricing-card pricing-featured">
+      <span class="pricing-tier">PROFESSIONAL</span><h3>Professional</h3><p class="pricing-audience">Full-service teams connecting optical and communications.</p>
+      <div class="pricing-price"><strong>$599</strong><span>/ month<br/>per location</span></div>
+      <ul><li>Everything in Core</li><li>Optical inventory and order workflows</li><li>Practice communications and staff tools</li><li>AI assistance and expanded reporting</li></ul>
+      <a href="/demo/" class="pricing-link">Explore Professional →</a><small>Provider services and setup subject to onboarding</small>
+    </article>
+    <article class="pricing-card">
+      <span class="pricing-tier">COMPLETE</span><h3>Complete</h3><p class="pricing-audience">Practices planning broader workflows and growth support.</p>
+      <div class="pricing-price"><strong>$799</strong><span>/ month<br/>per location</span></div>
+      <ul><li>Everything in Professional</li><li>Broader connected operations</li><li>Growth workflow planning</li><li>Higher-touch rollout support</li></ul>
+      <a href="/demo/" class="pricing-link">Discuss Complete →</a><small>Ask about custom multi-location rollout terms</small>
+    </article>
+  </div>
+</div></section>
+<section class="pricing-questions section-light"><div class="wrap">
+  <span class="eyebrow">Before you choose</span><h2>Pricing questions, answered.</h2>
+  <div class="pricing-faq">
+    <details><summary>Is Oculivo priced per practice or per staff member?</summary><p>Published plan prices are per location. We review your practice size, provider needs and integrations during the demo.</p></details>
+    <details><summary>Are email, calling, texting and fax included automatically?</summary><p>Provider-backed communication services require configuration and may have usage charges. We'll identify any usage-based costs during onboarding.</p></details>
+    <details><summary>Can an established practice migrate existing patient and billing records?</summary><p>Migration scope depends on your current system and data export options. We assess those requirements before committing to a migration approach.</p></details>
+    <details><summary>Can I evaluate Oculivo before signing up?</summary><p>Yes. Request a private demo using practice contact details and we'll discuss the workflows most important to your team. Do not include patient information.</p></details>
   </div>
 </div></section>
 <section class="founding-section"><div class="wrap"><div class="founding-card"><div><span class="eyebrow">Founding practice program</span><h2>Use your real workflow before you commit.</h2><p>We’ll walk through your providers, patient flow, optical operations, communications, billing and migration needs.</p></div><a class="btn-white" href="/demo/">Request your private demo&nbsp; →</a></div></div></section>
 </main>
 </Base>
+<style>
+.pricing-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px;margin-top:24px}.pricing-card{padding:29px;background:#fff;border:1px solid #d9d8e8;border-radius:21px;display:flex;flex-direction:column;min-height:520px;box-shadow:0 8px 28px rgba(20,16,63,.025)}.pricing-featured{border:2px solid #6c55d5;box-shadow:0 18px 44px rgba(48,28,113,.12)}.pricing-tier{color:#6444c5;font-size:11px;font-weight:850;letter-spacing:.16em}.pricing-card h3{font-size:30px;letter-spacing:-.035em;margin:14px 0 7px}.pricing-audience{font-size:14px;color:#6e6b83;line-height:1.65;min-height:71px}.pricing-price{display:flex;align-items:center;gap:12px;border-bottom:1px solid #e5e4ee;padding:12px 0 25px}.pricing-price strong{font-size:47px;letter-spacing:-.05em;color:#15112b}.pricing-price span{font-size:12px;line-height:1.5;color:#69667e}.pricing-card ul{list-style:none;padding:14px 0 19px;display:grid;gap:13px}.pricing-card li{font-size:13px;line-height:1.5;color:#302b45}.pricing-card li::before{content:'✓';color:#5c3bd4;margin-right:9px;font-weight:900}.pricing-link{margin-top:auto;padding:14px 16px;border-radius:11px;text-decoration:none;text-align:center;background:#25204c;color:#fff;font-size:13px;font-weight:800}.pricing-featured .pricing-link{background:linear-gradient(90deg,#4d3ac5,#6b3ee3)}.pricing-link:hover{filter:brightness(1.1)}.pricing-card small{font-size:11px;line-height:1.5;color:#69667e;margin-top:15px;text-align:center}.pricing-questions{padding:45px 0 80px}.pricing-questions h2{font-size:clamp(34px,5vw,56px);letter-spacing:-.045em;margin:20px 0 30px}.pricing-faq{display:grid;gap:12px;max-width:940px}.pricing-faq details{border:1px solid #dad8e8;background:#fff;border-radius:13px;padding:19px 24px}.pricing-faq summary{cursor:pointer;font-weight:750;font-size:15px}.pricing-faq p{line-height:1.7;color:#646176;font-size:14px}
+@media(max-width:940px){.pricing-grid{grid-template-columns:1fr 1fr}}@media(max-width:640px){.pricing-grid{grid-template-columns:1fr}.pricing-card{min-height:auto}.pricing-audience{min-height:auto}.pricing-questions{padding-top:18px}}
+</style>
