@@ -26,6 +26,10 @@ check(base.includes('href="/pricing/">Pricing</a>'),'Pricing is linked in reposi
 check(base.includes('href="/security/">Security</a>'),'Security is linked from the public site')
 check(!base.includes('\\n'),'Base metadata has no literal newline escapes')
 check(base.includes('schema')&&base.includes('JSON.stringify(schema)'),'Page-specific structured data can be rendered alongside site schema')
+check((base.match(/<img src="\/oculivo-brand-logo\.png"/g)||[]).length===2,'Header and footer reuse one customer-approved Oculivo logo asset')
+check(!base.includes('oculivo-word')&&!base.includes('<svg viewBox="0 0 64 44"'),'No second text/SVG logo remains in website navigation')
+check(base.includes('href="/oculivo-favicon.png"'),'Website favicon uses the official Oculivo eye crop')
+check(!base.includes('href="/favicon.svg"'),'Old competing favicon is not referenced')
 const mainLinks=(base.match(/<div class="main-links">([\s\S]*?)<\/div>/)||[])[1]||''
 const mobileLinks=(base.match(/<div class="mobile-nav-panel">([\s\S]*?)<\/div>/)||[])[1]||''
 check(!mainLinks.includes('/website-seo')&&!mobileLinks.includes('/website-seo'),'Website + SEO is removed from primary desktop/mobile navigation')
