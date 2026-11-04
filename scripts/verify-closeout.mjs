@@ -47,7 +47,7 @@ check(worker.includes('oculivo_cta_click')&&worker.includes('taxrescrm.app/book?
 check(worker.includes("'/favicon.svg'")&&worker.includes("'/site.webmanifest'"),'Worker serves current brand assets')
 check(worker.includes('G-WR6GGVYLXX')&&worker.includes('yguz2tkhnt'),'GA4 and Clarity injection guards are present')
 check(worker.includes('BC8190C5D48F98C3E4C4A6EC29AA5CB3'),'Bing verification is preserved')
-check(['$399/mo','$599/mo','$799/mo'].every(x=>pricing.includes(x)),'All three approved pricing tiers are present')
+check(['$399','$599','$799'].every(x=>pricing.includes(x))&&['Core','Professional','Complete'].every(x=>pricing.includes(x)),'All three approved pricing tiers are present')
 check(pricing.includes('AggregateOffer'),'Pricing structured data is present')
 check(sitemap.includes("'pricing/'")&&sitemap.includes("'security/'"),'Pricing and security are in the sitemap')
 check(sitemap.includes("'demo/'"),'First-party demo lead capture route is included in sitemap')
