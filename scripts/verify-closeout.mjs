@@ -44,7 +44,7 @@ check(worker.includes('canonicalPublicUrl')&&worker.includes("canonical.hostname
 check(worker.includes('index,follow,max-image-preview:large')&&worker.includes('(?:robots|googlebot|bingbot)'),'Legacy proxy robots metadata cannot reintroduce noindex')
 check(worker.includes('canonicalPublicUrl(incoming)')&&worker.includes('Optometry &amp; Ophthalmology Practice Management Software | Oculivo')&&worker.includes('Request a private software demo.'),'Proxied homepage receives verified commercial title, description and canonical')
 check(worker.includes('oculivo_cta_click')&&worker.includes('taxrescrm.app/book?product=oculivo'),'Proxied legacy pages track demo/pricing/app CTA clicks in GA4')
-check(worker.includes("'/favicon.svg'")&&worker.includes("'/site.webmanifest'"),'Worker serves current brand assets')
+check(worker.includes("'/oculivo-brand-logo.png'")&&worker.includes("'/oculivo-favicon.png'")&&worker.includes("'/site.webmanifest'"),'Worker serves the single approved logo, matching favicon, and manifest')
 check(worker.includes('G-WR6GGVYLXX')&&worker.includes('yguz2tkhnt'),'GA4 and Clarity injection guards are present')
 check(worker.includes('BC8190C5D48F98C3E4C4A6EC29AA5CB3'),'Bing verification is preserved')
 check(['$399','$599','$799'].every(x=>pricing.includes(x))&&['Core','Professional','Complete'].every(x=>pricing.includes(x)),'All three approved pricing tiers are present')
