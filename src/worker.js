@@ -26,7 +26,9 @@ async function handleOculivoDemoRequest(request, env) {
     return json({ok:false,error:'Please complete the required fields using a valid email address.'},400)
   }
   if(!['1','2-5','6+'].includes(locations))return json({ok:false,error:'Invalid number of locations'},400)
-  const endpoint=String(env.OCULIVO_LEAD_WEBHOOK_URL||'').trim()
+  // The Admin intake URL is public and fixed to the approved RomyLabs project.
+  // Allow an explicit override for authorized migration or staging.
+  const endpoint=String(env.OCULIVO_LEAD_WEBHOOK_URL||'https://mpxgxfqdbquzkrvvejkh.supabase.co/functions/v1/oculivo-demo-intake').trim()
   const secret=String(env.OCULIVO_LEAD_WEBHOOK_SECRET||'')
   if(!endpoint||!secret)return json({ok:false,error:'Online requests are temporarily unavailable.'},503)
   let target
