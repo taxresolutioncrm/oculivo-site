@@ -65,6 +65,21 @@ const siteSchema = {
     })(window,document,'clarity','script','yguz2tkhnt');
   </script>
   <script is:inline>
+    (function(){
+      try {
+        const params = new URLSearchParams(location.search);
+        const keys = ['utm_source','utm_medium','utm_campaign','utm_term','utm_content'];
+        let saved = JSON.parse(sessionStorage.getItem('oculivo-attribution') || 'null');
+        if(!saved || typeof saved !== 'object')saved = {landing_path:location.pathname};
+        if(keys.some(k=>params.has(k))) {
+          saved = {landing_path:location.pathname};
+          for(const key of keys){if(params.has(key))saved[key]=(params.get(key)||'').slice(0,120)}
+        }
+        sessionStorage.setItem('oculivo-attribution', JSON.stringify(saved));
+      }catch{}
+    })();
+  </script>
+  <script is:inline>
     document.addEventListener('click', function(event){
       const target = event.target instanceof Element ? event.target.closest('a') : null;
       if(!target) return;
@@ -96,7 +111,7 @@ const siteSchema = {
       <a href="/optical-management">Optical</a>
       <a href="/communications/">Communications</a>
       <a href="/pricing/">Pricing</a>
-      <a href="/locations/">Nationwide</a>
+      <a href="/features/">Features</a>
     </div>
     <a class="nav-demo" href="/demo/">Book a demo&nbsp; →</a>
     <details class="mobile-nav">
@@ -106,6 +121,7 @@ const siteSchema = {
         <a href="/ophthalmology-software">Ophthalmology</a>
         <a href="/optical-management">Optical</a>
         <a href="/communications/">Communications</a>
+        <a href="/features/">Features</a>
         <a href="/pricing/">Pricing</a>
         <a href="/security/">Security</a>
         <a href="/locations/">Nationwide</a>
@@ -124,7 +140,7 @@ const siteSchema = {
       </a>
       <div class="footer-copy">The operating system for modern eye care.<br/>Built by RomyLabs.</div>
     </div>
-    <div class="footer-col"><strong>Platform</strong><a href="/optometry-software">Optometry software</a><a href="/ophthalmology-software">Ophthalmology software</a><a href="/optical-management">Optical management</a><a href="/communications/">Communications</a></div>
+    <div class="footer-col"><strong>Platform</strong><a href="/features/">All features</a><a href="/optometry-software">Optometry software</a><a href="/ophthalmology-software">Ophthalmology software</a><a href="/optical-management">Optical management</a><a href="/communications/">Communications</a></div>
     <div class="footer-col"><strong>Growth & trust</strong><a href="/resources/">Practice resources</a><a href="/website-seo/">Website + SEO</a><a href="/pricing/">Pricing</a><a href="/security/">Security</a><a href="/locations/">Nationwide coverage</a><a href="/privacy/">Privacy</a><a href="/demo/">Founding practice demo</a><a href="mailto:info@romylabs.com">Contact RomyLabs</a></div>
   </div>
 </footer>
