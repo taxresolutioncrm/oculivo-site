@@ -17,7 +17,7 @@ jobs:
           node-version: '22'
       - name: Full repository build and existing validation
         run: |
-          npm ci --no-audit --no-fund && npm run build && npm run verify:closeout
+          npm install --no-package-lock --no-audit --no-fund && npm run build && npm run verify:closeout
       - name: Validate scoped page content and canonical contract
         env:
           TARGET_PAGE: 'src/pages/optometry-software/index.astro'
