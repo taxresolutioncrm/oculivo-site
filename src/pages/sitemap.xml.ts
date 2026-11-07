@@ -13,6 +13,7 @@ const urls = [
   'website-seo/',
   'optometry-software/',
   'ophthalmology-software/',
+  'ophthalmology-patient-communications-software/',
   'locations/',
   'resources/',
   'resources/optometry-patient-recall-workflow/',
