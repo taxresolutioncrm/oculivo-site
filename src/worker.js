@@ -124,6 +124,8 @@ export default {
       '/optometry-software/',
       '/ophthalmology-software',
       '/ophthalmology-software/',
+      '/ophthalmology-patient-communications-software',
+      '/ophthalmology-patient-communications-software/',
       '/optical-management',
       '/optical-management/'
     ])
