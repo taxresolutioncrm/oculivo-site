@@ -74,6 +74,18 @@ export default {
       return Response.redirect(canonical.toString(), 301)
     }
 
+    // Always serve the owned Astro homepage and immutable brand assets; never
+    // proxy these routes through the retired legacy marketing origin.
+    if (incoming.pathname === '/favicon.svg') {
+      return Response.redirect(new URL('/oculivo-favicon.png', incoming.origin).toString(), 301)
+    }
+    if (incoming.pathname === '/' || incoming.pathname === '/index.html'
+      || incoming.pathname === '/oculivo-brand-logo.png'
+      || incoming.pathname === '/oculivo-favicon.png'
+      || incoming.pathname.startsWith('/_astro/')) {
+      return env.ASSETS.fetch(request)
+    }
+
     if (incoming.pathname === '/demo' || incoming.pathname === '/demo/') {
       return Response.redirect('https://taxrescrm.app/book?product=oculivo', 302)
     }
@@ -104,7 +116,8 @@ export default {
       '/robots.txt',
       '/sitemap.xml',
       '/BingSiteAuth.xml',
-      '/favicon.svg',
+      '/oculivo-brand-logo.png',
+      '/oculivo-favicon.png',
       '/site.webmanifest',
       '/features',
       '/features/',
@@ -182,9 +195,9 @@ export default {
           trackingParts.push('<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">')
           if (!/msvalidate\.01/i.test(html)) trackingParts.push('<meta name="msvalidate.01" content="BC8190C5D48F98C3E4C4A6EC29AA5CB3">')
           if (!/site\.webmanifest/i.test(html)) trackingParts.push('<link rel="manifest" href="/site.webmanifest">')
-          if (!/href=["']\/favicon\.svg["']/i.test(html)) {
-            trackingParts.push('<link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg">')
-            trackingParts.push('<link rel="shortcut icon" href="/favicon.svg">')
+          if (!/href=["']\/oculivo-favicon\.png["']/i.test(html)) {
+            trackingParts.push('<link rel="icon" type="image/png" sizes="64x64" href="/oculivo-favicon.png">')
+            trackingParts.push('<link rel="shortcut icon" href="/oculivo-favicon.png">')
           }
           if (incoming.pathname === '/' || incoming.pathname === '') {
             if (!/<meta\s+[^>]*name=["']description["']/i.test(html)) trackingParts.push('<meta name="description" content="Cloud-based eye care practice management software for optometry, ophthalmology and optical operations, connecting scheduling, patients, billing, communications and reporting.">')
