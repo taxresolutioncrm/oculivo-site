@@ -37,7 +37,7 @@ const plans=[
       <div class="oc-optic-scene" aria-label="Illustration of a connected eye-care practice workspace">
         <div class="oc-orbit oc-orbit-one"></div><div class="oc-orbit oc-orbit-two"></div>
         <div class="oc-eye-graphic" aria-hidden="true"><span class="oc-eye-inner"><span class="oc-eye-pupil"></span></span></div>
-        <div class="oc-scene-label">EVERY PART OF PRACTICE. ONE PICTURE.</div>
+        <div class="oc-scene-label">CONNECTED EYE-CARE WORKFLOWS</div>
         <div class="oc-interface" aria-label="Illustrative workflow overview, not a live product screenshot">
           <div class="oc-interface-top"><span><i aria-hidden="true"></i> Practice overview</span><small>Illustrative workflow</small></div>
           <div class="oc-interface-body">
@@ -139,4 +139,55 @@ const plans=[
 @media(max-width:800px){.oc-thin-grid,.oc-section-heading,.oc-process-layout,.oc-pricing-intro,.oc-guides-layout{grid-template-columns:1fr;gap:24px}.oc-specialty-row{grid-template-columns:1fr 35px;gap:10px}.oc-specialty-number{grid-column:1/-1}.oc-price-grid{grid-template-columns:1fr}.oc-plan{min-height:330px}.oc-hero-bottom{gap:20px;flex-wrap:wrap}.oc-final-grid{align-items:flex-start;flex-direction:column}.oc-hero-wrap{padding-top:58px}.oc-hero h1{font-size:clamp(46px,9vw,70px)}}
 @media(max-width:560px){.oc-hero h1{font-size:clamp(39px,10vw,55px)}.oc-hero-intro{font-size:15px}.oc-hero-actions>a{width:100%;justify-content:space-between}.oc-optic-scene{height:390px}.oc-orbit{width:370px;height:370px}.oc-orbit-two{width:280px;height:280px}.oc-eye-graphic{width:180px;height:110px;border-width:14px;top:17px;right:30px}.oc-eye-inner{width:75px;height:75px;border-width:11px}.oc-eye-pupil{width:29px;height:29px}.oc-scene-label{top:12px;left:2px;font-size:9px}.oc-interface{width:95%;margin-top:100px}.oc-interface-title>span{font-size:19px}.oc-interface-body{padding:16px}.oc-interface-rows>div{padding:14px 0}.oc-hero-bottom{font-size:8px}.oc-thin-intro,.oc-specialties,.oc-process,.oc-pricing,.oc-guides{padding:64px 0}.oc-specialty-row{padding:25px 5px}.oc-specialty-row h3{font-size:27px}.oc-guide-links a{grid-template-columns:83px 1fr 15px;gap:10px}.oc-guide-links a strong{font-size:13px}.oc-final{padding:60px 0}.oc-final h2{font-size:40px}}
 @media(prefers-reduced-motion:reduce){.oc-specialty-row,.oc-plan{transition:none}}
+</style>
+<style>
+/* Final editorial alignment and accessibility refinements. */
+.oc-hero-wrap{grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr);gap:clamp(24px,3.5vw,64px);min-height:680px;padding-block:76px}
+.oc-hero h1{font-size:clamp(48px,5vw,73px);line-height:1.08;letter-spacing:-.053em;max-width:760px;margin-top:30px}
+.oc-hero-intro{max-width:575px;font-size:17px;line-height:1.7}
+.oc-seo-line{font-size:12px;line-height:1.5;letter-spacing:.045em;color:#14626e}
+.oc-hero-actions{margin-top:31px}
+.oc-primary,.oc-secondary{min-height:55px;font-size:14px;line-height:1.45;transition:background .18s,transform .18s}
+.oc-primary:hover,.oc-secondary:hover{transform:translateY(-2px)}
+.oc-price-anchor{margin-top:28px;padding-top:20px}
+.oc-price-kicker{color:#4e5a68;letter-spacing:.12em}
+.oc-optic-scene{height:590px;min-width:0}
+.oc-orbit{width:510px;height:510px}
+.oc-orbit-two{width:395px;height:395px}
+.oc-eye-graphic{width:260px;height:152px;right:5%;top:44px;opacity:.77}
+.oc-eye-inner{width:108px;height:108px;border-width:15px}
+.oc-eye-pupil{width:48px;height:48px}
+.oc-interface{width:min(440px,93%);margin-top:87px;transform:rotate(-1.5deg);box-shadow:0 22px 56px rgba(28,39,69,.14)}
+.oc-scene-label{top:49px;left:4%;max-width:200px;color:#487078;letter-spacing:.12em}
+.oc-interface-top small{color:#e1e7f2}
+.oc-interface-rows small{color:#526577}
+.oc-hero-bottom{font-size:11px;line-height:1.5;letter-spacing:.095em}
+.oc-specialty-row:focus-visible,.oc-guide-links a:focus-visible{outline:3px solid #287d92;outline-offset:-3px}
+.oc-plan-bottom>a,.oc-final a{min-height:49px;align-items:center}
+@media(max-width:1050px){
+  .oc-hero-wrap{grid-template-columns:1fr;min-height:0;padding-block:65px}
+  .oc-optic-scene{height:490px;max-width:690px;width:100%;margin:auto}
+  .oc-hero h1{max-width:850px}
+}
+@media(max-width:800px){
+  .oc-hero-wrap{padding-block:55px}
+  .oc-hero h1{font-size:clamp(40px,7.2vw,64px)}
+  .oc-orbit{width:420px;height:420px}
+  .oc-orbit-two{width:325px;height:325px}
+}
+@media(max-width:560px){
+  .oc-hero-wrap{padding-block:44px}
+  .oc-hero h1{font-size:clamp(37px,9.3vw,50px);line-height:1.09}
+  .oc-hero-intro{font-size:15px}
+  .oc-price-anchor{gap:8px 12px}
+  .oc-optic-scene{height:355px}
+  .oc-orbit{width:325px;height:325px}
+  .oc-orbit-two{width:248px;height:248px}
+  .oc-eye-graphic{width:160px;height:95px;right:8%;top:22px;border-width:12px}
+  .oc-eye-inner{width:64px;height:64px;border-width:9px}
+  .oc-eye-pupil{width:25px;height:25px}
+  .oc-interface{margin-top:85px;width:95%;transform:rotate(-1deg)}
+  .oc-scene-label{top:5px;left:3%;font-size:9px}
+  .oc-hero-bottom{font-size:9px}
+}
 </style>
