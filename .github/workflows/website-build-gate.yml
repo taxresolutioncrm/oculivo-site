@@ -1,0 +1,32 @@
+name: Oculivo website integrity and build
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  verify-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install pinned dependencies
+        run: npm install --no-audit --no-fund
+      - name: Run website verification
+        run: npm run verify:closeout
+      - name: Build production website
+        run: npm run build
+      - name: Check exported homepage and pricing
+        run: |
+          test -f dist/index.html
+          test -f dist/pricing/index.html
+          grep -q 'Optometry' dist/index.html
+          grep -q '\$399' dist/index.html
+          grep -q 'oculivo-brand-logo.png' dist/index.html
+          grep -q 'oculivo-favicon.png' dist/index.html
+          echo 'Oculivo homepage, pricing, and brand assets present.'
