@@ -21,37 +21,29 @@ const plans=[
 ---
 <Base title="Optometry & Ophthalmology Practice Management Software | Oculivo" description="Eye-care practice software for optometry, ophthalmology and optical workflows. Explore Oculivo, compare plans from $399/month per location and book a private demo." schema={schema}>
 <main class="oc-home">
-  <section class="oc-hero" aria-labelledby="oc-headline">
-    <div class="wrap oc-hero-wrap">
-      <div class="oc-hero-text">
-        <p class="oc-kicker"><span class="oc-signal" aria-hidden="true"></span> SOFTWARE FOR MODERN EYE CARE</p>
-        <h1 id="oc-headline">A clearer way to run <em>your entire practice.</em></h1>
-        <p class="oc-seo-line">Optometry &amp; ophthalmology practice management software</p>
-        <p class="oc-hero-intro">Your patient journey doesn't stop at the exam room. Neither should your software. Bring scheduling, clinical work, optical orders, billing, and team coordination into one connected view.</p>
-        <div class="oc-hero-actions">
-          <a class="oc-primary" href="/demo/">Schedule your private demo <span aria-hidden="true">↗</span></a>
-          <a class="oc-secondary" href="/pricing/">Explore pricing <span aria-hidden="true">→</span></a>
-        </div>
-        <div class="oc-price-anchor"><span class="oc-price-kicker">PUBLISHED PLANS</span><strong>From $399 / month</strong><span>per practice location</span></div>
+  <section class="oc-hero2" aria-labelledby="oc-headline">
+    <div class="wrap oc-hero2-intro">
+      <div class="oc-hero2-copy">
+        <p class="oc-hero2-overline"><span aria-hidden="true" class="oc-hero2-pulse"></span> THE PRACTICE PLATFORM FOR EYE CARE</p>
+        <h1 id="oc-headline">Better care starts with a <em>better-connected practice.</em></h1>
+        <p class="oc-hero2-keyword">Optometry &amp; ophthalmology practice management software</p>
+        <p class="oc-hero2-description">Give your front desk, providers, optical team and billing staff one clearer way to work together. Oculivo connects the operations around patient care, from scheduling to follow-up.</p>
+        <div class="oc-hero2-actions"><a href="/demo/" class="oc-hero2-primary">Book your private demo <span aria-hidden="true">↗</span></a><a href="/pricing/" class="oc-hero2-secondary">See pricing and plans <span aria-hidden="true">→</span></a></div>
+        <p class="oc-hero2-rate"><strong>Plans from $399/month</strong><span>per practice location · <a href="/pricing/">Compare all three plans</a></span></p>
       </div>
-      <div class="oc-optic-scene" aria-label="Illustration of a connected eye-care practice workspace">
-        <div class="oc-orbit oc-orbit-one"></div><div class="oc-orbit oc-orbit-two"></div>
-        <div class="oc-eye-graphic" aria-hidden="true"><span class="oc-eye-inner"><span class="oc-eye-pupil"></span></span></div>
-        <div class="oc-scene-label">CONNECTED EYE-CARE WORKFLOWS</div>
-        <div class="oc-interface" aria-label="Illustrative workflow overview, not a live product screenshot">
-          <div class="oc-interface-top"><span><i aria-hidden="true"></i> Practice overview</span><small>Illustrative workflow</small></div>
-          <div class="oc-interface-body">
-            <div class="oc-interface-title"><span>Today at a glance</span><b>ONE WORKSPACE</b></div>
-            <div class="oc-interface-rows">
-              <div><span class="oc-interface-number">01</span><span><strong>Appointments &amp; patients</strong><small>Front-desk coordination</small></span><span>↗</span></div>
-              <div><span class="oc-interface-number">02</span><span><strong>Clinical &amp; optical</strong><small>Care through fulfillment</small></span><span>↗</span></div>
-              <div><span class="oc-interface-number">03</span><span><strong>Billing &amp; follow-up</strong><small>Connected next steps</small></span><span>↗</span></div>
-            </div>
-          </div>
+      <div class="oc-hero2-visual" aria-label="Eye care practice operations connected across four teams">
+        <div class="oc-hero2-visual-heading"><span>OCULIVO / THE CONNECTED PRACTICE</span><span>01 — 04</span></div>
+        <div class="oc-hero2-lens" aria-hidden="true"><span></span></div>
+        <div class="oc-hero2-pathways">
+          <div><span>01</span><strong>Front desk</strong><small>Scheduling &amp; intake</small></div>
+          <div><span>02</span><strong>Clinical care</strong><small>Patients &amp; documentation</small></div>
+          <div><span>03</span><strong>Optical</strong><small>Inventory &amp; orders</small></div>
+          <div><span>04</span><strong>Operations</strong><small>Billing &amp; follow-up</small></div>
         </div>
+        <div class="oc-hero2-visual-foot"><span>Four teams. One connected workflow.</span><span aria-hidden="true">↗</span></div>
       </div>
     </div>
-    <div class="wrap oc-hero-bottom"><span>DESIGNED FOR EYE-CARE PRACTICES</span><span>OPTOMETRY / OPHTHALMOLOGY / OPTICAL</span></div>
+    <div class="wrap oc-hero2-bottom"><span>BUILT SPECIFICALLY FOR EYE-CARE PRACTICES</span><span>OPTOMETRY <span aria-hidden="true">/</span> OPHTHALMOLOGY <span aria-hidden="true">/</span> OPTICAL</span></div>
   </section>
 
   <section class="oc-thin-intro" aria-labelledby="oc-clarity"><div class="wrap oc-thin-grid">
@@ -190,4 +182,70 @@ const plans=[
   .oc-scene-label{top:5px;left:3%;font-size:9px}
   .oc-hero-bottom{font-size:9px}
 }
+</style>
+
+<style>
+/* Genuine redesign: replaces oversized eye graphic and fake dashboard with an
+   eye-care-specific editorial operation map. All visuals are CSS and accessible text. */
+.oc-hero2{background:#faf9f5;color:#172339;border-bottom:1px solid #dae3df;overflow:hidden}
+.oc-hero2-intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(360px,.83fr);gap:clamp(50px,6vw,100px);align-items:center;padding-top:92px;padding-bottom:83px}
+.oc-hero2-copy{min-width:0}
+.oc-hero2-overline{display:flex;align-items:center;gap:12px;font-size:11px;letter-spacing:.17em;font-weight:800;color:#286b71;margin:0 0 29px}
+.oc-hero2-pulse{width:10px;height:10px;background:#1ca7ab;border-radius:50%;box-shadow:0 0 0 5px #ddf3ee;flex-shrink:0}
+.oc-hero2 h1{font-size:clamp(47px,5.1vw,73px);max-width:780px;letter-spacing:-.059em;line-height:1.075;margin:0;color:#17233d;font-weight:700}
+.oc-hero2 h1 em{font-style:normal;color:#5136d3}
+.oc-hero2-keyword{font-size:11px;line-height:1.5;text-transform:uppercase;letter-spacing:.09em;font-weight:850;color:#28747d;margin:25px 0 13px}
+.oc-hero2-description{font-size:17px;line-height:1.72;color:#526170;max-width:620px;margin:0}
+.oc-hero2-actions{display:flex;flex-wrap:wrap;gap:11px;margin-top:29px}
+.oc-hero2-actions a{display:inline-flex;align-items:center;justify-content:space-between;gap:24px;min-height:51px;padding:15px 19px;border-radius:5px;text-decoration:none;font-size:13px;line-height:1.5;font-weight:800;transition:background .15s,transform .15s}
+.oc-hero2-actions a:hover{transform:translateY(-2px)}
+.oc-hero2-primary{background:#22213d;color:white}
+.oc-hero2-primary:hover{background:#5136b7}
+.oc-hero2-secondary{border:1px solid #9baeb0;color:#202c43;background:transparent}
+.oc-hero2-secondary:hover{background:#eef3f0}
+.oc-hero2-rate{border-top:1px solid #d7e0de;margin:26px 0 0;padding-top:17px;display:flex;align-items:baseline;flex-wrap:wrap;gap:8px 13px}
+.oc-hero2-rate strong{font-size:17px;color:#211c43}
+.oc-hero2-rate span{font-size:12px;color:#687477}
+.oc-hero2-rate a{color:#4d38a9;text-underline-offset:3px}
+.oc-hero2-visual{background:#e5f0ed;border:1px solid #d0dfd9;min-height:585px;padding:28px;display:flex;flex-direction:column;position:relative;overflow:hidden;isolation:isolate;border-radius:5px}
+.oc-hero2-visual-heading{display:flex;justify-content:space-between;gap:14px;color:#416f70;font-size:10px;line-height:1.4;letter-spacing:.12em;font-weight:850;position:relative;z-index:2}
+.oc-hero2-lens{height:155px;position:relative;margin:30px 0 6px;display:flex;justify-content:center;align-items:center}
+.oc-hero2-lens:before{content:"";width:300px;height:300px;position:absolute;border-radius:50%;border:1px solid #a5c9c0}
+.oc-hero2-lens:after{content:"";width:215px;height:215px;position:absolute;border-radius:50%;border:1px solid #bbd7d0}
+.oc-hero2-lens span{width:128px;height:128px;border:19px solid #6250dc;border-radius:50%;background:#90e1df;position:relative;z-index:1;box-shadow:inset 0 0 0 24px #38abc3,inset 0 0 0 42px #1d2847}
+.oc-hero2-pathways{background:#fff;border:1px solid #d2dfdc;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));z-index:2;position:relative;margin-top:auto}
+.oc-hero2-pathways>div{padding:21px 20px;display:grid;gap:7px}
+.oc-hero2-pathways>div:nth-child(odd){border-right:1px solid #e1e8e5}
+.oc-hero2-pathways>div:nth-child(-n+2){border-bottom:1px solid #e1e8e5}
+.oc-hero2-pathways>div>span{font-size:10px;font-weight:850;color:#6856cc}
+.oc-hero2-pathways strong{font-size:18px;letter-spacing:-.02em}
+.oc-hero2-pathways small{font-size:12px;color:#63747b;line-height:1.45}
+.oc-hero2-visual-foot{padding-top:19px;display:flex;justify-content:space-between;align-items:center;gap:10px;color:#385e63;font-size:12px;font-weight:800;letter-spacing:.02em}
+.oc-hero2-visual-foot span:last-child{font-size:21px;color:#4f3dc1}
+.oc-hero2-bottom{border-top:1px solid #dae3df;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:20px 0;font-size:10px;letter-spacing:.13em;color:#456469;font-weight:850}
+.oc-hero2-bottom span span{color:#837eac;padding-inline:9px}
+@media(max-width:1050px){.oc-hero2-intro{grid-template-columns:1fr;gap:50px;padding-top:65px;padding-bottom:65px}.oc-hero2-visual{min-height:500px;max-width:740px}.oc-hero2 h1{max-width:850px}}
+@media(max-width:620px){.oc-hero2-intro{padding-top:50px;padding-bottom:48px;gap:37px}.oc-hero2 h1{font-size:clamp(37px,9.2vw,52px)}.oc-hero2-description{font-size:15px}.oc-hero2-actions a{width:100%}.oc-hero2-visual{padding:19px;min-height:510px}.oc-hero2-visual-heading{font-size:8px}.oc-hero2-lens{height:145px}.oc-hero2-lens span{width:106px;height:106px;border-width:15px;box-shadow:inset 0 0 0 20px #38abc3,inset 0 0 0 35px #1d2847}.oc-hero2-pathways>div{padding:16px 12px}.oc-hero2-pathways strong{font-size:15px}.oc-hero2-pathways small{font-size:11px}.oc-hero2-bottom{font-size:9px}.oc-hero2-rate{align-items:flex-start}}
+/* Consistent finishing across lower homepage sections. */
+.oc-thin-intro,.oc-specialties,.oc-pricing,.oc-guides{scroll-margin-top:90px}
+.oc-thin-intro{padding:90px 0}
+.oc-thin-intro h2,.oc-section-heading h2,.oc-process h2,.oc-pricing h2,.oc-guides h2,.oc-final h2{font-size:clamp(36px,4.1vw,57px);line-height:1.13;letter-spacing:-.047em}
+.oc-specialties{padding:85px 0 95px}
+.oc-specialty-row{min-height:175px;gap:clamp(15px,3vw,43px);padding:30px 15px;align-items:center}
+.oc-specialty-row h3{font-size:clamp(24px,2.5vw,34px)}
+.oc-specialty-row:hover{padding-left:25px}
+.oc-process{padding:90px 0}
+.oc-process-layout{gap:clamp(40px,5vw,90px)}
+.oc-pricing{padding:90px 0}
+.oc-pricing-intro{margin-bottom:37px}
+.oc-plan{min-height:365px;padding:27px;border-radius:9px}
+.oc-plan-middle{box-shadow:0 12px 30px rgba(50,44,119,.06)}
+.oc-plan h3{margin-top:24px}
+.oc-plan-cost strong{font-size:42px}
+.oc-plan-bottom>a{border-radius:4px}
+.oc-guides{padding:85px 0}
+.oc-guide-links a{min-height:85px;transition:padding .15s,background .15s}
+.oc-guide-links a:hover{padding-left:10px;background:#e8efea}
+.oc-final-grid{align-items:center}
+@media(max-width:800px){.oc-thin-intro,.oc-specialties,.oc-process,.oc-pricing,.oc-guides{padding:65px 0}.oc-specialty-row{min-height:0;padding:25px 10px;align-items:start}.oc-specialty-row:hover{padding-left:12px}.oc-price-grid{gap:13px}.oc-plan{min-height:330px}}
 </style>
