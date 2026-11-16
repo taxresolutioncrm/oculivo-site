@@ -7,9 +7,9 @@
   "theme_color": "#0b0b22",
   "icons": [
     {
-      "src": "/favicon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml"
+      "src": "/oculivo-favicon.png",
+      "sizes": "64x64",
+      "type": "image/png"
     }
   ]
 }
