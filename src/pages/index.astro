@@ -25,15 +25,15 @@ const plans=[
     <div class="wrap oc-hero2-intro">
       <div class="oc-hero2-copy">
         <p class="oc-hero2-overline"><span aria-hidden="true" class="oc-hero2-pulse"></span> THE PRACTICE PLATFORM FOR EYE CARE</p>
-        <h1 id="oc-headline">Better care starts with a <em>better-connected practice.</em></h1>
+        <h1 id="oc-headline">Run your eye-care practice <em>with more clarity.</em></h1>
         <p class="oc-hero2-keyword">Optometry &amp; ophthalmology practice management software</p>
-        <p class="oc-hero2-description">Give your front desk, providers, optical team and billing staff one clearer way to work together. Oculivo connects the operations around patient care, from scheduling to follow-up.</p>
+        <p class="oc-hero2-description">Scheduling, patient records, optical orders, billing and follow-up — connected in one workspace built specifically for optometry and ophthalmology teams.</p>
         <div class="oc-hero2-actions"><a href="/demo/" class="oc-hero2-primary">Book your private demo <span aria-hidden="true">↗</span></a><a href="/pricing/" class="oc-hero2-secondary">See pricing and plans <span aria-hidden="true">→</span></a></div>
         <p class="oc-hero2-rate"><strong>Plans from $399/month</strong><span>per practice location · <a href="/pricing/">Compare all three plans</a></span></p>
       </div>
       <div class="oc-hero2-visual" aria-label="Eye care practice operations connected across four teams">
         <div class="oc-hero2-visual-heading"><span>OCULIVO / THE CONNECTED PRACTICE</span><span>01 — 04</span></div>
-        <div class="oc-hero2-lens" aria-hidden="true"><span></span></div>
+        <div class="oc-hero2-illustration" aria-hidden="true"><div class="oc-hero2-mark">ONE PRACTICE. ONE VIEW.</div><div class="oc-hero2-flow"><span>SCHEDULE</span><span class="oc-flow-line"></span><span>CARE</span><span class="oc-flow-line"></span><span>OPTICAL</span><span class="oc-flow-line"></span><span>FOLLOW-UP</span></div></div>
         <div class="oc-hero2-pathways">
           <div><span>01</span><strong>Front desk</strong><small>Scheduling &amp; intake</small></div>
           <div><span>02</span><strong>Clinical care</strong><small>Patients &amp; documentation</small></div>
@@ -248,4 +248,27 @@ const plans=[
 .oc-guide-links a:hover{padding-left:10px;background:#e8efea}
 .oc-final-grid{align-items:center}
 @media(max-width:800px){.oc-thin-intro,.oc-specialties,.oc-process,.oc-pricing,.oc-guides{padding:65px 0}.oc-specialty-row{min-height:0;padding:25px 10px;align-items:start}.oc-specialty-row:hover{padding-left:12px}.oc-price-grid{gap:13px}.oc-plan{min-height:330px}}
+</style>
+<style>
+/* Screenshot-driven visual cleanup: remove oversized concentric eye and dense
+   simulated dashboard; use quiet typographic process line and balanced grid. */
+.oc-hero2-intro{grid-template-columns:minmax(0,1.1fr) minmax(350px,.9fr);gap:clamp(36px,4.5vw,76px);padding-top:75px;padding-bottom:75px}
+.oc-hero2 h1{font-size:clamp(45px,4.6vw,65px);line-height:1.12;letter-spacing:-.047em;max-width:710px}
+.oc-hero2-keyword{margin-top:23px}
+.oc-hero2-description{max-width:575px}
+.oc-hero2-visual{min-height:460px;padding:26px 29px;background:#edf4f0;border-color:#d1e0db;box-shadow:0 18px 54px rgba(20,36,51,.045)}
+.oc-hero2-illustration{display:grid;gap:22px;align-content:center;min-height:135px;padding:27px 5px 18px;position:relative}
+.oc-hero2-mark{font-size:clamp(16px,1.85vw,24px);font-weight:750;letter-spacing:-.035em;color:#192b43;text-align:center}
+.oc-hero2-flow{display:flex;align-items:center;justify-content:space-between;gap:7px;color:#496c70;font-size:9px;font-weight:850;letter-spacing:.1em}
+.oc-flow-line{height:1px;flex:1;background:#95c6bc;min-width:5px}
+.oc-hero2-pathways{margin-top:8px;border-radius:7px;overflow:hidden;box-shadow:0 8px 25px rgba(26,41,60,.04)}
+.oc-hero2-pathways>div{padding:20px 18px}
+.oc-hero2-pathways strong{font-size:17px}
+.oc-hero2-pathways small{font-size:12px;line-height:1.5}
+.oc-hero2-visual-foot{font-size:11px;padding-top:18px}
+.oc-hero2-actions a{min-height:52px}
+.oc-hero2-rate{margin-top:26px}
+.oc-hero2-bottom{letter-spacing:.075em;font-size:10px}
+@media(max-width:1050px){.oc-hero2-intro{grid-template-columns:1fr;gap:32px}.oc-hero2-visual{max-width:790px;min-height:420px}.oc-hero2 h1{max-width:760px}}
+@media(max-width:620px){.oc-hero2-intro{padding-top:48px;padding-bottom:48px}.oc-hero2 h1{font-size:clamp(36px,8.8vw,51px)}.oc-hero2-visual{padding:18px;min-height:405px}.oc-hero2-illustration{min-height:110px;padding:17px 0}.oc-hero2-flow{font-size:8px;letter-spacing:0}.oc-hero2-pathways>div{padding:15px 12px}.oc-hero2-pathways strong{font-size:15px}.oc-hero2-pathways small{font-size:11px}}
 </style>
