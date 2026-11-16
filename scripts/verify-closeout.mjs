@@ -30,6 +30,12 @@ check((base.match(/<img src="\/oculivo-brand-logo\.png"/g)||[]).length===2,'Head
 check(!base.includes('oculivo-word')&&!base.includes('<svg viewBox="0 0 64 44"'),'No second text/SVG logo remains in website navigation')
 check(base.includes('href="/oculivo-favicon.png"'),'Website favicon uses the official Oculivo eye crop')
 check(!base.includes('href="/favicon.svg"'),'Old competing favicon is not referenced')
+check(fs.existsSync(new URL('../public/oculivo-brand-logo.png',import.meta.url)),'Single approved Oculivo logo image exists')
+check(fs.existsSync(new URL('../public/oculivo-favicon.png',import.meta.url)),'Approved Oculivo eye favicon exists')
+check(!fs.existsSync(new URL('../public/oculivo-logo.svg',import.meta.url)),'Old competing SVG wordmark is absent')
+check(!fs.existsSync(new URL('../public/favicon.svg',import.meta.url)),'Old competing favicon file is absent')
+check(base.includes('<a class="oculivo-logo" href="/" aria-label="Oculivo home"><img src="/oculivo-brand-logo.png"') ,'Shared header/footer branding uses approved source')
+
 const mainLinks=(base.match(/<div class="main-links">([\s\S]*?)<\/div>/)||[])[1]||''
 const mobileLinks=(base.match(/<div class="mobile-nav-panel">([\s\S]*?)<\/div>/)||[])[1]||''
 check(!mainLinks.includes('/website-seo')&&!mobileLinks.includes('/website-seo'),'Website + SEO is removed from primary desktop/mobile navigation')
