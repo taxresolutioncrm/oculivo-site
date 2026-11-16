@@ -16,9 +16,20 @@ const pricingSchema = {
     "offerCount":"3"
   }
 }
+const faqSchema = {
+  '@context':'https://schema.org',
+  '@type':'FAQPage',
+  mainEntity:[
+    {'@type':'Question',name:'Is Oculivo priced per practice or per staff member?',acceptedAnswer:{'@type':'Answer',text:'Published Oculivo plan prices are per practice location. Practice size, provider needs and integrations are reviewed during the demo.'}},
+    {'@type':'Question',name:'Are calling, texting, email and fax services included?',acceptedAnswer:{'@type':'Answer',text:'Communication services require provider configuration and may have usage charges, identified during onboarding.'}},
+    {'@type':'Question',name:'Can we migrate existing patient and billing data?',acceptedAnswer:{'@type':'Answer',text:'Migration scope depends on your current system and available data exports. The requirements are assessed before implementation commitments.'}},
+    {'@type':'Question',name:'Can I see Oculivo before subscribing?',acceptedAnswer:{'@type':'Answer',text:'Yes. Request a private demo to discuss relevant workflows. Do not include patient information in the request.'}}
+  ]
+}
 ---
-<Base title="Oculivo Pricing | Eye Care Practice Software" description="Oculivo eye care practice software pricing starts at $399 per month per location, with plans for growing practices and advanced operations.">
+<Base title="Oculivo Pricing: Core $399, Professional $599 & Complete $799" description="Oculivo eye care practice software pricing starts at $399 per month per location, with plans for growing practices and advanced operations.">
 <script type="application/ld+json" set:html={JSON.stringify(pricingSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 <main>
 <section class="hero-dark page-hero"><div class="wrap"><span class="eyebrow">Transparent founding-practice pricing</span><h1>Eye-care software priced<br/>for the practice.</h1><p>Choose the Oculivo level that fits your practice today. Founding practices lock their launch-plan price for 24 months. Annual billing saves 15%.</p><div class="hero-actions"><a class="btn-grad" href="/demo/">Request a private demo&nbsp; →</a></div></div></section>
 <section class="section-light depth-section"><div class="wrap">
