@@ -33,7 +33,7 @@ const plans=[
       </div>
       <div class="oc-hero2-visual" aria-label="Eye care practice operations connected across four teams">
         <div class="oc-hero2-visual-heading"><span>OCULIVO / THE CONNECTED PRACTICE</span><span>01 — 04</span></div>
-        <div class="oc-hero2-illustration" aria-hidden="true"><div class="oc-hero2-mark">ONE PRACTICE. ONE VIEW.</div><div class="oc-hero2-flow"><span>SCHEDULE</span><span class="oc-flow-line"></span><span>CARE</span><span class="oc-flow-line"></span><span>OPTICAL</span><span class="oc-flow-line"></span><span>FOLLOW-UP</span></div></div>
+        <div class="oc-hero2-illustration" aria-hidden="true"><svg class="oc-teal-eye" viewBox="0 0 220 120" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 61C43 22 74 8 110 8s67 14 98 53c-31 37-62 51-98 51S43 98 12 61Z" fill="#c0f4ea" stroke="#17a7a6" stroke-width="8"/><circle cx="110" cy="60" r="43" fill="#47d8d3" stroke="#5541c9" stroke-width="9"/><circle cx="110" cy="60" r="23" fill="#15314f"/><circle cx="101" cy="50" r="8" fill="#ecfffa"/></svg><div class="oc-hero2-mark">ONE PRACTICE. ONE VIEW.</div><div class="oc-hero2-flow"><span>SCHEDULE</span><span class="oc-flow-line"></span><span>CARE</span><span class="oc-flow-line"></span><span>OPTICAL</span><span class="oc-flow-line"></span><span>FOLLOW-UP</span></div></div>
         <div class="oc-hero2-pathways">
           <div><span>01</span><strong>Front desk</strong><small>Scheduling &amp; intake</small></div>
           <div><span>02</span><strong>Clinical care</strong><small>Patients &amp; documentation</small></div>
@@ -313,4 +313,13 @@ const plans=[
  .oc-hero2-pathways>div{padding:12px 9px}
  .oc-hero2-pathways strong{font-size:13px}
 }
+</style>
+
+<style>
+/* Restore the approved concept's turquoise eye motif as an illustration, NOT a second logo. */
+.oc-hero2-illustration{min-height:155px;gap:7px;padding:10px 0 14px;justify-items:center}
+.oc-teal-eye{display:block;width:154px;max-width:48%;height:auto;filter:drop-shadow(0 6px 11px rgba(15,106,112,.10));margin:0 auto 4px}
+.oc-hero2-mark{font-size:18px;line-height:1.25;text-align:center}
+.oc-hero2-flow{width:100%;margin-top:12px}
+@media(max-width:700px){.oc-hero2-illustration{min-height:140px}.oc-teal-eye{width:125px}.oc-hero2-mark{font-size:16px}}
 </style>
