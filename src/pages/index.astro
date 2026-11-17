@@ -31,17 +31,20 @@ const plans=[
         <div class="oc-hero2-actions"><a href="/demo/" class="oc-hero2-primary">Book your private demo <span aria-hidden="true">↗</span></a><a href="/pricing/" class="oc-hero2-secondary">See pricing and plans <span aria-hidden="true">→</span></a></div>
         <p class="oc-hero2-rate"><strong>Plans from $399/month</strong><span>per practice location · <a href="/pricing/">Compare all three plans</a></span></p>
       </div>
-      <div class="oc-hero2-visual" aria-label="Eye care practice operations connected across four teams">
-        <div class="oc-hero2-visual-heading"><span>OCULIVO / THE CONNECTED PRACTICE</span><span>01 — 04</span></div>
-        <div class="oc-hero2-illustration" aria-hidden="true"><div class="oc-original-eye" aria-hidden="true"><span class="oc-original-iris"><span class="oc-original-pupil"></span></span></div><div class="oc-hero2-mark">ONE PRACTICE. ONE VIEW.</div><div class="oc-hero2-flow"><span>SCHEDULE</span><span class="oc-flow-line"></span><span>CARE</span><span class="oc-flow-line"></span><span>OPTICAL</span><span class="oc-flow-line"></span><span>FOLLOW-UP</span></div></div>
-        <div class="oc-hero2-pathways">
-          <div><span>01</span><strong>Front desk</strong><small>Scheduling &amp; intake</small></div>
-          <div><span>02</span><strong>Clinical care</strong><small>Patients &amp; documentation</small></div>
-          <div><span>03</span><strong>Optical</strong><small>Inventory &amp; orders</small></div>
-          <div><span>04</span><strong>Operations</strong><small>Billing &amp; follow-up</small></div>
+      <section class="oc-workspace" aria-labelledby="oc-workspace-title">
+        <div class="oc-workspace-intro">
+          <span class="oc-workspace-eyebrow">Connected workflows</span>
+          <h2 id="oc-workspace-title">One workspace for the entire practice.</h2>
+          <p>Keep front desk, providers, optical staff, and billing aligned from scheduling through follow-up.</p>
+          <a href="/features/" class="oc-workspace-learn">Explore the platform <span aria-hidden="true">→</span></a>
         </div>
-        <div class="oc-hero2-visual-foot"><span>Four teams. One connected workflow.</span><span aria-hidden="true">↗</span></div>
-      </div>
+        <div class="oc-workspace-list" aria-label="Practice workflow capabilities">
+          <div class="oc-workspace-item"><span class="oc-workspace-icon" aria-hidden="true">01</span><div><h3>Front desk</h3><p>Scheduling, intake, reminders</p></div></div>
+          <div class="oc-workspace-item"><span class="oc-workspace-icon" aria-hidden="true">02</span><div><h3>Clinical care</h3><p>Patient records, charting, documentation</p></div></div>
+          <div class="oc-workspace-item"><span class="oc-workspace-icon" aria-hidden="true">03</span><div><h3>Optical</h3><p>Inventory, orders, fulfillment</p></div></div>
+          <div class="oc-workspace-item"><span class="oc-workspace-icon" aria-hidden="true">04</span><div><h3>Operations</h3><p>Billing, reporting, follow-up</p></div></div>
+        </div>
+      </section>
     </div>
     <div class="wrap oc-hero2-bottom"><span>BUILT SPECIFICALLY FOR EYE-CARE PRACTICES</span><span>OPTOMETRY <span aria-hidden="true">/</span> OPHTHALMOLOGY <span aria-hidden="true">/</span> OPTICAL</span></div>
   </section>
@@ -315,34 +318,25 @@ const plans=[
 }
 </style>
 
-<style>
-/* Restore the approved concept's turquoise eye motif as an illustration, NOT a second logo. */
-.oc-hero2-illustration{min-height:155px;gap:7px;padding:10px 0 14px;justify-items:center}
-.oc-teal-eye{display:block;width:154px;max-width:48%;height:auto;filter:drop-shadow(0 6px 11px rgba(15,106,112,.10));margin:0 auto 4px}
-.oc-hero2-mark{font-size:18px;line-height:1.25;text-align:center}
-.oc-hero2-flow{width:100%;margin-top:12px}
-@media(max-width:700px){.oc-hero2-illustration{min-height:140px}.oc-teal-eye{width:125px}.oc-hero2-mark{font-size:16px}}
-</style>
+
 
 <style>
-/* Restore EXACT original purple / turquoise eye construction from the first
-   editorial hero (previously .oc-eye-graphic / .oc-eye-inner / .oc-eye-pupil).
-   No new wordmark: this is decorative artwork only. */
-.oc-hero2-illustration{padding:14px 0 18px;min-height:177px;gap:7px;justify-items:center}
-.oc-original-eye{
-  width:202px;height:119px;border:16px solid #6b4af2;
-  border-radius:75% 5% 75% 5%;transform:rotate(45deg);
-  background:#a9f0e8;display:grid;place-items:center;
-  position:relative;flex-shrink:0;margin:9px auto 18px;
-}
-.oc-original-iris{display:grid;place-items:center;width:83px;height:83px;border-radius:50%;background:#1ca9cf;border:12px solid #4a2fbc}
-.oc-original-pupil{width:36px;height:36px;border-radius:50%;background:#141536;box-shadow:inset 8px 8px #3441a0}
-.oc-hero2-mark{margin-top:9px}
-.oc-hero2-visual{overflow:hidden}
-@media(max-width:700px){
-  .oc-hero2-illustration{min-height:159px;padding:10px 0 15px}
-  .oc-original-eye{width:162px;height:95px;border-width:13px;margin:10px auto 14px}
-  .oc-original-iris{width:66px;height:66px;border-width:10px}
-  .oc-original-pupil{width:29px;height:29px;box-shadow:inset 7px 7px #3441a0}
-}
+/* Oculivo's operational overview: actual feature content without a decorative eye or fake app mockup. */
+.oc-workspace{background:#fff;border:1px solid #dde3e9;border-radius:14px;box-shadow:0 12px 40px rgba(19,36,61,.06);padding:clamp(20px,2.2vw,32px);display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:24px;align-items:start;min-width:0;width:100%;max-width:100%}
+.oc-workspace-intro{min-width:0}
+.oc-workspace-eyebrow{display:block;color:#5638bd;font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin:0 0 15px}
+.oc-workspace h2{font-size:clamp(25px,2.2vw,32px);line-height:1.16;letter-spacing:-.04em;margin:0 0 14px;color:#18243b}
+.oc-workspace-intro>p{font-size:13px;line-height:1.7;margin:0;color:#576575}
+.oc-workspace-learn{display:inline-flex;align-items:center;gap:16px;margin-top:21px;color:#5135bb;text-decoration:none;border-bottom:1px solid #b9adf0;padding-bottom:5px;font-size:12px;font-weight:800}
+.oc-workspace-learn:hover{color:#382487;border-color:currentColor}
+.oc-workspace-list{display:grid;gap:8px;min-width:0}
+.oc-workspace-item{display:flex;gap:13px;align-items:center;border:1px solid #e1e5eb;background:#fbfcff;padding:14px;border-radius:9px;min-width:0}
+.oc-workspace-icon{display:grid;place-items:center;flex:0 0 34px;width:34px;height:34px;border-radius:8px;background:#f0edfd;color:#593bd2;font-size:11px;font-weight:800}
+.oc-workspace-item>div{min-width:0}
+.oc-workspace-item h3{color:#18243b;font-size:14px;letter-spacing:-.015em;font-weight:750;line-height:1.3;margin:0 0 4px}
+.oc-workspace-item p{font-size:11px;color:#5d6b79;line-height:1.45;margin:0}
+.oc-workspace a:focus-visible{outline:2px solid #5135bb;outline-offset:5px}
+@media(max-width:1500px){.oc-workspace{grid-template-columns:1fr;gap:19px}.oc-workspace h2{max-width:460px}}
+@media(max-width:1350px){.oc-workspace{max-width:790px;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:24px}}
+@media(max-width:740px){.oc-workspace{grid-template-columns:1fr;gap:18px;padding:20px}.oc-workspace h2{font-size:28px}.oc-workspace-item{padding:13px}}
 </style>
