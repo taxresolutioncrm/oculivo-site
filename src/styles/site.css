@@ -88,3 +88,19 @@ html,body{max-width:100%;overflow-x:clip}
   .site-nav>.oculivo-logo{min-height:42px;padding:0}
   .site-nav>.oculivo-logo img{width:163px;max-height:41px}
 }
+
+/* Approved Oculivo dark header and purple demo CTA — single override at the
+   end of the stylesheet so previous light-header rules cannot win. */
+.site-header{background:#0d1127;color:#f7f5ff;border-bottom:1px solid #272345;box-shadow:0 3px 16px rgba(9,12,27,.12)}
+.site-nav>.oculivo-logo{background:transparent;border:0;border-radius:0;box-shadow:none}
+.site-nav>.oculivo-logo:hover{box-shadow:none}
+.main-links a{color:#f2efff}
+.main-links a:hover,.main-links a:focus-visible{color:#71e2ea}
+.nav-demo{background:#6234ed;border-color:#6234ed;color:#fff;border-radius:6px}
+.nav-demo:hover,.nav-demo:focus-visible{background:#754cf6;border-color:#754cf6;color:#fff}
+.mobile-nav summary{background:#171c39;color:#fff;border-color:#454267}
+.mobile-nav-panel{background:#121830;border-color:#393c5b}
+.mobile-nav-panel a{color:#f4f1ff}
+.mobile-nav-panel a:hover,.mobile-nav-panel a:focus-visible{background:#27234b;color:#fff}
+.mobile-nav-panel .mobile-demo{background:#6234ed;color:#fff}
+.mobile-nav-panel .mobile-demo:hover,.mobile-nav-panel .mobile-demo:focus-visible{background:#754cf6;color:#fff}
