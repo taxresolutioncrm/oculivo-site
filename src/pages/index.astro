@@ -33,7 +33,7 @@ const plans=[
         <p class="oc-hero2-rate"><strong>Plans from $399/month</strong><span>per practice location · <a href="/pricing/">Compare all three plans</a></span></p>
       </div>
       <div class="oc-hero-photo">
-        <img src="https://images.unsplash.com/photo-1766310549795-dd0fc75d499f?auto=format&fit=crop&w=1400&q=82" alt="Optometrist examining a patient using professional eye-care equipment" width="1400" height="1050" fetchpriority="high" decoding="async"/>
+        <img src="/oculivo-approved-hero.webp" alt="Smiling optometrist examining a patient through a slit-lamp microscope in a bright professional eye-care practice" width="520" height="292" fetchpriority="high" decoding="async"/>
         <div class="oc-hero-photo-tag"><span class="oc-hero-photo-dot"></span> BUILT FOR REAL EYE-CARE WORKFLOWS</div>
       </div>
     </div>
@@ -427,4 +427,12 @@ const plans=[
 @media(max-width:1020px){.oc-hero2-intro{grid-template-columns:1fr;max-width:850px}.oc-hero-photo{aspect-ratio:1.6}.oc-product-feature-heading{align-items:flex-start;flex-direction:column}.oc-specialty-gallery{gap:13px}.oc-specialty-photo-info{padding:18px}}
 @media(max-width:720px){.oc-hero-photo{aspect-ratio:1.2;border-radius:12px}.oc-hero-photo-tag{font-size:9px;left:12px;right:12px;bottom:12px;padding:11px}.oc-product-feature{padding:55px 0 60px}.oc-product-feature-heading h2{font-size:35px}.oc-specialty-gallery{grid-template-columns:1fr;gap:17px}.oc-specialty-image{aspect-ratio:1.7}.oc-specialty-photo-info h3{font-size:26px}}
 @media(prefers-reduced-motion:reduce){.oc-specialty-photo-card,.oc-specialty-image img{transition:none}}
+</style>
+
+<style>
+/* Exact user-approved second photograph: retain its natural wide composition. */
+.oc-hero-photo{aspect-ratio:1.7}
+.oc-hero-photo>img{object-position:center center}
+@media(max-width:1020px){.oc-hero-photo{aspect-ratio:1.7}}
+@media(max-width:720px){.oc-hero-photo{aspect-ratio:1.35}}
 </style>
