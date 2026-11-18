@@ -32,12 +32,22 @@ const plans=[
         <div class="oc-hero2-actions"><a href="/demo/" class="oc-hero2-primary">Book your private demo <span aria-hidden="true">↗</span></a><a href="/pricing/" class="oc-hero2-secondary">See pricing and plans <span aria-hidden="true">→</span></a></div>
         <p class="oc-hero2-rate"><strong>Plans from $399/month</strong><span>per practice location · <a href="/pricing/">Compare all three plans</a></span></p>
       </div>
-      <div class="oc-hero-product">
-        <ProductPreview variant="dashboard"/>
-        <p class="oc-product-label">Oculivo CRM interface preview · Sample information shown</p>
+      <div class="oc-hero-photo">
+        <img src="https://images.unsplash.com/photo-1766310549795-dd0fc75d499f?auto=format&fit=crop&w=1400&q=82" alt="Optometrist examining a patient using professional eye-care equipment" width="1400" height="1050" fetchpriority="high" decoding="async"/>
+        <div class="oc-hero-photo-tag"><span class="oc-hero-photo-dot"></span> BUILT FOR REAL EYE-CARE WORKFLOWS</div>
       </div>
     </div>
     <div class="wrap oc-hero2-bottom"><span>BUILT SPECIFICALLY FOR EYE-CARE PRACTICES</span><span>OPTOMETRY <span aria-hidden="true">/</span> OPHTHALMOLOGY <span aria-hidden="true">/</span> OPTICAL</span></div>
+  </section>
+
+  <section class="oc-product-feature" aria-labelledby="oc-product-feature-title">
+    <div class="wrap oc-product-feature-shell">
+      <div class="oc-product-feature-heading">
+        <div><p class="oc-label-dark">MEET OCULIVO</p><h2 id="oc-product-feature-title">The software behind your practice.</h2><p>See a preview of the connected workspace behind your day-to-day operations, from appointments to patient care and billing.</p></div>
+        <a href="/demo/">See Oculivo in a live demo <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="oc-product-feature-visual"><ProductPreview variant="dashboard"/><p class="oc-product-label">Illustrative Oculivo interface preview with sample information — the private demo shows the working product.</p></div>
+    </div>
   </section>
 
   <section class="oc-showcase" id="inside-oculivo" aria-labelledby="oc-showcase-heading">
@@ -59,12 +69,19 @@ const plans=[
 
   <section class="oc-specialties" aria-labelledby="oc-specialties-title"><div class="wrap">
     <div class="oc-section-heading"><p class="oc-label-dark">BUILT AROUND YOUR SPECIALTY <span>02 / 04</span></p><h2 id="oc-specialties-title">Eye care is not a generic business.</h2></div>
-    <div class="oc-specialty-list">
-      {specialties.map(item=><a class="oc-specialty-row" href={item.href}>
-        <span class="oc-specialty-number">{item.number} / {item.name}</span>
-        <div><h3>{item.headline}</h3><p>{item.description}</p><span class="oc-specialty-link">{item.cta}</span></div>
-        <span class="oc-specialty-arrow" aria-hidden="true">↗</span>
-      </a>)}
+    <div class="oc-specialty-gallery">
+      <a href="/optometry-software/" class="oc-specialty-photo-card">
+        <div class="oc-specialty-image"><img src="https://images.unsplash.com/photo-1759143545924-beb85b33c0f1?auto=format&fit=crop&w=1200&q=80" alt="Professional front-desk reception supporting patient appointments and intake" width="800" height="650" loading="lazy" decoding="async"/></div>
+        <div class="oc-specialty-photo-info"><span>01 / OPTOMETRY</span><h3>From reception to exam room.</h3><p>Scheduling, patients, documentation and team coordination in one eye-care workflow.</p><strong>Explore optometry <span aria-hidden="true">↗</span></strong></div>
+      </a>
+      <a href="/ophthalmology-software/" class="oc-specialty-photo-card">
+        <div class="oc-specialty-image"><img src="https://images.unsplash.com/photo-1764727291644-5dcb0b1a0375?auto=format&fit=crop&w=1200&q=80" alt="Modern medical clinic reception and care environment" width="800" height="650" loading="lazy" decoding="async"/></div>
+        <div class="oc-specialty-photo-info"><span>02 / OPHTHALMOLOGY</span><h3>Clarity across specialty care.</h3><p>Connect provider schedules, patient information, clinical workflows and practice operations.</p><strong>Explore ophthalmology <span aria-hidden="true">↗</span></strong></div>
+      </a>
+      <a href="/optical-management/" class="oc-specialty-photo-card">
+        <div class="oc-specialty-image"><img src="https://images.unsplash.com/photo-1788347101825-f3a560ec1e2d?auto=format&fit=crop&w=1200&q=80" alt="Eyeglass frames displayed on shelves in a professional optical store" width="800" height="650" loading="lazy" decoding="async"/></div>
+        <div class="oc-specialty-photo-info"><span>03 / OPTICAL</span><h3>Keep optical connected.</h3><p>Bring inventory, frames, orders and dispensing into the broader patient workflow.</p><strong>Explore optical management <span aria-hidden="true">↗</span></strong></div>
+      </a>
     </div>
   </div></section>
 
@@ -375,4 +392,39 @@ const plans=[
 @media(max-width:940px){.oc-showcase-head{align-items:flex-start;flex-direction:column}.oc-showcase-story,.oc-showcase-story.flipped{grid-template-columns:1fr}.oc-showcase-story.flipped .oc-showcase-story-text,.oc-showcase-story.flipped .oc-preview{grid-column:auto;grid-row:auto}.oc-showcase-story.flipped .oc-showcase-story-text{grid-row:1}.oc-showcase-story.flipped .oc-preview{grid-row:2}}
 @media(max-width:600px){.oc-hero2-intro,.oc-hero2-bottom{width:min(100% - 34px,1050px)}.oc-hero2-intro{padding-top:48px;padding-bottom:42px}.oc-hero2 h1{font-size:clamp(35px,8.5vw,53px)}.oc-hero-product .oc-preview{transform:none}.oc-product-label{font-size:10px}.oc-showcase{padding:65px 0}.oc-showcase-head{gap:15px;margin-bottom:30px}.oc-showcase-head h2{font-size:36px}.oc-showcase-head p:not(.oc-label-dark){font-size:14px}.oc-showcase-story{padding:17px;gap:24px;border-radius:13px}.oc-showcase-stories{gap:20px}.oc-showcase-story h3{font-size:28px}}
 @media(prefers-reduced-motion:reduce){.oc-hero-product .oc-preview{transform:none}}
+</style>
+
+<style>
+/* Photography-led Oculivo marketing upgrade; retains approved header, brand, CRM, pricing and lead routes. */
+.oc-hero2{background:#fbfaf8}
+.oc-hero2-intro{grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:clamp(30px,4.5vw,72px);align-items:center}
+.oc-hero-photo{position:relative;min-width:0;aspect-ratio:1.16;overflow:hidden;border-radius:20px;box-shadow:0 30px 75px rgba(15,25,51,.16);background:#e5e9e9}
+.oc-hero-photo>img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+.oc-hero-photo-tag{position:absolute;left:24px;bottom:23px;background:rgba(15,23,46,.89);color:#fff;padding:13px 17px;border-radius:6px;display:flex;gap:11px;align-items:center;letter-spacing:.12em;font-size:10px;font-weight:800;backdrop-filter:blur(8px)}
+.oc-hero-photo-dot{width:8px;height:8px;border-radius:50%;background:#5ce3e1;flex-shrink:0}
+.oc-product-feature{background:#e9ebf2;padding:88px 0 91px}
+.oc-product-feature-shell{max-width:1250px}
+.oc-product-feature-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:35px;margin-bottom:35px}
+.oc-product-feature-heading>div{max-width:720px}
+.oc-product-feature-heading h2{font-size:clamp(34px,4.5vw,58px);line-height:1.12;letter-spacing:-.05em;margin:12px 0 15px}
+.oc-product-feature-heading p:not(.oc-label-dark){font-size:15px;color:#5d687d;line-height:1.65;max-width:660px}
+.oc-product-feature-heading>a{color:#fff;background:#5935d4;padding:16px 20px;font-size:13px;font-weight:800;white-space:nowrap;border-radius:6px}
+.oc-product-feature-heading>a:hover{background:#3e249c}
+.oc-product-feature-visual{max-width:1120px;margin:0 auto}
+.oc-product-feature-visual .oc-preview{box-shadow:0 23px 70px rgba(27,31,78,.15)}
+.oc-specialty-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin-top:38px}
+.oc-specialty-photo-card{display:flex;flex-direction:column;min-width:0;background:#fff;border:1px solid #e3e3e8;border-radius:14px;overflow:hidden;box-shadow:0 8px 24px rgba(20,27,45,.04);transition:box-shadow .2s,transform .2s}
+.oc-specialty-photo-card:hover{transform:translateY(-4px);box-shadow:0 15px 35px rgba(20,27,45,.12)}
+.oc-specialty-image{aspect-ratio:1.37;overflow:hidden;background:#e8eaeb}
+.oc-specialty-image img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .3s}
+.oc-specialty-photo-card:hover img{transform:scale(1.04)}
+.oc-specialty-photo-info{padding:24px 23px 26px;display:flex;flex-direction:column;flex:1}
+.oc-specialty-photo-info>span{font-size:10px;color:#6042b7;font-weight:800;letter-spacing:.1em}
+.oc-specialty-photo-info h3{font-size:clamp(23px,2.3vw,31px);letter-spacing:-.04em;line-height:1.18;margin:14px 0 12px}
+.oc-specialty-photo-info p{font-size:13px;line-height:1.65;color:#5e6a7b;margin:0 0 24px;flex:1}
+.oc-specialty-photo-info strong{font-size:12px;color:#5036b1}
+@media(max-width:1350px){.oc-hero2-intro{grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);max-width:1400px}.oc-hero-photo{aspect-ratio:1.08}}
+@media(max-width:1020px){.oc-hero2-intro{grid-template-columns:1fr;max-width:850px}.oc-hero-photo{aspect-ratio:1.6}.oc-product-feature-heading{align-items:flex-start;flex-direction:column}.oc-specialty-gallery{gap:13px}.oc-specialty-photo-info{padding:18px}}
+@media(max-width:720px){.oc-hero-photo{aspect-ratio:1.2;border-radius:12px}.oc-hero-photo-tag{font-size:9px;left:12px;right:12px;bottom:12px;padding:11px}.oc-product-feature{padding:55px 0 60px}.oc-product-feature-heading h2{font-size:35px}.oc-specialty-gallery{grid-template-columns:1fr;gap:17px}.oc-specialty-image{aspect-ratio:1.7}.oc-specialty-photo-info h3{font-size:26px}}
+@media(prefers-reduced-motion:reduce){.oc-specialty-photo-card,.oc-specialty-image img{transition:none}}
 </style>
