@@ -1,7 +1,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 const root=new URL('../',import.meta.url)
-const images=['hero','exam','reception','optical','consultation','dashboard-preview','billing-preview']
+const images=['hero','exam','reception','optical','consultation','dashboard-preview','billing-preview','optometry-exam']
 for(const name of images){
  const pathname=path.join(new URL(root).pathname,'public','images',`oculivo-${name}.webp`)
  const file=fs.readFileSync(pathname)
@@ -17,7 +17,7 @@ if(!homepage.includes('src="/images/oculivo-hero.webp"') || homepage.includes('s
 for(const name of ['reception','consultation','optical']){
  if(!homepage.includes(`/images/oculivo-${name}.webp`))throw new Error(`Homepage is missing the local ${name} photograph`)
 }
-for(const [page,name] of [['optometry-software','exam'],['ophthalmology-software','consultation'],['optical-management','optical'],['communications','reception'],['features','dashboard-preview'],['pricing','billing-preview']]){
+for(const [page,name] of [['optometry-software','optometry-exam'],['ophthalmology-software','consultation'],['optical-management','optical'],['communications','reception'],['features','dashboard-preview'],['pricing','billing-preview']]){
  const pageSource=fs.readFileSync(new URL(`../src/pages/${page}/index.astro`,import.meta.url),'utf8')
  if(!pageSource.includes(`src="/images/oculivo-${name}.webp"`))throw new Error(`Incorrect photograph on ${page}`)
 }
