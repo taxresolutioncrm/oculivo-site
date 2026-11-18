@@ -1,9 +1,24 @@
 ---
 import Base from '../../layouts/Base.astro'
+import PagePhoto from '../../components/PagePhoto.astro'
 import { seoResources } from '../../data/seoResources'
 export function getStaticPaths(){ return seoResources.map((resource)=>({params:{slug:resource.slug},props:{resource}})) }
 const { resource } = Astro.props
 const canonical=`https://oculivo.com/resources/${resource.slug}/`
+const guideImages:Record<string,{id:number;alt:string}>={
+ 'optometry-scheduling-workflow':{id:6809657,alt:'Reception team coordinating an appointment with a patient'},
+ 'eye-care-insurance-verification-workflow':{id:5327864,alt:'Clinician and patient reviewing digital care information'},
+ 'optometry-no-show-reduction-guide':{id:4266930,alt:'Doctor and patient communicating about healthcare planning'},
+ 'contact-lens-inventory-management-guide':{id:5201940,alt:'Eyewear retail display with organized optical products'},
+ 'ophthalmology-referral-workflow':{id:3846009,alt:'Ophthalmology clinician examining a patient with diagnostic equipment'},
+ 'optometry-billing-workflow-guide':{id:5452291,alt:'Professional reviewing digital medical information on a tablet'},
+ 'multi-location-optometry-software-guide':{id:6011667,alt:'Medical team reviewing digital information in a clinical environment'},
+ 'optometry-patient-intake-workflow':{id:7108328,alt:'Patients discussing intake with clinic staff'},
+ 'optical-order-tracking-workflow':{id:5766609,alt:'Eyeglasses collection organized in an optical store'},
+ 'optometry-software-buyers-guide':{id:4266948,alt:'Patient and clinician discussing healthcare information'}
+}
+const guideImage=guideImages[resource.slug] || {id:6749735,alt:'Professional optometrist performing an eye examination'}
+
 const schema=[
  {'@context':'https://schema.org','@type':'Article','headline':resource.title,'description':resource.description,'datePublished':'2026-09-16','dateModified':'2026-09-17','author':{'@type':'Organization','name':'Oculivo'},'publisher':{'@type':'Organization','name':'Oculivo','url':'https://oculivo.com'},'mainEntityOfPage':canonical},
  {'@context':'https://schema.org','@type':'FAQPage','mainEntity':resource.faq.map(([q,a])=>({'@type':'Question','name':q,'acceptedAnswer':{'@type':'Answer','text':a}}))}
@@ -12,6 +27,8 @@ const schema=[
 <Base title={`${resource.title} | Oculivo`} description={resource.description} schema={schema}>
 <main>
 <section class="hero-dark page-hero"><div class="wrap"><span class="eyebrow">{resource.eyebrow}</span><h1>{resource.h1}</h1><p>{resource.intro}</p><div class="hero-actions"><a class="btn-grad" href="https://taxrescrm.app/book?product=oculivo">Request a private demo&nbsp; →</a><a class="btn-outline" href="/resources/">Browse resources</a></div></div></section>
+<PagePhoto src={`https://images.pexels.com/photos/${guideImage.id}/pexels-photo-${guideImage.id}.jpeg?auto=compress&cs=tinysrgb&w=1400`} alt={guideImage.alt} eyebrow="PRACTICAL EYE-CARE RESOURCES"/>
+
 <section class="section-light"><div class="wrap article-wrap"><div class="quick"><strong>Quick answer:</strong> {resource.intro}</div>
 {resource.sections.map(([heading,body]) => <section class="article-section"><h2>{heading}</h2><p>{body}</p></section>)}
 <section class="faq-block"><span class="eyebrow">FAQ</span><h2>Frequently asked questions</h2>{resource.faq.map(([q,a]) => <article><h3>{q}</h3><p>{a}</p></article>)}</section>
