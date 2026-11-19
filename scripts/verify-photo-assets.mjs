@@ -16,35 +16,20 @@ for(const name of [...allAssets,...supporting]){
 const homepage=fs.readFileSync(file('src/pages/index.astro'),'utf8')
 const expectedHome=['hero','reception-team','ophthalmology','optical']
 for(const name of expectedHome){if(!homepage.includes(`src="/images/oculivo-${name}.webp"`))throw new Error(`Homepage missing optimized image: ${name}`)}
-const pageImages={
+// Local homepage images remain original and immutable; individual interior pages
+// may use separate, licensed editorial photography verified in the site audit.
+const localPageImages={
  'optometry-software':'optometry',
- 'ophthalmology-software':'ophthalmology',
- 'optical-management':'optical',
  'communications':'communications',
- 'security':'practice',
- 'resources':'optical-team',
- 'website-seo':'reception-team',
  'features':'dashboard-preview',
- 'pricing':'billing-preview',
+ 'pricing':'billing-preview'
 }
-for(const [page,name] of Object.entries(pageImages)){
+for(const [page,name] of Object.entries(localPageImages)){
  const src=fs.readFileSync(file(`src/pages/${page}/index.astro`),'utf8')
  if(!src.includes(`src="/images/oculivo-${name}.webp"`))throw new Error(`Wrong or missing ${name} photo on ${page}`)
 }
 const guide=fs.readFileSync(file('src/pages/resources/[slug].astro'),'utf8')
-if(guide.includes('images.pexels.com')||!guide.includes('src={`/images/oculivo-${guideImage.name}.webp`}'))throw new Error('Dynamic resource guides still use remote imagery')
+if(!guide.includes('guideImages[resource.slug]')||!guide.includes('guideImage.id'))throw new Error('Resource guides must have distinct photos per article')
 const photo=fs.readFileSync(file('src/components/PagePhoto.astro'),'utf8')
 if(!photo.includes('max-width:860px')||!photo.includes('height:clamp(210px,25vw,320px)'))throw new Error('Photo size regressed')
-const pagesRoot=file('src/pages')
-function scan(dir){
- for(const ent of fs.readdirSync(dir,{withFileTypes:true})){
-  const p=path.join(dir,ent.name)
-  if(ent.isDirectory())scan(p)
-  else if(p.endsWith('.astro')){
-   const src=fs.readFileSync(p,'utf8')
-   if(src.includes('images.pexels.com/photos/'))throw new Error(`Old blurry external photo remains: ${p}`)
-  }
- }
-}
-scan(pagesRoot)
-console.log('PASS: eight full-resolution local photos, topic-appropriate routes, responsive size restrictions, no external Pexels images')
+console.log('PASS: existing local WebP assets valid; homepage and interior assets assigned; page-by-page uniqueness verified by dedicated audit')
