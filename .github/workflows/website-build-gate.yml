@@ -19,6 +19,8 @@ jobs:
         run: npm install --no-audit --no-fund
       - name: Run website verification
         run: npm run verify:closeout
+      - name: Audit every page and verify all remote photos return real images
+        run: CHECK_PHOTO_HTTP=1 npm run verify:page-audit
       - name: Build production website
         run: npm run build
       - name: Check exported homepage and pricing

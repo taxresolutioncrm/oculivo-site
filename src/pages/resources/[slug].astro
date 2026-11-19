@@ -5,19 +5,21 @@ import { seoResources } from '../../data/seoResources'
 export function getStaticPaths(){ return seoResources.map((resource)=>({params:{slug:resource.slug},props:{resource}})) }
 const { resource } = Astro.props
 const canonical=`https://oculivo.com/resources/${resource.slug}/`
-const guideImages:Record<string,{name:string;alt:string}>={
- 'optometry-scheduling-workflow':{name:'reception-team',alt:'Reception staff reviewing patient scheduling details'},
- 'eye-care-insurance-verification-workflow':{name:'practice',alt:'Clinician explaining electronic practice information to a patient'},
- 'optometry-no-show-reduction-guide':{name:'communications',alt:'Eye-care reception team discussing appointment information'},
- 'contact-lens-inventory-management-guide':{name:'optical-team',alt:'Optician consulting with a patient about eyewear products'},
- 'ophthalmology-referral-workflow':{name:'ophthalmology',alt:'Ophthalmologist reviewing diagnostic imaging with a patient'},
- 'optometry-billing-workflow-guide':{name:'practice',alt:'Clinician reviewing information with a patient on a tablet'},
- 'multi-location-optometry-software-guide':{name:'reception-team',alt:'Eye-care staff assisting a patient in a modern clinic'},
- 'optometry-patient-intake-workflow':{name:'communications',alt:'Eye-care team assisting a family during patient intake'},
- 'optical-order-tracking-workflow':{name:'optical',alt:'Optician helping a customer compare eyeglass frames'},
- 'optometry-software-buyers-guide':{name:'hero',alt:'Optometrist performing a slit-lamp vision examination'}
+// One distinct, topic-matched editorial photo for every dynamically generated guide.
+const guideImages:Record<string,{id:number;alt:string}>={
+ 'optometry-scheduling-workflow':{id:7108318,alt:'Patients checking in with clinical staff at a medical reception'},
+ 'eye-care-insurance-verification-workflow':{id:8413295,alt:'Clinician reviewing signed practice paperwork with a patient'},
+ 'optometry-no-show-reduction-guide':{id:6812443,alt:'Reception professional explaining appointment information to a patient'},
+ 'contact-lens-inventory-management-guide':{id:5996694,alt:'Contact lens case beside an optometry test chart'},
+ 'ophthalmology-referral-workflow':{id:5996648,alt:'Eye specialist examining a patient with ophthalmology instruments'},
+ 'optometry-billing-workflow-guide':{id:6812438,alt:'Patient making a card payment at a clinic reception'},
+ 'multi-location-optometry-software-guide':{id:7108331,alt:'Patient reviewing clinical information during a medical office visit'},
+ 'optometry-patient-intake-workflow':{id:7108328,alt:'Patients discussing registration with clinic reception staff'},
+ 'optical-order-tracking-workflow':{id:5201991,alt:'Eyeglass frames organized across the display of an optical store'},
+ 'optometry-software-buyers-guide':{id:6749739,alt:'Patient comparing trial lenses during an optometry examination'}
 }
-const guideImage=guideImages[resource.slug] || {name:'optometry',alt:'Optometrist examining a patient in a modern clinic'}
+const guideImage=guideImages[resource.slug]
+if(!guideImage) throw new Error('Missing unique resource guide image: '+resource.slug)
 
 const schema=[
  {'@context':'https://schema.org','@type':'Article','headline':resource.title,'description':resource.description,'datePublished':'2026-09-16','dateModified':'2026-09-17','author':{'@type':'Organization','name':'Oculivo'},'publisher':{'@type':'Organization','name':'Oculivo','url':'https://oculivo.com'},'mainEntityOfPage':canonical},
@@ -27,7 +29,7 @@ const schema=[
 <Base title={`${resource.title} | Oculivo`} description={resource.description} schema={schema}>
 <main>
 <section class="hero-dark page-hero"><div class="wrap"><span class="eyebrow">{resource.eyebrow}</span><h1>{resource.h1}</h1><p>{resource.intro}</p><div class="hero-actions"><a class="btn-grad" href="https://taxrescrm.app/book?product=oculivo">Request a private demo&nbsp; →</a><a class="btn-outline" href="/resources/">Browse resources</a></div></div></section>
-<PagePhoto src={`/images/oculivo-${guideImage.name}.webp`} alt={guideImage.alt} eyebrow="PRACTICAL EYE-CARE RESOURCES"/>
+<PagePhoto src={`https://images.pexels.com/photos/${guideImage.id}/pexels-photo-${guideImage.id}.jpeg?auto=compress&cs=tinysrgb&w=1600&q=85`} alt={guideImage.alt} eyebrow="PRACTICAL EYE-CARE RESOURCES"/>
 
 <section class="section-light"><div class="wrap article-wrap"><div class="quick"><strong>Quick answer:</strong> {resource.intro}</div>
 {resource.sections.map(([heading,body]) => <section class="article-section"><h2>{heading}</h2><p>{body}</p></section>)}
