@@ -4,17 +4,17 @@ const {src,alt,eyebrow='INSIDE A MODERN EYE-CARE PRACTICE',position='center'} = 
 <section class="oc-page-photo-band" aria-label="Eye-care practice photography">
   <div class="wrap oc-page-photo-wrap">
     <figure class="oc-page-photo-frame">
-      <img src={src} alt={alt} width="860" height="460" loading="eager" decoding="async" style={`object-position:${position}`} />
+      <img src={src} alt={alt} width="1400" height="788" loading="lazy" decoding="async" style={`object-position:${position}`} />
       <figcaption class="oc-page-photo-label"><span class="oc-photo-point"></span>{eyebrow}</figcaption>
     </figure>
   </div>
 </section>
 <style>
 .oc-page-photo-band{background:#f5f6f9;padding:0 20px 54px;margin:0}
-.oc-page-photo-wrap{max-width:900px;width:100%;margin:0 auto}
-.oc-page-photo-frame{margin:0;position:relative;overflow:hidden;border-radius:16px;background:#e4e7ed;height:clamp(235px,29vw,360px);box-shadow:0 14px 42px rgba(14,26,49,.09)}
+.oc-page-photo-wrap{max-width:860px;width:100%;margin:0 auto}
+.oc-page-photo-frame{margin:0;position:relative;overflow:hidden;border-radius:16px;background:#e4e7ed;height:clamp(210px,25vw,320px);box-shadow:0 14px 42px rgba(14,26,49,.09)}
 .oc-page-photo-frame>img{width:100%;height:100%;object-fit:cover;display:block}
 .oc-page-photo-label{display:inline-flex;gap:10px;align-items:center;position:absolute;bottom:16px;left:18px;padding:10px 14px;border-radius:6px;background:rgba(17,23,44,.88);color:#fff;font-size:10px;font-weight:800;letter-spacing:.08em;line-height:1.4;max-width:calc(100% - 36px)}
 .oc-photo-point{width:7px;height:7px;border-radius:50%;background:#5fe1de;flex-shrink:0}
-@media(max-width:750px){.oc-page-photo-band{padding:0 14px 35px}.oc-page-photo-frame{height:clamp(220px,53vw,330px);border-radius:12px}.oc-page-photo-label{left:11px;bottom:11px;font-size:9px;padding:9px 11px}}
+@media(max-width:750px){.oc-page-photo-band{padding:0 14px 35px}.oc-page-photo-frame{height:clamp(190px,49vw,290px);border-radius:12px}.oc-page-photo-label{left:11px;bottom:11px;font-size:9px;padding:9px 11px}}
 </style>
