@@ -34,3 +34,38 @@ jobs:
           grep -q 'oculivo-brand-logo.png' dist/index.html
           grep -q 'oculivo-favicon.png' dist/index.html
           echo 'Oculivo homepage, pricing, and brand assets present.'
+      - name: Check Cloudflare production credentials
+        id: cloudflare
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        env:
+          CF_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CF_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [ -n "$CF_API_TOKEN" ] && [ -n "$CF_ACCOUNT_ID" ]; then
+            echo "ready=yes" >> "$GITHUB_OUTPUT"
+            echo "Cloudflare credentials present; deploying tested website."
+          else
+            echo "ready=no" >> "$GITHUB_OUTPUT"
+            echo "::warning::Production not deployed: CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID repository secrets are required. A green GitHub build does not publish the site."
+          fi
+      - name: Deploy verified Oculivo Worker to Cloudflare
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.cloudflare.outputs.ready == 'yes'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx wrangler deploy
+      - name: Verify deployed Cloudflare website content and photo routing
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.cloudflare.outputs.ready == 'yes'
+        run: |
+          set -e
+          for i in 1 2 3 4 5; do
+            curl -fsSL --max-time 15 'https://oculivo.com/' -o /tmp/oculivo-public-home.html || true
+            if grep -q 'Specialist ophthalmology examination room with dedicated diagnostic equipment' /tmp/oculivo-public-home.html &&
+               grep -q 'Rows of diverse optical frames displayed in a modern eyewear shop' /tmp/oculivo-public-home.html; then break; fi
+            sleep 4
+          done
+          grep -q 'Specialist ophthalmology examination room with dedicated diagnostic equipment' /tmp/oculivo-public-home.html
+          grep -q 'Rows of diverse optical frames displayed in a modern eyewear shop' /tmp/oculivo-public-home.html
+          curl -fsSL --max-time 15 'https://oculivo.com/images/oculivo-hero.webp' -o /tmp/oculivo-public-hero.webp
+          test $(wc -c < /tmp/oculivo-public-hero.webp) -gt 80000
+          echo 'PASS: Cloudflare published correct homepage imagery and is serving bundled local photo assets.'
