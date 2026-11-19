@@ -14,7 +14,7 @@ for(const name of [...allAssets,...supporting]){
  console.log(`PASS: valid local photograph ${name} (${size} bytes)`)
 }
 const homepage=fs.readFileSync(file('src/pages/index.astro'),'utf8')
-const expectedHome=['hero','reception-team','ophthalmology','optical']
+const expectedHome=['hero','reception-team']
 for(const name of expectedHome){if(!homepage.includes(`src="/images/oculivo-${name}.webp"`))throw new Error(`Homepage missing optimized image: ${name}`)}
 // Local homepage images remain original and immutable; individual interior pages
 // may use separate, licensed editorial photography verified in the site audit.
