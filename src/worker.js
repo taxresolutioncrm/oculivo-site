@@ -82,7 +82,8 @@ export default {
     if (incoming.pathname === '/' || incoming.pathname === '/index.html'
       || incoming.pathname === '/oculivo-brand-logo.png'
       || incoming.pathname === '/oculivo-favicon.png'
-      || incoming.pathname.startsWith('/_astro/')) {
+      || incoming.pathname.startsWith('/_astro/')
+      || incoming.pathname.startsWith('/images/')) {
       return env.ASSETS.fetch(request)
     }
 
