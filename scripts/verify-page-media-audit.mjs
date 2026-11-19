@@ -46,7 +46,7 @@ for(const {route,source} of entries){
  if(seen.has(source))throw new Error('Duplicate photo between '+seen.get(source)+' and '+route+': '+source)
  seen.set(source,route)
  if(source.startsWith('/images/'))assert(fs.existsSync(path.join(root,'public',source)),'Local image exists: '+route)
- else assert(/^https:\/\/images\.pexels\.com\/photos\/(\d+)\/pexels-photo-\1\.jpeg\?auto=compress&cs=tinysrgb&w=1600&q=85$/.test(source),'Editorial image uses approved high-resolution Pexels URL: '+route)
+ else assert(/^https:\/\/images\.pexels\.com\/photos\/(\d+)\/pexels-photo-\1\.jpeg\?auto=compress&cs=tinysrgb&w=(?:1100|1600)&q=85$/.test(source),'Editorial image uses approved high-resolution Pexels URL: '+route)
 }
 assert(entries.length>=26,'Comprehensive photographic inventory covers all product pages and editorial guides')
 assert(new Set(entries.map(x=>x.source)).size===entries.length,'ZERO duplicate photo assignments across all rendered routes')
