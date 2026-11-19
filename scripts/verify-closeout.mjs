@@ -67,3 +67,26 @@ const seo=read('src/pages/website-seo/index.astro')
 check(!/reputation management|call tracking|appointment attribution|portal messages|portal conversations|automation/i.test(pricing+'\n'+seo),'Pricing and SEO pages contain no unsupported marketing claims')
 check(pkg.dependencies?.astro==='4.16.18'&&pkg.devDependencies?.typescript==='5.6.3'&&pkg.devDependencies?.wrangler==='4.20.0','Website toolchain versions are pinned')
 if(process.exitCode)process.exit(process.exitCode)
+
+/* CTR and crawl coverage: protect useful, distinct search snippets and site indexability. */
+const searchPages = [
+ ['home',home],
+ ['optometry',optometry],
+ ['ophthalmology',ophthalmology],
+ ['optical',optical],
+ ['pricing',pricing]
+]
+const extracted = searchPages.map(([name,html])=>{
+ const tag=html.match(/<Base\s+title="([^"]+)"\s+description="([^"]+)"/)
+ check(Boolean(tag),name+' has explicit title and meta description')
+ return {name,title:tag?.[1]||'',description:tag?.[2]||''}
+})
+check(new Set(extracted.map(x=>x.title)).size===extracted.length,'Core buyer-intent landing pages have unique titles')
+check(extracted.every(x=>x.title.length>=30&&x.title.length<=67),'Core SEO titles are human-readable and fit usual search-result limits')
+check(extracted.every(x=>x.description.length>=95&&x.description.length<=165),'Core SEO descriptions are informative and not excessively long')
+check(base.includes('<link rel="canonical" href={canonical} />'),'Shared pages declare canonical URLs')
+check(base.includes('max-image-preview:large'),'Search robots are permitted large image previews')
+const robots=read('src/pages/robots.txt.ts')
+check(robots.includes('User-agent: *')&&robots.includes('Allow: /')&&robots.includes('https://oculivo.com/sitemap.xml'),'robots.txt explicitly permits public crawlers and links sitemap')
+check(sitemap.includes('locations/')&&sitemap.includes('resources/'),'Sitemap includes geographic and educational landing pages')
+
