@@ -14,7 +14,7 @@ for(const name of [...allAssets,...supporting]){
  console.log(`PASS: valid local photograph ${name} (${size} bytes)`)
 }
 const homepage=fs.readFileSync(file('src/pages/index.astro'),'utf8')
-const expectedHome=['hero','reception-team','practice','optical-team']
+const expectedHome=['hero','reception-team','ophthalmology','optical']
 for(const name of expectedHome){if(!homepage.includes(`src="/images/oculivo-${name}.webp"`))throw new Error(`Homepage missing optimized image: ${name}`)}
 const pageImages={
  'optometry-software':'optometry',
