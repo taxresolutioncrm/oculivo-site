@@ -17,6 +17,8 @@ jobs:
           node-version: '22'
       - name: Install pinned dependencies
         run: npm install --no-audit --no-fund
+      - name: Verify Worker serves all uploaded images from static assets
+        run: node scripts/verify-worker-images.mjs
       - name: Run website verification
         run: npm run verify:closeout
       - name: Audit every page and verify all remote photos return real images
