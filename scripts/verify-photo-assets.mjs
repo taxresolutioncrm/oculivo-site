@@ -31,5 +31,5 @@ for(const [page,name] of Object.entries(localPageImages)){
 const guide=fs.readFileSync(file('src/pages/resources/[slug].astro'),'utf8')
 if(!guide.includes('guideImages[resource.slug]')||!guide.includes('guideImage.id'))throw new Error('Resource guides must have distinct photos per article')
 const photo=fs.readFileSync(file('src/components/PagePhoto.astro'),'utf8')
-if(!photo.includes('max-width:860px')||!photo.includes('height:clamp(210px,25vw,320px)'))throw new Error('Photo size regressed')
+if(!photo.includes('max-width:860px')||!photo.includes('height:clamp(260px,32vw,390px)'))throw new Error('Photo size regressed')
 console.log('PASS: existing local WebP assets valid; homepage and interior assets assigned; page-by-page uniqueness verified by dedicated audit')
